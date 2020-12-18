@@ -1,4 +1,4 @@
-import { customElement, LitElement, property, html, css } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import xml from 'highlight.js/lib/languages/xml';
@@ -8,11 +8,14 @@ hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
 
 
-@customElement('code-big')
 export class CodeBig extends LitElement {
 
-    @property() fileName;
-    @property() code;
+    static get properties() {
+        return {
+            fileName: {type: String},
+            code: {type: String}
+        }
+    }
 
     firstUpdated() {
         super.firstUpdated();
@@ -140,3 +143,5 @@ export class CodeBig extends LitElement {
     }
 
 }
+
+customElements.define('code-big', CodeBig);

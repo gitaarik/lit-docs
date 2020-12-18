@@ -2,42 +2,37 @@ import { property, html, css } from 'lit-element';
 import { LitStateElement } from 'lit-element-state';
 
 
-export class HeaderNav extends LitStateElement {
+class DemoShell extends LitStateElement {
+
+    _hashChangeCallback = null;
 
     static get properties() {
         return {
-            navItems: {type: Array},
-            activeTab: {type: String}
+            pages: {type: Array},
+            activePageHash: {type: String}
         }
     }
-
-    constructor() {
-        super();
-        this.activeTab = location.hash.substr(1);
-    }
-
-    _hashChangeCallback = null;
 
     connectedCallback() {
         super.connectedCallback();
         this._addHashChangeCallback();
-        this._setInitialActiveTab();
+        this._setInitialActiveHash();
     }
 
     _addHashChangeCallback() {
         this._hashChangeCallback = window.addEventListener('hashchange', () => {
-            this.activeTab = location.hash.substr(1);
+            this.activePageHash = location.hash.substr(1);
             window.scrollTo({ top: 0 });
         });
     }
 
-    _setInitialActiveTab() {
+    _setInitialActiveHash() {
 
-        if (this.activeTab) {
-            return;
+        this.activePageHash = location.hash.substr(1);
+
+        if (!this.activePageHash) {
+            this.activePageHash = this.pages[0].hash;
         }
-
-        this.activeTab = this.navItems[0][0];
 
     }
 
@@ -50,7 +45,8 @@ export class HeaderNav extends LitStateElement {
             </header>
 
             <article>
-                ${this.tabContents}
+                <h1>${this.activePage.title}</h1>
+                ${this.activePage.template}
             </article>
 
         `;
@@ -59,14 +55,14 @@ export class HeaderNav extends LitStateElement {
 
     get navButtons() {
 
-        return this.navItems.map(item => {
+        return this.pages.map(item => {
 
             return html`
                 <button
-                    @click=${() => location.hash = item[0]}
-                    ?active=${this.activeTab == item[0]}
+                    @click=${() => location.hash = item.hash}
+                    ?active=${this.activePageHash == item.hash}
                 >
-                    ${item[1]}
+                    ${item.title}
                 </button>
             `;
 
@@ -74,31 +70,12 @@ export class HeaderNav extends LitStateElement {
 
     }
 
-    get tabContents() {
-
-        switch (this.activeTab) {
-
-            default:
-            case 'state-var':
-                return html`<state-var></state-var>`;
-
-            case 'async-state-var':
-                return html`<async-state-var></async-state-var>`;
-
-            case 'async-state-var-update':
-                return html`<async-state-var-update></async-state-var-update>`;
-
-            case 'async-state-var-update-cache':
-                return html`<async-state-var-update-cache></async-state-var-update-cache>`;
-
-            case 'different-vars-on-rerender':
-                return html`<different-vars-on-rerender></different-vars-on-rerender>`;
-
-            case 'mixin-usage':
-                return html`<mixin-usage></mixin-usage>`;
-
+    get activePage() {
+        for (const item of this.pages) {
+            if (item.hash == this.activePageHash) {
+                return item;
+            }
         }
-
     }
 
     static get styles() {
@@ -142,10 +119,15 @@ export class HeaderNav extends LitStateElement {
                 background: #FFF;
             }
 
+            h1 {
+                margin: 0;
+                font-size: 25px;
+            }
+
         `;
 
     }
 
 }
 
-customElements.define('header-nav', MyElement);
+customElements.define('demo-shell', DemoShell);

@@ -1,7 +1,6 @@
-import { customElement, LitElement, property, html, css } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 
-@customElement('code-small')
 export class CodeSmall extends LitElement {
 
     render() {
@@ -22,3 +21,5 @@ export class CodeSmall extends LitElement {
     }
 
 }
+
+customElements.define('code-small', CodeSmall);
