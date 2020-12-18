@@ -1,15 +1,20 @@
-import { customElement, property, html, css } from 'lit-element';
-import { LitStateElement } from './lit-state.js';
-import './async-state-var/index';
-import './async-state-var-update/index';
-import './async-state-var-update-cache/index';
+import { property, html, css } from 'lit-element';
+import { LitStateElement } from 'lit-element-state';
 
 
-@customElement('header-nav')
 export class HeaderNav extends LitStateElement {
 
-    @property() navItems = [];
-    @property() activeTab = location.hash.substr(1);
+    static get properties() {
+        return {
+            navItems: {type: Array},
+            activeTab: {type: String}
+        }
+    }
+
+    constructor() {
+        super();
+        this.activeTab = location.hash.substr(1);
+    }
 
     _hashChangeCallback = null;
 
@@ -142,3 +147,5 @@ export class HeaderNav extends LitStateElement {
     }
 
 }
+
+customElements.define('header-nav', MyElement);

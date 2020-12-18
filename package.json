@@ -1,14 +1,14 @@
 {
-  "name": "lit-state-demo-app-components",
-  "version": "0.0.1",
-  "description": "Components for building a demo app for LitState",
+  "name": "lit-state-demo-app-helpers",
+  "version": "0.0.6",
+  "description": "Helper components and functions for building a demo app for LitState",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gitaarik/lit-state-demo-app-components.git"
+    "url": "git+https://github.com/gitaarik/lit-state-demo-app-helpers.git"
   },
   "keywords": [
     "lit-state",
@@ -17,7 +17,10 @@
   "author": "gitaarik",
   "license": "LGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/gitaarik/lit-state-demo-app-components/issues"
+    "url": "https://github.com/gitaarik/lit-state-demo-app-helpers/issues"
   },
-  "homepage": "https://github.com/gitaarik/lit-state-demo-app-components#readme"
+  "homepage": "https://github.com/gitaarik/lit-state-demo-app-helpers#readme",
+  "dependencies": {
+    "lit-element-state": "^1.2.3"
+  }
 }
