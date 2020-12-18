@@ -1,0 +1,23 @@
+{
+  "name": "lit-state-demo-app-components",
+  "version": "0.0.1",
+  "description": "Components for building a demo app for LitState",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitaarik/lit-state-demo-app-components.git"
+  },
+  "keywords": [
+    "lit-state",
+    "demo"
+  ],
+  "author": "gitaarik",
+  "license": "LGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/gitaarik/lit-state-demo-app-components/issues"
+  },
+  "homepage": "https://github.com/gitaarik/lit-state-demo-app-components#readme"
+}
