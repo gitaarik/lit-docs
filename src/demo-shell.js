@@ -44,7 +44,6 @@ class DemoShell extends LitElement {
             </header>
 
             <article>
-                <h1>${this.activePage.title}</h1>
                 ${this.activePage.template}
             </article>
 
@@ -89,7 +88,7 @@ class DemoShell extends LitElement {
             }
 
             header {
-                margin-bottom: 25px;
+                margin-bottom: 15px;
             }
 
             nav {
@@ -101,7 +100,7 @@ class DemoShell extends LitElement {
                 padding: 10px;
                 border: 1px #999 solid;
                 border-left-width: 0;
-                background: #DDD;
+                background: #C7C3BB;
                 color: #000;
                 cursor: pointer;
             }
@@ -110,17 +109,9 @@ class DemoShell extends LitElement {
                 border-left-width: 1px;
             }
 
-            nav button:hover {
-                background: #EEE;
-            }
-
+            nav button:hover,
             nav button[active] {
-                background: #FFF;
-            }
-
-            h1 {
-                margin: 0;
-                font-size: 25px;
+                background: #DAD7D2;
             }
 
         `;

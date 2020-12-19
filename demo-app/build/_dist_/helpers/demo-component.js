@@ -1,27 +1,23 @@
-import { css } from 'lit-element';
-import { LitStateElement } from 'lit-element-state';
-
-
+import { css } from '../../web_modules/lit-element.js';
+import { LitStateElement } from '../../web_modules/lit-element-state.js';
 export const DemoComponent = superclass => class LitStateElement extends superclass {
-
-    static getStyles() {
-        if (!this.styles) {
-            return this._defaultStyles;
-        } else if (Array.isArray(this.styles)) {
-            return [this._defaultStyles, ...this.styles];
-        } else {
-            return [this._defaultStyles, this.styles];
-        }
+  static getStyles() {
+    if (!this.styles) {
+      return this._defaultStyles;
+    } else if (Array.isArray(this.styles)) {
+      return [this._defaultStyles, ...this.styles];
+    } else {
+      return [this._defaultStyles, this.styles];
     }
+  }
 
-    static get _defaultStyles() {
-
-        return css`
+  static get _defaultStyles() {
+    return css`
 
             :host {
                 display: block;
                 padding: 15px;
-                background: #DAD7D2;
+                background: lightgrey;
                 border: 1px #666 solid;
             }
 
@@ -56,7 +52,6 @@ export const DemoComponent = superclass => class LitStateElement extends supercl
             }
 
         `;
+  }
 
-    }
-
-}
+};

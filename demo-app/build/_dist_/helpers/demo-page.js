@@ -1,21 +1,17 @@
-import { css } from 'lit-element';
-
-
+import { css } from '../../web_modules/lit-element.js';
 export const DemoPage = superclass => class extends superclass {
-
-    static getStyles() {
-        if (!this.styles) {
-            return this._defaultStyles;
-        } else if (Array.isArray(this.styles)) {
-            return [this._defaultStyles, ...this.styles];
-        } else {
-            return [this._defaultStyles, this.styles];
-        }
+  static getStyles() {
+    if (!this.styles) {
+      return this._defaultStyles;
+    } else if (Array.isArray(this.styles)) {
+      return [this._defaultStyles, ...this.styles];
+    } else {
+      return [this._defaultStyles, this.styles];
     }
+  }
 
-    static get _defaultStyles() {
-
-        return css`
+  static get _defaultStyles() {
+    return css`
 
             :host {
                 display: block;
@@ -29,7 +25,7 @@ export const DemoPage = superclass => class extends superclass {
                 padding: 10px 0;
                 margin: 20px 0 15px;
                 font-size: 25px;
-                border-bottom: 1px solid #AAA;
+                border-bottom: 1px solid #BBB;
             }
 
             h2 {
@@ -44,7 +40,6 @@ export const DemoPage = superclass => class extends superclass {
 
             p {
                 margin: 15px 0;
-                line-height: 1.5;
             }
 
             a {
@@ -63,7 +58,6 @@ export const DemoPage = superclass => class extends superclass {
             }
 
         `;
+  }
 
-    }
-
-}
+};
