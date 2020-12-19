@@ -1,8 +1,7 @@
 import { css } from 'lit-element';
-import { LitStateElement } from 'lit-element-state';
 
 
-export class DemoElement extends LitStateElement {
+export const DemoPage = superclass => class extends superclass {
 
     static getStyles() {
         if (!this.styles) {
@@ -26,20 +25,12 @@ export class DemoElement extends LitStateElement {
                 box-sizing: border-box;
             }
 
-            h1 {
-                margin: 0;
-                font-size: 25px;
-            }
-
             h2 {
-                margin-top: 0;
                 font-size: 20px;
-                color: green;
             }
 
             h3 {
                 font-size: 16px;
-                color: red;
             }
 
             a {

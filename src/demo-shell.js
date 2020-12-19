@@ -1,8 +1,7 @@
-import { property, html, css } from 'lit-element';
-import { LitStateElement } from 'lit-element-state';
+import { LitElement, property, html, css } from 'lit-element';
 
 
-class DemoShell extends LitStateElement {
+class DemoShell extends LitElement {
 
     _hashChangeCallback = null;
 

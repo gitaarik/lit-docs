@@ -1,10 +1,10 @@
-import { customElement, property, html, css } from 'lit-element';
-import { LitStateElement } from 'lit-element-state';
+import { customElement, LitElement, property, html } from 'lit-element';
+import { DemoPage } from '@app/helpers/index';
 import '@app/helpers/index';
 
 
 @customElement('demo-shell-usage')
-export class DemoShellUsage extends LitStateElement {
+export class DemoShellUsage extends DemoPage(LitElement) {
 
     render() {
 
@@ -12,9 +12,9 @@ export class DemoShellUsage extends LitStateElement {
 
             <p>
                 The <code-small>&lt;demo-shell&gt;</code-small> component
-                creates the basic page layout and navigation. You provide it an
-                array of pages, and the navigation is automatically created for
-                you.
+                creates the basic page layout and navigation that you see on
+                this page. You provide it an array of pages, and the navigation
+                is automatically created for you.
             </p>
 
             <p>
@@ -27,14 +27,12 @@ export class DemoShellUsage extends LitStateElement {
 
     get demoShellCode() {
 
-        return `
-import { customElement, property, html, css } from 'lit-element';
-import { LitStateElement } from 'lit-element-state';
+        return `import { customElement, LitElement, html } from 'lit-element';
 import 'lit-state-demo-app-helpers';
 
 
 @customElement('my-demo-app')
-export class MyDemoApp extends LitStateElement {
+export class MyDemoApp extends LitElement {
 
     render() {
         return html\`<demo-shell .pages=\${this.pages}></demo-shell>\`;
