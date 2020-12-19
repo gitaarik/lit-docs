@@ -1,6 +1,6 @@
 {
   "name": "lit-state-demo-app-helpers",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Helper components and functions for building a demo app for LitState",
   "main": "src/index.js",
   "scripts": {
