@@ -55,33 +55,42 @@ export let CodeBlocks = _decorate([customElement('code-blocks')], function (_ini
 
             <h2>Small code block</h2>
 
-            <h3>Code:</h3>
-
-            <p>
-                <code-big .code=${'Normal text, <code-small>code styled text</code-small>.'}></code-big>
-            </p>
-
-            <h3>Output:</h3>
+            <h3>Example:</h3>
 
             <p>
                 Normal text, <code-small>code styled text</code-small>.
             </p>
 
-            <h2>Big code block</h2>
-
-            <h3>Code:</h3>
+            <h3>Usage:</h3>
 
             <p>
-                <code-big .code=${this.bigCodeDemoSource}></code-big>
+                <code-big .code=${this.smallCodeDemo}></code-big>
             </p>
 
-            <h3>Output:</h3>
+            <h2>Big code block</h2>
+
+            <h3>Example:</h3>
 
             <p>
                 <code-big .code=${this.bigCodeDemo}></code-big>
             </p>
 
+            <h3>Usage:</h3>
+
+            <p>
+                <code-big .code=${this.bigCodeDemoSource}></code-big>
+            </p>
+
         `;
+      }
+    }, {
+      kind: "get",
+      key: "smallCodeDemo",
+      value: function smallCodeDemo() {
+        return `import { html } from 'lit-element';
+import 'lit-state-demo-app-helpers';
+
+html\`Normal text, <code-small>code styled text</code-small>.\`;`;
       }
     }, {
       kind: "get",
@@ -95,11 +104,14 @@ export let CodeBlocks = _decorate([customElement('code-blocks')], function (_ini
       kind: "get",
       key: "bigCodeDemoSource",
       value: function bigCodeDemoSource() {
-        return `const code = \`function() {
+        return `import { html } from 'lit-element';
+import 'lit-state-demo-app-helpers';
+
+const code = \`function() {
     console.log('hello!');
 }\`;
 
-return html\`<code-big .code=\${code}></code-big>\`;`;
+html\`<code-big .code=\${code}></code-big>\`;`;
       }
     }]
   };

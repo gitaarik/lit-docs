@@ -33,8 +33,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 import { customElement, LitElement, property, html } from '../web_modules/lit-element.js';
 import { DemoPage } from './helpers/index.js';
 import './helpers/index.js';
-export let DemoShellUsage = _decorate([customElement('demo-shell-usage')], function (_initialize, _DemoPage) {
-  class DemoShellUsage extends _DemoPage {
+export let DemoAppHelpersUsage = _decorate([customElement('demo-app-helpers-usage')], function (_initialize, _DemoPage) {
+  class DemoAppHelpersUsage extends _DemoPage {
     constructor(...args) {
       super(...args);
 
@@ -44,63 +44,25 @@ export let DemoShellUsage = _decorate([customElement('demo-shell-usage')], funct
   }
 
   return {
-    F: DemoShellUsage,
+    F: DemoAppHelpersUsage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>Demo Shell</h1>
+            <h1>Demo App Helpers</h1>
 
             <p>
-                The <code-small>&lt;demo-shell&gt;</code-small> component
-                creates the basic page layout and navigation that you see on
-                this page. You provide it an array of pages, and the navigation
-                is automatically created for you.
-            </p>
-
-            <h2>Usage</h2>
-
-            <p>
-                <code-big .code=${this.demoShellCode}></code-big>
+                The npm package <code-small>lit-state-demo-app-helpers</code-small>
+                provides helper utilities to create a demo app like the one
+                you're currently viewing. The package contains some web
+                components, some mixins and some functions. They are documented
+                in this demo app. Use the tabs at the top of the page to see
+                the different helpers.
             </p>
 
         `;
-      }
-    }, {
-      kind: "get",
-      key: "demoShellCode",
-      value: function demoShellCode() {
-        return `import { customElement, LitElement, html } from 'lit-element';
-import 'lit-state-demo-app-helpers';
-import './demo-page-1.js';
-import './demo-page-2.js';
-
-
-@customElement('my-demo-app')
-export class MyDemoApp extends LitElement {
-
-    render() {
-        return html\`<demo-shell .pages=\${this.pages}></demo-shell>\`;
-    }
-
-    get pages() {
-        return [
-            {
-                hash: 'page1',
-                title: 'Page 1',
-                template: html\`<demo-page-1></demo-page-1>\`
-            },
-            {
-                hash: 'page2',
-                title: 'Page 2',
-                template: html\`<demo-page-2></demo-page-2>\`
-            }
-        ];
-    }
-
-}`;
       }
     }]
   };

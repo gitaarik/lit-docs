@@ -61,13 +61,15 @@ export let DemoComponentMixin = _decorate([customElement('demo-component-mixin')
                 all demo components have consistent styling.
             </p>
 
+            <h2>Example</h2>
+
             <p>
                 <example-demo-component></example-demo-component>
             </p>
 
-            <p>
-                <code-big .code=${this.demoShellCode}></code-big>
-            </p>
+            <h2>Usage</h2>
+
+            <p><code-big .code=${this.demoShellCode}></code-big></p>
 
             <h1>Multiple demo components</h1>
 
@@ -79,10 +81,16 @@ export let DemoComponentMixin = _decorate([customElement('demo-component-mixin')
                 arranged well on different viewports:
             </p>
 
+            <h2>Example</h2>
+
             <div class="demoComponents">
                 <example-demo-component></example-demo-component>
                 <example-demo-component></example-demo-component>
             </div>
+
+            <h2>Usage</h2>
+
+            <p><code-big .code=${this.demoComponentsWrapperCode}></code-big></p>
 
         `;
       }
@@ -115,6 +123,15 @@ export class ExampleDemoComponent extends DemoComponent(LitElement) {
     }
 
 }`;
+      }
+    }, {
+      kind: "get",
+      key: "demoComponentsWrapperCode",
+      value: function demoComponentsWrapperCode() {
+        return `<div class="demoComponents">
+    <example-demo-component></example-demo-component>
+    <example-demo-component></example-demo-component>
+</div>`;
       }
     }]
   };

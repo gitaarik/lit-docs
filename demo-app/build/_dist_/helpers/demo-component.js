@@ -17,7 +17,7 @@ export const DemoComponent = superclass => class LitStateElement extends supercl
             :host {
                 display: block;
                 padding: 15px;
-                background: lightgrey;
+                background: #DAD7D2;
                 border: 1px #666 solid;
             }
 

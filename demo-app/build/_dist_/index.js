@@ -32,10 +32,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
 import './helpers/index.js';
+import './demo-app-helpers-usage.js';
 import './demo-shell-usage.js';
 import './demo-page-mixin.js';
 import './demo-component-mixin/index.js';
 import './code-blocks.js';
+import './utils-functions.js';
 export let LitStateDemoAppHelpersDemo = _decorate([customElement('lit-state-demo-app-helpers-demo')], function (_initialize, _LitElement) {
   class LitStateDemoAppHelpersDemo extends _LitElement {
     constructor(...args) {
@@ -59,6 +61,10 @@ export let LitStateDemoAppHelpersDemo = _decorate([customElement('lit-state-demo
       key: "pages",
       value: function pages() {
         return [{
+          hash: 'demo-app-helpers',
+          title: 'Demo app helpers',
+          template: html`<demo-app-helpers-usage></demo-app-helpers-usage>`
+        }, {
           hash: 'demo-shell',
           title: 'Demo shell',
           template: html`<demo-shell-usage></demo-shell-usage>`
@@ -74,6 +80,10 @@ export let LitStateDemoAppHelpersDemo = _decorate([customElement('lit-state-demo
           hash: 'demo-component-mixin',
           title: 'Demo component mixin',
           template: html`<demo-component-mixin></demo-component-mixin>`
+        }, {
+          hash: 'util-functions',
+          title: 'Utils',
+          template: html`<util-functions></util-functions>`
         }];
       }
     }]

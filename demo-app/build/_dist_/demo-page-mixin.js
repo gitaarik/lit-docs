@@ -61,6 +61,8 @@ export let DemoPageMixin = _decorate([customElement('demo-page-mixin')], functio
                 page, so that all demo pages have consistent styling.
             </p>
 
+            <h2>Usage</h2>
+
             <p>
                 <code-big .code=${this.demoShellCode}></code-big>
             </p>
@@ -72,7 +74,7 @@ export let DemoPageMixin = _decorate([customElement('demo-page-mixin')], functio
       key: "demoShellCode",
       value: function demoShellCode() {
         return `import { customElement, LitElement, html } from 'lit-element';
-import 'lit-state-demo-app-helpers';
+import { DemoPage } from 'lit-state-demo-app-helpers';
 
 
 @customElement('demo-page-mixin')

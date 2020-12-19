@@ -8,7 +8,7 @@ export class CodeSmall extends LitElement {
     return css`
             :host {
                 display: inline-block;
-                padding: 1px 2px;
+                padding: 1px 3px;
                 margin: 1px;
                 background: #444;
                 color: white;

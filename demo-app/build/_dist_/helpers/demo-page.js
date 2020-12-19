@@ -25,7 +25,7 @@ export const DemoPage = superclass => class extends superclass {
                 padding: 10px 0;
                 margin: 20px 0 15px;
                 font-size: 25px;
-                border-bottom: 1px solid #BBB;
+                border-bottom: 1px solid #AAA;
             }
 
             h2 {
@@ -40,6 +40,7 @@ export const DemoPage = superclass => class extends superclass {
 
             p {
                 margin: 15px 0;
+                line-height: 1.5;
             }
 
             a {

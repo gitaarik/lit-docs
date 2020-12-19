@@ -103,7 +103,7 @@ class DemoShell extends LitElement {
                 padding: 10px;
                 border: 1px #999 solid;
                 border-left-width: 0;
-                background: #DDD;
+                background: #C7C3BB;
                 color: #000;
                 cursor: pointer;
             }
@@ -112,12 +112,9 @@ class DemoShell extends LitElement {
                 border-left-width: 1px;
             }
 
-            nav button:hover {
-                background: #EEE;
-            }
-
+            nav button:hover,
             nav button[active] {
-                background: #FFF;
+                background: #DAD7D2;
             }
 
         `;
