@@ -13,12 +13,18 @@ export class DemoAppHelpersUsage extends DemoPage(LitElement) {
             <h1>Demo App Helpers</h1>
 
             <p>
-                The npm package <code-small>lit-state-demo-app-helpers</code-small>
-                provides helper utilities to create a demo app like the one
-                you're currently viewing. The package contains some web
-                components, some mixins and some functions. They are documented
-                in this demo app. Use the tabs at the top of the page to see
-                the different helpers.
+                These are helper utilities to create a demo app like the one
+                you're currently viewing. You can install it with:
+            </p>
+
+            <p>
+                <code-big .code=${'npm install lit-state-demo-app-helpers'}></code-big>
+            </p>
+            
+            <p>
+                The package contains some web components, some mixins and some
+                functions. They are documented in this demo app. Use the tabs
+                at the top of the page to see the different helpers.
             </p>
 
         `;
