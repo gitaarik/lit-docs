@@ -1,6 +1,6 @@
 {
   "name": "lit-element-demo-app-helpers",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Helper utilities for building a demo app for LitElement related features",
   "main": "src/index.js",
   "files": "src/*",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/gitaarik/lit-element-demo-app-helpers#readme",
   "dependencies": {
-    "highlight.js": "^10.4.1"
+    "highlight.js": "^10.4.1",
+    "lit-element-style": "0.0.1"
   }
 }
