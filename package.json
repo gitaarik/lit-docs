@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/gitaarik/lit-element-demo-app-helpers#readme",
   "dependencies": {
-    "highlight.js": "^10.4.1",
-    "lit-element-state": "^1.2.3"
+    "highlight.js": "^10.4.1"
   }
 }
