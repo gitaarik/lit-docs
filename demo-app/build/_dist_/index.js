@@ -38,8 +38,8 @@ import './demo-page-mixin.js';
 import './demo-component-mixin/index.js';
 import './code-blocks.js';
 import './utils-functions.js';
-export let LitStateDemoAppHelpersDemo = _decorate([customElement('lit-state-demo-app-helpers-demo')], function (_initialize, _LitElement) {
-  class LitStateDemoAppHelpersDemo extends _LitElement {
+export let LitElementDemoAppHelpersDemo = _decorate([customElement('lit-element-demo-app-helpers-demo')], function (_initialize, _LitElement) {
+  class LitElementDemoAppHelpersDemo extends _LitElement {
     constructor(...args) {
       super(...args);
 
@@ -49,7 +49,7 @@ export let LitStateDemoAppHelpersDemo = _decorate([customElement('lit-state-demo
   }
 
   return {
-    F: LitStateDemoAppHelpersDemo,
+    F: LitElementDemoAppHelpersDemo,
     d: [{
       kind: "method",
       key: "render",

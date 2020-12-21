@@ -8,8 +8,8 @@ import './code-blocks';
 import './utils-functions';
 
 
-@customElement('lit-state-demo-app-helpers-demo')
-export class LitStateDemoAppHelpersDemo extends LitElement {
+@customElement('lit-element-demo-app-helpers-demo')
+export class LitElementDemoAppHelpersDemo extends LitElement {
 
     render() {
         return html`<demo-shell .pages=${this.pages}></demo-shell>`;

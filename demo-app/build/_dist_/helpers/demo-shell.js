@@ -64,7 +64,7 @@ class DemoShell extends LitElement {
       return html`
                 <button
                     @click=${() => location.hash = item.hash}
-                    ?active=${this.activePageHash == item.hash}
+                    ?active=${this.activePage.hash == item.hash}
                 >
                     ${item.title}
                 </button>
@@ -77,7 +77,10 @@ class DemoShell extends LitElement {
       if (item.hash == this.activePageHash) {
         return item;
       }
-    }
+    } // If `this.activePageHash` is not found, fall back to first page
+
+
+    return this.pages[0];
   }
 
   static get styles() {

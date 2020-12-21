@@ -10,15 +10,21 @@ export class DemoAppHelpersUsage extends DemoPage(LitElement) {
 
         return html`
 
-            <h1>Demo App Helpers</h1>
+            <h1>LitElement Demo App Helpers</h1>
 
             <p>
                 These are helper utilities to create a demo app like the one
-                you're currently viewing. You can install it with:
+                you're currently viewing. It is meant for creators of
+                LitElement related libraries. You can use these helpers to make
+                a demo app to demonstrate your library. It's also useful as a
+                testing app for the features of your library, for while you're
+                developing.
             </p>
 
+            <p>Install with:</p>
+
             <p>
-                <code-big .code=${'npm install lit-state-demo-app-helpers'}></code-big>
+                <code-big .code=${'npm install lit-element-demo-app-helpers'}></code-big>
             </p>
             
             <p>

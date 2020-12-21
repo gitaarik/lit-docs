@@ -1,7 +1,7 @@
 {
-  "name": "lit-state-demo-app-helpers",
-  "version": "0.1.0",
-  "description": "Helper components and functions for building a demo app for LitState",
+  "name": "lit-element-demo-app-helpers",
+  "version": "0.0.1",
+  "description": "Helper utilities for building a demo app for LitElement related features",
   "main": "src/index.js",
   "files": "src/*",
   "scripts": {
@@ -9,18 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gitaarik/lit-state-demo-app-helpers.git"
+    "url": "git+https://github.com/gitaarik/lit-element-demo-app-helpers.git"
   },
   "keywords": [
-    "lit-state",
+    "lit-element",
     "demo"
   ],
   "author": "gitaarik",
   "license": "LGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/gitaarik/lit-state-demo-app-helpers/issues"
+    "url": "https://github.com/gitaarik/lit-element-demo-app-helpers/issues"
   },
-  "homepage": "https://github.com/gitaarik/lit-state-demo-app-helpers#readme",
+  "homepage": "https://github.com/gitaarik/lit-element-demo-app-helpers#readme",
   "dependencies": {
     "highlight.js": "^10.4.1",
     "lit-element-state": "^1.2.3"

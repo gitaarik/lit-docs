@@ -1,6 +1,5 @@
-import { css } from '../../web_modules/lit-element.js';
-import { LitStateElement } from '../../web_modules/lit-element-state.js';
-export const DemoComponent = superclass => class LitStateElement extends superclass {
+import { LitElement, css } from '../../web_modules/lit-element.js';
+export const DemoComponent = superclass => class LitElement extends superclass {
   static getStyles() {
     if (!this.styles) {
       return this._defaultStyles;
