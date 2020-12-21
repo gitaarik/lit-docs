@@ -1,4 +1,4 @@
-import { customElement, LitElement, property, html } from 'lit-element';
+import { customElement, LitElement, html } from 'lit-element';
 import { DemoPage } from '@app/helpers/index';
 import { currentTime } from '@app/helpers/index';
 

@@ -1,4 +1,4 @@
-import { customElement, LitElement, property, html } from 'lit-element';
+import { customElement, LitElement, html } from 'lit-element';
 import { DemoPage } from '@app/helpers/index';
 import '@app/helpers/index';
 import './example-demo-component';
@@ -57,7 +57,7 @@ export class DemoComponentMixin extends DemoPage(LitElement) {
 
     get demoShellCode() {
 
-        return `import { customElement, LitElement, property, html } from 'lit-element';
+        return `import { customElement, LitElement, html } from 'lit-element';
 import { DemoComponent } from 'lit-state-demo-app-helpers';
 
 
