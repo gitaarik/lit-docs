@@ -32,7 +32,7 @@ export class DemoShellUsage extends DemoPage(LitElement) {
     get demoShellCode() {
 
         return `import { customElement, LitElement, html } from 'lit-element';
-import 'lit-state-demo-app-helpers';
+import 'lit-element-demo-app-helpers';
 import './demo-page-1.js';
 import './demo-page-2.js';
 

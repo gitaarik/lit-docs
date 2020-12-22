@@ -1,64 +1,50 @@
 import { css } from '../../web_modules/lit-element.js';
-export const DemoPage = superclass => class extends superclass {
-  static getStyles() {
-    if (!this.styles) {
-      return this._defaultStyles;
-    } else if (Array.isArray(this.styles)) {
-      return [this._defaultStyles, ...this.styles];
-    } else {
-      return [this._defaultStyles, this.styles];
+import { litStyle } from '../../web_modules/lit-element-style.js';
+export const DemoPage = litStyle(css`
+
+    :host {
+        display: block;
     }
-  }
 
-  static get _defaultStyles() {
-    return css`
+    * {
+        box-sizing: border-box;
+    }
 
-            :host {
-                display: block;
-            }
+    h1 {
+        padding: 10px 0;
+        margin: 20px 0 15px;
+        font-size: 25px;
+        border-bottom: 1px solid #AAA;
+    }
 
-            * {
-                box-sizing: border-box;
-            }
+    h2 {
+        margin: 25px 0 10px;
+        font-size: 20px;
+    }
 
-            h1 {
-                padding: 10px 0;
-                margin: 20px 0 15px;
-                font-size: 25px;
-                border-bottom: 1px solid #AAA;
-            }
+    h3 {
+        margin: 20px 0 5px;
+        font-size: 16px;
+    }
 
-            h2 {
-                margin: 25px 0 10px;
-                font-size: 20px;
-            }
+    p {
+        margin: 15px 0;
+        line-height: 1.5;
+    }
 
-            h3 {
-                margin: 20px 0 5px;
-                font-size: 16px;
-            }
+    a {
+        color: #000;
+    }
 
-            p {
-                margin: 15px 0;
-                line-height: 1.5;
-            }
+    .demoComponents {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -15px 0 0 -15px;
+    }
 
-            a {
-                color: #000;
-            }
+    .demoComponents > * {
+        margin: 15px 0 0 15px;
+        max-width: 290px;
+    }
 
-            .demoComponents {
-                display: flex;
-                flex-wrap: wrap;
-                margin: -15px 0 0 -15px;
-            }
-
-            .demoComponents > * {
-                margin: 15px 0 0 15px;
-                max-width: 290px;
-            }
-
-        `;
-  }
-
-};
+`);

@@ -30,7 +30,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, property, html } from '../web_modules/lit-element.js';
+import { customElement, LitElement, html } from '../web_modules/lit-element.js';
 import { DemoPage } from './helpers/index.js';
 import './helpers/index.js';
 export let DemoShellUsage = _decorate([customElement('demo-shell-usage')], function (_initialize, _DemoPage) {
@@ -73,7 +73,7 @@ export let DemoShellUsage = _decorate([customElement('demo-shell-usage')], funct
       key: "demoShellCode",
       value: function demoShellCode() {
         return `import { customElement, LitElement, html } from 'lit-element';
-import 'lit-state-demo-app-helpers';
+import 'lit-element-demo-app-helpers';
 import './demo-page-1.js';
 import './demo-page-2.js';
 

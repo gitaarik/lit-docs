@@ -58,7 +58,7 @@ export class DemoComponentMixin extends DemoPage(LitElement) {
     get demoShellCode() {
 
         return `import { customElement, LitElement, html } from 'lit-element';
-import { DemoComponent } from 'lit-state-demo-app-helpers';
+import { DemoComponent } from 'lit-element-demo-app-helpers';
 
 
 @customElement('example-demo-component')

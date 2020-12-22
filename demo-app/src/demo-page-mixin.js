@@ -33,7 +33,7 @@ export class DemoPageMixin extends DemoPage(LitElement) {
     get demoShellCode() {
 
         return `import { customElement, LitElement, html } from 'lit-element';
-import { DemoPage } from 'lit-state-demo-app-helpers';
+import { DemoPage } from 'lit-element-demo-app-helpers';
 
 
 @customElement('demo-page-mixin')

@@ -1,56 +1,42 @@
 import { LitElement, css } from '../../web_modules/lit-element.js';
-export const DemoComponent = superclass => class LitElement extends superclass {
-  static getStyles() {
-    if (!this.styles) {
-      return this._defaultStyles;
-    } else if (Array.isArray(this.styles)) {
-      return [this._defaultStyles, ...this.styles];
-    } else {
-      return [this._defaultStyles, this.styles];
+import { litStyle } from '../../web_modules/lit-element-style.js';
+export const DemoComponent = litStyle(css`
+
+    :host {
+        display: block;
+        padding: 15px;
+        background: #DAD7D2;
+        border: 1px #666 solid;
     }
-  }
 
-  static get _defaultStyles() {
-    return css`
+    h2 {
+        margin-top: 0;
+        font-size: 20px;
+        color: green;
+    }
 
-            :host {
-                display: block;
-                padding: 15px;
-                background: #DAD7D2;
-                border: 1px #666 solid;
-            }
+    h3 {
+        margin: 20px 0;
+        font-weight: 600;
+        font-size: 16px;
+    }
 
-            h2 {
-                margin-top: 0;
-                font-size: 20px;
-                color: green;
-            }
+    .status {
+        color: blue;
+    }
 
-            h3 {
-                margin: 20px 0;
-                font-weight: 600;
-                font-size: 16px;
-            }
+    .value {
+        color: red;
+    }
 
-            .status {
-                color: blue;
-            }
+    .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -5px 0 0 -5px;
+    }
 
-            .value {
-                color: red;
-            }
+    .buttons > * {
+        margin: 5px 0 0 5px;
+    }
 
-            .buttons {
-                display: flex;
-                flex-wrap: wrap;
-                margin: -5px 0 0 -5px;
-            }
-
-            .buttons > * {
-                margin: 5px 0 0 5px;
-            }
-
-        `;
-  }
-
-};
+`);

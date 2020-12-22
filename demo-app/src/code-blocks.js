@@ -46,7 +46,7 @@ export class CodeBlocks extends DemoPage(LitElement) {
 
     get smallCodeDemo() {
         return `import { html } from 'lit-element';
-import 'lit-state-demo-app-helpers';
+import 'lit-element-demo-app-helpers';
 
 html\`Normal text, <code-small>code styled text</code-small>.\`;`;
     }
@@ -59,7 +59,7 @@ html\`Normal text, <code-small>code styled text</code-small>.\`;`;
 
     get bigCodeDemoSource() {
         return `import { html } from 'lit-element';
-import 'lit-state-demo-app-helpers';
+import 'lit-element-demo-app-helpers';
 
 const code = \`function() {
     console.log('hello!');

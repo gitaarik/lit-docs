@@ -30,7 +30,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, property, html } from '../web_modules/lit-element.js';
+import { customElement, LitElement, html } from '../web_modules/lit-element.js';
 import { DemoPage } from './helpers/index.js';
 import './helpers/index.js';
 export let CodeBlocks = _decorate([customElement('code-blocks')], function (_initialize, _DemoPage) {
@@ -88,7 +88,7 @@ export let CodeBlocks = _decorate([customElement('code-blocks')], function (_ini
       key: "smallCodeDemo",
       value: function smallCodeDemo() {
         return `import { html } from 'lit-element';
-import 'lit-state-demo-app-helpers';
+import 'lit-element-demo-app-helpers';
 
 html\`Normal text, <code-small>code styled text</code-small>.\`;`;
       }
@@ -105,7 +105,7 @@ html\`Normal text, <code-small>code styled text</code-small>.\`;`;
       key: "bigCodeDemoSource",
       value: function bigCodeDemoSource() {
         return `import { html } from 'lit-element';
-import 'lit-state-demo-app-helpers';
+import 'lit-element-demo-app-helpers';
 
 const code = \`function() {
     console.log('hello!');

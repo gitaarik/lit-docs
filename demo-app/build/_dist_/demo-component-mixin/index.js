@@ -30,7 +30,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, property, html } from '../../web_modules/lit-element.js';
+import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
 import { DemoPage } from '../helpers/index.js';
 import '../helpers/index.js';
 import './example-demo-component.js';
@@ -98,8 +98,8 @@ export let DemoComponentMixin = _decorate([customElement('demo-component-mixin')
       kind: "get",
       key: "demoShellCode",
       value: function demoShellCode() {
-        return `import { customElement, LitElement, property, html } from 'lit-element';
-import { DemoComponent } from 'lit-state-demo-app-helpers';
+        return `import { customElement, LitElement, html } from 'lit-element';
+import { DemoComponent } from 'lit-element-demo-app-helpers';
 
 
 @customElement('example-demo-component')

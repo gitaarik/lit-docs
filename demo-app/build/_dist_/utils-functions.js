@@ -30,7 +30,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, property, html } from '../web_modules/lit-element.js';
+import { customElement, LitElement, html } from '../web_modules/lit-element.js';
 import { DemoPage } from './helpers/index.js';
 import { currentTime } from './helpers/index.js';
 export let UtilFunctions = _decorate([customElement('util-functions')], function (_initialize, _DemoPage) {
@@ -75,7 +75,7 @@ export let UtilFunctions = _decorate([customElement('util-functions')], function
       kind: "get",
       key: "currentTimeUsageCode",
       value: function currentTimeUsageCode() {
-        return `import { currentTime } from 'lit-state-demo-app-helpers';
+        return `import { currentTime } from 'lit-element-demo-app-helpers';
 
 console.log('The current time is: ' + currentTime());`;
       }

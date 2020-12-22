@@ -33,7 +33,7 @@ export class UtilFunctions extends DemoPage(LitElement) {
     }
 
     get currentTimeUsageCode() {
-        return `import { currentTime } from 'lit-state-demo-app-helpers';
+        return `import { currentTime } from 'lit-element-demo-app-helpers';
 
 console.log('The current time is: ' + currentTime());`;
     }
