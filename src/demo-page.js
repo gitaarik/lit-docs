@@ -12,21 +12,40 @@ export const DemoPage = litStyle(css`
         box-sizing: border-box;
     }
 
-    h1 {
-        padding: 10px 0;
-        margin: 20px 0 15px;
-        font-size: 25px;
-        border-bottom: 1px solid #AAA;
+    :first-child {
+        margin-top: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 24px;
+        margin-bottom: 16px;
+        font-weight: 600;
+        line-height: 1.25;
+    }
+
+    h1, h2 {
+        padding-bottom: .3em;
+        border-bottom: 1px solid #aaa;
     }
 
     h2 {
-        margin: 25px 0 10px;
-        font-size: 20px;
+        font-size: 1.5em;
     }
 
     h3 {
-        margin: 20px 0 5px;
-        font-size: 16px;
+        font-size: 1.25em;
+    }
+
+    h4 {
+        font-size: 1em;
+    }
+
+    h5 {
+        font-size: .875em;
+    }
+
+    h6 {
+        font-size: .85em;
     }
 
     p {

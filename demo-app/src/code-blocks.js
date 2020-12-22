@@ -12,6 +12,8 @@ export class CodeBlocks extends DemoPage(LitElement) {
 
             <h1>Code blocks</h1>
 
+            <p>Use the code blocks to demonstrate how your library should be used.</p>
+
             <h2>Small code block</h2>
 
             <h3>Example:</h3>
@@ -40,6 +42,20 @@ export class CodeBlocks extends DemoPage(LitElement) {
                 <code-big .code=${this.bigCodeDemoSource}></code-big>
             </p>
 
+            <h2>Big code block with filename</h2>
+
+            <h3>Example:</h3>
+
+            <p>
+                <code-big filename='my-function.js' .code=${this.bigCodeDemo}></code-big>
+            </p>
+
+            <h3>Usage:</h3>
+
+            <p>
+                <code-big .code=${this.bigCodeWithFilenameDemoSource}></code-big>
+            </p>
+
         `;
 
     }
@@ -66,6 +82,19 @@ const code = \`function() {
 }\`;
 
 html\`<code-big .code=\${code}></code-big>\`;`;
+    }
+
+    get bigCodeWithFilenameDemoSource() {
+
+        return `import { html } from 'lit-element';
+import 'lit-element-demo-app-helpers';
+
+const code = \`function() {
+    console.log('hello!');
+}\`;
+
+html\`<code-big filename='my-function.js' .code=\${code}></code-big>\`;`;
+
     }
 
 }

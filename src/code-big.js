@@ -31,7 +31,7 @@ export class CodeBig extends LitElement {
     render() {
         return html`
             ${this._fileName}
-            <code class="hljs">${this.code}</code>
+            <code class="hljs" ?has-filename=${!!this.fileName}>${this.code}</code>
         `;
     }
 
@@ -57,6 +57,7 @@ export class CodeBig extends LitElement {
                 display: block;
                 margin: 0;
                 padding: 7px 10px;
+                border-radius: 5px 5px 0 0;
                 background: #555;
                 color: #FFF;
                 font-weight: bold;
@@ -69,9 +70,14 @@ export class CodeBig extends LitElement {
                 padding: 10px;
                 width: 100%;
                 white-space: pre;
+                border-radius: 5px;
                 overflow-x: auto;
                 color: #ffffff;
                 background: #1c1b1b;
+            }
+
+            .hljs[has-filename] {
+                border-radius: 0 0 5px 5px;
             }
 
             .hljs-comment {
