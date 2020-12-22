@@ -1,6 +1,6 @@
 {
   "name": "lit-element-demo-app-helpers",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Helper utilities for building a demo app for LitElement related features",
   "main": "src/index.js",
   "files": "src/*",
