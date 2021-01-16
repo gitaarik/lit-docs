@@ -30,11 +30,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, html } from '../web_modules/lit-element.js';
-import { DemoPage } from './helpers/index.js';
-import './helpers/index.js';
-export let DemoPageUsage = _decorate([customElement('demo-page-usage')], function (_initialize, _DemoPage) {
-  class DemoPageUsage extends _DemoPage {
+import { customElement, LitElement, html, css } from '../../web_modules/lit-element.js';
+
+let CrossIcon = _decorate([customElement('cross-icon')], function (_initialize, _LitElement) {
+  class CrossIcon extends _LitElement {
     constructor(...args) {
       super(...args);
 
@@ -44,51 +43,40 @@ export let DemoPageUsage = _decorate([customElement('demo-page-usage')], functio
   }
 
   return {
-    F: DemoPageUsage,
+    F: CrossIcon,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
-
-            <h1>DemoPage</h1>
-
-            <p>
-                The <code>DemoPage</code> mixin should be used for
-                the demo pages that are provided to the
-                <code>&lt;demo-shell&gt;</code> component, like the
-                current page you're reading. It adds some basic styles for the
-                page, so that all demo pages have consistent styling.
-            </p>
-
-            <h2>Usage</h2>
-
-            <p>
-                <code-block .code=${this.demoShellCode}></code-block>
-            </p>
-
+            <svg viewBox="0 0 100 100" width="100%" height="100%">
+                <line x1="0" y1="0" x2="100" y2="100" />
+                <line x1="100" y1="0" x2="0" y2="100" />
+            </svg>
         `;
       }
     }, {
       kind: "get",
-      key: "demoShellCode",
-      value: function demoShellCode() {
-        return `import { customElement, LitElement, html } from 'lit-element';
-import { DemoPage } from 'lit-element-demo-app-helpers';
+      static: true,
+      key: "styles",
+      value: function styles() {
+        return css`
 
+            :host {
+                display: block;
+            }
 
-@customElement('demo-page')
-export class DemoPage extends DemoPage(LitElement) {
+            svg {
+                height: 100%;
+            }
 
-    render() {
-        return html\`
-            <h1>This h1 tag is styled by the DemoPage</h1>
-            <p>And this p tag also. <code>this is some code</code>.</p>
-        \`;
-    }
+            line {
+                stroke: #7b8184;
+                stroke-width: 5px;
+            }
 
-}`;
+        `;
       }
     }]
   };
-}, DemoPage(LitElement));
+}, LitElement);

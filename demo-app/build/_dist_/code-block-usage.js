@@ -30,12 +30,11 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
-import { LitDocsStyle } from '../helpers/index.js';
-import '../helpers/index.js';
-import './example-demo-component.js';
-export let DemoComponent = _decorate([customElement('demo-component')], function (_initialize, _LitDocsStyle) {
-  class DemoComponent extends _LitDocsStyle {
+import { customElement, LitElement, html } from '../web_modules/lit-element.js';
+import { LitDocsStyle } from './helpers/index.js';
+import './helpers/index.js';
+export let CodeBlockUsage = _decorate([customElement('code-block-usage')], function (_initialize, _LitDocsStyle) {
+  class CodeBlockUsage extends _LitDocsStyle {
     constructor(...args) {
       super(...args);
 
@@ -45,93 +44,84 @@ export let DemoComponent = _decorate([customElement('demo-component')], function
   }
 
   return {
-    F: DemoComponent,
+    F: CodeBlockUsage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>DemoComponent</h1>
+            <h1>Code block</h1>
 
             <p>
-                The <code>DemoComponent</code> mixin can be used for components
-                that demonstrate some functionality of your library. It adds
-                some basic styles for the component, so that all demo
-                components have consistent styling.
+                Use code blocks to demonstrate code. When using
+                <a href="lit-state-style">LitStateStyle</a>, the default
+                <code>&lt;code&gt;</code> blocks are styled and are good for
+                tiny code snippets. For bigger code blocks, use
+                <code>&lt;lit-docs-code-block&gt;</code>.
             </p>
 
-            <h2>Example</h2>
+            <h3>Example:</h3>
 
             <p>
-                <example-demo-component></example-demo-component>
+                <lit-docs-code-block .code=${this.bigCodeDemo}></lit-docs-lit-docs-code-block>
             </p>
 
-            <h2>Usage</h2>
-
-            <p><lit-docs-code-block .code=${this.demoShellCode}></lit-docs-code-block></p>
-
-            <h1>Multiple demo components</h1>
+            <h3>Usage:</h3>
 
             <p>
-                If you use multiple demo components on your
-                <a href="#demo-page-mixin">demo page</a>, it is advised to wrap
-                them in <code>&lt;div class="demoComponents"&gt;&lt;div&gt;</code>,
-                so that they have some margin from each other, and stay
-                arranged well on different viewports:
+                <lit-docs-code-block .code=${this.bigCodeDemoSource}></lit-docs-code-block>
             </p>
 
-            <h2>Example</h2>
+            <h2>Code block with filename</h2>
 
-            <div class="demoComponents">
-                <example-demo-component></example-demo-component>
-                <example-demo-component></example-demo-component>
-            </div>
+            <h3>Example:</h3>
 
-            <h2>Usage</h2>
+            <p>
+                <lit-docs-code-block filename='my-function.js' .code=${this.bigCodeDemo}></lit-docs-code-block>
+            </p>
 
-            <p><lit-docs-code-block .code=${this.demoComponentsWrapperCode}></lit-docs-code-block></p>
+            <h3>Usage:</h3>
+
+            <p>
+                <lit-docs-code-block .code=${this.bigCodeWithFilenameDemoSource}></lit-docs-code-block>
+            </p>
 
         `;
       }
     }, {
       kind: "get",
-      key: "demoShellCode",
-      value: function demoShellCode() {
-        return `import { customElement, LitElement, html } from 'lit-element';
-import { DemoComponent } from 'lit-element-demo-app-helpers';
-
-
-@customElement('example-demo-component')
-export class ExampleDemoComponent extends DemoComponent(LitElement) {
-
-    render() {
-
-        return html\`
-            <h2>H2 tag</h2>
-            <h3>Normal H3 tag</h3>
-            <h3 class="status">Status H3 tag</h3>
-            <h3 class="value">Value H3 tag</h3>
-            <div class="buttons">
-                <button>Button 1</button>
-                <button>Button 2</button>
-                <button>Button 3</button>
-                <button>Button 4</button>
-            </div>
-        \`;
-
-    }
-
+      key: "bigCodeDemo",
+      value: function bigCodeDemo() {
+        return `function() {
+    console.log('hello!');
 }`;
       }
     }, {
       kind: "get",
-      key: "demoComponentsWrapperCode",
-      value: function demoComponentsWrapperCode() {
-        return `<div class="demoComponents">
-    <example-demo-component></example-demo-component>
-    <example-demo-component></example-demo-component>
-</div>`;
+      key: "bigCodeDemoSource",
+      value: function bigCodeDemoSource() {
+        return `import { html } from 'lit-element';
+import 'lit-element-demo-app-helpers';
+
+const code = \`function() {
+    console.log('hello!');
+}\`;
+
+html\`<lit-docs-code-block .code=\${code}></lit-docs-code-block>\`;`;
+      }
+    }, {
+      kind: "get",
+      key: "bigCodeWithFilenameDemoSource",
+      value: function bigCodeWithFilenameDemoSource() {
+        return `import { html } from 'lit-element';
+import 'lit-element-demo-app-helpers';
+
+const code = \`function() {
+    console.log('hello!');
+}\`;
+
+html\`<lit-docs-code-block filename='my-function.js' .code=\${code}></lit-docs-code-block>\`;`;
       }
     }]
   };

@@ -30,11 +30,19 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, html } from '../web_modules/lit-element.js';
-import { DemoPage } from './helpers/index.js';
-import './helpers/index.js';
-export let DemoShellUsage = _decorate([customElement('demo-shell-usage')], function (_initialize, _DemoPage) {
-  class DemoShellUsage extends _DemoPage {
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+import { customElement, LitElement, property, html, css } from '../../web_modules/lit-element.js';
+import { LitDocsStyle } from './lit-docs-style.js';
+import './hamburger-icon.js';
+import './cross-icon.js';
+
+let LitDocsUI = _decorate([customElement('lit-docs-ui')], function (_initialize, _LitDocsStyle) {
+  class LitDocsUI extends _LitDocsStyle {
     constructor(...args) {
       super(...args);
 
@@ -44,64 +52,344 @@ export let DemoShellUsage = _decorate([customElement('demo-shell-usage')], funct
   }
 
   return {
-    F: DemoShellUsage,
+    F: LitDocsUI,
     d: [{
+      kind: "field",
+      decorators: [property({
+        type: String
+      })],
+      key: "docsTitle",
+
+      value() {
+        return '';
+      }
+
+    }, {
+      kind: "field",
+      decorators: [property({
+        type: Array
+      })],
+      key: "pages",
+
+      value() {
+        return [];
+      }
+
+    }, {
+      kind: "field",
+      decorators: [property({
+        type: Boolean
+      })],
+      key: "_showMenu",
+
+      value() {
+        return false;
+      }
+
+    }, {
+      kind: "field",
+      decorators: [property({
+        type: String
+      })],
+      key: "_activePage",
+
+      value() {
+        return '';
+      }
+
+    }, {
+      kind: "method",
+      key: "connectedCallback",
+      value: function connectedCallback() {
+        _get(_getPrototypeOf(LitDocsUI.prototype), "connectedCallback", this).call(this);
+
+        this._initActivePage();
+
+        this._fixMenuWidthOnPageWidthChange();
+      }
+    }, {
+      kind: "method",
+      key: "firstUpdated",
+      value: function firstUpdated() {
+        _get(_getPrototypeOf(LitDocsUI.prototype), "firstUpdated", this).call(this);
+
+        this._fixMenuWidth();
+      }
+    }, {
+      kind: "method",
+      key: "_initActivePage",
+      value: function _initActivePage() {
+        const path = window.location.pathname.substr(1);
+
+        if (path) {
+          for (const page of this.pages) {
+            if (page.path === window.location.pathname.substr(1)) {
+              this._activePage = page;
+              return;
+            }
+          }
+        } // If no page was not found, fall back to first page
+
+
+        this._activePage = this.pages[0];
+      }
+    }, {
+      kind: "method",
+      key: "_fixMenuWidth",
+      value: function _fixMenuWidth() {
+        this.shadowRoot.getElementById('menuSidebarContent').style.maxWidth = (() => {
+          if (window.innerWidth > 500) {
+            return this.shadowRoot.getElementById('menu').clientWidth + 'px';
+          } else {
+            return 'none';
+          }
+        })();
+      }
+    }, {
+      kind: "method",
+      key: "_resetMenuWidth",
+      value: function _resetMenuWidth() {
+        this.shadowRoot.getElementById('menuSidebarContent').style.maxWidth = 'none';
+      }
+    }, {
+      kind: "method",
+      key: "_fixMenuWidthOnPageWidthChange",
+      value: function _fixMenuWidthOnPageWidthChange() {
+        window.addEventListener('resize', () => this._fixMenuWidth());
+      }
+    }, {
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>Demo Shell</h1>
+            <div id="layout" ?show-menu=${this._showMenu}>
 
-            <p>
-                The <code>&lt;demo-shell&gt;</code> component creates the basic
-                page layout and navigation that you see on this page. You
-                provide it a title and an array of pages, and the navigation is
-                automatically created for you.
-            </p>
+                <div id="menu">
 
-            <h2>Usage</h2>
+                    <div id="menuSidebarContent">
+                        <header>
+                            <a
+                                href="/"
+                                @click=${event => this.handleTitleClick(event)}
+                            >
+                                ${this.docsTitle}
+                            </a>
+                        </header>
+                        <nav>${this.navTree}</nav>
+                    </div>
 
-            <p>
-                <code-block .code=${this.demoShellCode}></code-block>
-            </p>
+                    <div id="hamburgerMenu" @click=${this.handleHamburgerMenuClick}>
+                        <hamburger-icon ?hidden=${this._showMenu}></hamburger-icon>
+                        <cross-icon ?hidden=${!this._showMenu}></cross-icon>
+                    </div>
+
+                </div>
+
+                <article>
+                    <div id="articleContent">
+                        ${this._activePage.template}
+                    </div>
+                </article>
+
+            </div>
 
         `;
       }
     }, {
       kind: "get",
-      key: "demoShellCode",
-      value: function demoShellCode() {
-        return `import { customElement, LitElement, html } from 'lit-element';
-import 'lit-element-demo-app-helpers';
-import './demo-page-1.js';
-import './demo-page-2.js';
+      key: "navTree",
+      value: function navTree() {
+        return this.pages.map(page => {
+          return html`
+                <a
+                    class="navItem"
+                    href=${page.path}
+                    @click=${event => this.handleMenuItemClick(event, page)}
+                    ?active=${false}
+                >
+                    ${page.title}
+                </a>
+            `;
+        });
+      }
+    }, {
+      kind: "method",
+      key: "handleTitleClick",
+      value: function handleTitleClick(event) {
+        this.handleMenuItemClick(event, this.pages[0]);
+      }
+    }, {
+      kind: "method",
+      key: "handleMenuItemClick",
+      value: function handleMenuItemClick(event, page) {
+        if (event.ctrlKey || event.shiftKey) {
+          // Ctrl/shift click opens a `<a>` link in new tab/window, so when
+          // one of these keys are pressed, don't override normal behavior.
+          return;
+        }
 
+        event.preventDefault();
+        history.pushState({}, page.title, page.path);
+        this._activePage = page;
+        window.scrollTo(0, 0);
+        this._showMenu = false;
+      }
+    }, {
+      kind: "method",
+      key: "handleHamburgerMenuClick",
+      value: function handleHamburgerMenuClick() {
+        if (this._showMenu) {
+          this._showMenu = false;
+        } else {
+          this._showMenu = true;
+        }
 
-@customElement('my-demo-app')
-export class MyDemoApp extends LitElement {
+        this._resetMenuWidth();
+      }
+    }, {
+      kind: "get",
+      static: true,
+      key: "styles",
+      value: function styles() {
+        return css`
 
-    render() {
-        return html\`<demo-shell title="My Lib" .pages=\${this.pages}></demo-shell>\`;
-    }
-
-    get pages() {
-        return [
-            {
-                hash: 'page1',
-                title: 'Page 1',
-                template: html\`<demo-page-1></demo-page-1>\`
-            },
-            {
-                hash: 'page2',
-                title: 'Page 2',
-                template: html\`<demo-page-2></demo-page-2>\`
+            * {
+                box-sizing: border-box;
+                --left-sidebar-width: 250px;
+                --header-height: 45px;
+                --min-article-width: 300px;
             }
-        ];
-    }
 
-}`;
+            #layout {
+                display: flex;
+                margin: 0 auto;
+                min-height: 100vh;
+            }
+
+            #menuSidebarContent {
+                position: fixed;
+                width: 100%;
+                max-width: var(--left-sidebar-width);
+            }
+
+            #menuSidebarContent header {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: var(--header-height);
+                background: #bcb9b2;
+                border-bottom: 1px #999 solid;
+            }
+
+            #menuSidebarContent header a {
+                display: inline-block;
+                padding: 5px;
+                font-weight: 600;
+                text-decoration: none;
+                font-size: 20px;
+            }
+
+            nav {
+                display: flex;
+                flex-direction: column;
+                max-height: calc(100vh - var(--header-height));
+                overflow: auto;
+            }
+
+            .navItem {
+                margin: 0;
+                padding: 10px;
+                border-bottom: 1px #999 solid;
+                background: #C7C3BB;
+                text-align: left;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .navItem:hover,
+            .navItem[active] {
+                background: #DAD7D2;
+            }
+
+            article {
+                flex-grow: 0;
+                min-width: var(--min-article-width);
+            }
+
+            #articleContent {
+                padding: 20px;
+                max-width: 720px;
+                width: 100%;
+            }
+
+            #hamburgerMenu {
+                display: none;
+            }
+
+            @media screen and (min-width: 501px) {
+
+                #menu {
+                    position: relative;
+                    width: 100%;
+                    max-width: var(--left-sidebar-width);
+                    background: #bcb9b2;
+                    border-right: 1px #999 solid;
+                }
+
+                #sideBarOpener {
+                    display: none;
+                }
+
+            }
+
+            @media screen and (max-width: 500px) {
+
+                #layout[show-menu] #menu {
+                    display: block;
+                    position: absolute;
+                }
+
+                article {
+                    padding-top: var(--header-height);
+                }
+
+                #layout[show-menu] article {
+                    display: none;
+                }
+
+                #layout:not([show-menu]) #menuSidebarContent nav {
+                    display: none;
+                }
+
+                #hamburgerMenu {
+                    position: fixed;
+                    display: block;
+                    top: 2px;
+                    right: 0;
+                    padding: 10px;
+                    cursor: pointer;
+                }
+
+                #hamburgerMenu hamburger-icon {
+                    height: 20px;
+                }
+
+                #hamburgerMenu cross-icon {
+                    height: 20px;
+                }
+
+                #hamburgerMenu .stripe {
+                    width: 100%;
+                    height: 4px;
+                    margin: 5px 0;
+                    background: grey;
+                }
+
+            }
+
+        `;
       }
     }]
   };
-}, DemoPage(LitElement));
+}, LitDocsStyle(LitElement));

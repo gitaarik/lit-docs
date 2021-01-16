@@ -31,10 +31,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
-import { DemoPage } from './helpers/index.js';
+import { LitDocsStyle } from './helpers/index.js';
 import './helpers/index.js';
-export let IntroPage = _decorate([customElement('intro-page')], function (_initialize, _DemoPage) {
-  class IntroPage extends _DemoPage {
+export let IntroPage = _decorate([customElement('intro-page')], function (_initialize, _LitDocsStyle) {
+  class IntroPage extends _LitDocsStyle {
     constructor(...args) {
       super(...args);
 
@@ -65,7 +65,7 @@ export let IntroPage = _decorate([customElement('intro-page')], function (_initi
             <p>Install with:</p>
 
             <p>
-                <code-block .code=${'npm install lit-docs'}></code-block>
+                <lit-docs-code-block .code=${'npm install lit-docs'}></lit-docs-lit-docs-code-block>
             </p>
             
             <p>
@@ -78,4 +78,4 @@ export let IntroPage = _decorate([customElement('intro-page')], function (_initi
       }
     }]
   };
-}, DemoPage(LitElement));
+}, LitDocsStyle(LitElement));

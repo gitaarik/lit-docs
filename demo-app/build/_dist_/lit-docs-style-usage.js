@@ -31,10 +31,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
-import { DemoPage } from './helpers/index.js';
+import { LitDocsStyle } from './helpers/index.js';
 import './helpers/index.js';
-export let CodeBlocks = _decorate([customElement('code-blocks')], function (_initialize, _DemoPage) {
-  class CodeBlocks extends _DemoPage {
+export let LitDocsStyleUsage = _decorate([customElement('lit-docs-style-usage')], function (_initialize, _LitDocsStyle) {
+  class LitDocsStyleUsage extends _LitDocsStyle {
     constructor(...args) {
       super(...args);
 
@@ -44,79 +44,50 @@ export let CodeBlocks = _decorate([customElement('code-blocks')], function (_ini
   }
 
   return {
-    F: CodeBlocks,
+    F: LitDocsStyleUsage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>Code blocks</h1>
-
-            <p>Use the code blocks to demonstrate how your library should be used.</p>
-
-            <h3>Example:</h3>
+            <h1>LitDocsStyle</h1>
 
             <p>
-                <code-block .code=${this.bigCodeDemo}></code-block>
+                The <code>LitDocsStyle</code> mixin should be used to apply
+                general styles to the components that contain the documentation
+                content. You can apply it to your component by using it as a
+                mixin on your component:
             </p>
 
-            <h3>Usage:</h3>
+            <h2>Usage</h2>
 
             <p>
-                <code-block .code=${this.bigCodeDemoSource}></code-block>
-            </p>
-
-            <h2>Code block with filename</h2>
-
-            <h3>Example:</h3>
-
-            <p>
-                <code-block filename='my-function.js' .code=${this.bigCodeDemo}></code-block>
-            </p>
-
-            <h3>Usage:</h3>
-
-            <p>
-                <code-block .code=${this.bigCodeWithFilenameDemoSource}></code-block>
+                <lit-docs-code-block .code=${this.litDocsStyleCode}></lit-docs-code-block>
             </p>
 
         `;
       }
     }, {
       kind: "get",
-      key: "bigCodeDemo",
-      value: function bigCodeDemo() {
-        return `function() {
-    console.log('hello!');
+      key: "litDocsStyleCode",
+      value: function litDocsStyleCode() {
+        return `import { customElement, LitElement, html } from 'lit-element';
+import { LitDocsStyle } from 'lit-docs';
+
+
+@customElement('my-component')
+export class MyComponent extends LitDocsStyle(LitElement) {
+
+    render() {
+        return html\`
+            <h1>This h1 tag is styled by LitDocsStyle</h1>
+            <p>And this p tag also. <code>this is some code</code>.</p>
+        \`;
+    }
+
 }`;
-      }
-    }, {
-      kind: "get",
-      key: "bigCodeDemoSource",
-      value: function bigCodeDemoSource() {
-        return `import { html } from 'lit-element';
-import 'lit-element-demo-app-helpers';
-
-const code = \`function() {
-    console.log('hello!');
-}\`;
-
-html\`<code-block .code=\${code}></code-block>\`;`;
-      }
-    }, {
-      kind: "get",
-      key: "bigCodeWithFilenameDemoSource",
-      value: function bigCodeWithFilenameDemoSource() {
-        return `import { html } from 'lit-element';
-import 'lit-element-demo-app-helpers';
-
-const code = \`function() {
-    console.log('hello!');
-}\`;
-
-html\`<code-block filename='my-function.js' .code=\${code}></code-block>\`;`;
       }
     }]
   };
-}, DemoPage(LitElement));
+}, LitDocsStyle(LitElement));

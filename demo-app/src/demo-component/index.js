@@ -1,11 +1,11 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { DemoPage } from '@app/helpers/index';
+import { LitDocsStyle } from '@app/helpers/index';
 import '@app/helpers/index';
 import './example-demo-component';
 
 
 @customElement('demo-component')
-export class DemoComponent extends DemoPage(LitElement) {
+export class DemoComponent extends LitDocsStyle(LitElement) {
 
     render() {
 
@@ -14,10 +14,10 @@ export class DemoComponent extends DemoPage(LitElement) {
             <h1>DemoComponent</h1>
 
             <p>
-                T Mixinhe <code>DemoComponent</code> mixin can be used
-                for demo components that demonstrate some functionality of your
-                library. It adds some basic styles for the component, so that
-                all demo components have consistent styling.
+                The <code>DemoComponent</code> mixin can be used for components
+                that demonstrate some functionality of your library. It adds
+                some basic styles for the component, so that all demo
+                components have consistent styling.
             </p>
 
             <h2>Example</h2>
@@ -28,7 +28,7 @@ export class DemoComponent extends DemoPage(LitElement) {
 
             <h2>Usage</h2>
 
-            <p><code-block .code=${this.demoShellCode}></code-block></p>
+            <p><lit-docs-code-block .code=${this.demoShellCode}></lit-docs-code-block></p>
 
             <h1>Multiple demo components</h1>
 
@@ -49,7 +49,7 @@ export class DemoComponent extends DemoPage(LitElement) {
 
             <h2>Usage</h2>
 
-            <p><code-block .code=${this.demoComponentsWrapperCode}></code-block></p>
+            <p><lit-docs-code-block .code=${this.demoComponentsWrapperCode}></lit-docs-code-block></p>
 
         `;
 

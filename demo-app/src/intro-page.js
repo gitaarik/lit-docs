@@ -1,10 +1,10 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { DemoPage } from '@app/helpers/index';
+import { LitDocsStyle } from '@app/helpers/index';
 import '@app/helpers/index';
 
 
 @customElement('intro-page')
-export class IntroPage extends DemoPage(LitElement) {
+export class IntroPage extends LitDocsStyle(LitElement) {
 
     render() {
 
@@ -13,18 +13,23 @@ export class IntroPage extends DemoPage(LitElement) {
             <h1>LitDocs</h1>
 
             <p>
-                These are utilities to create documentation for LitElement
-                related projects, like the one you're currently viewing. It is
-                created in LitElement itself, and therefore it is easy to
+                This documentation you're currently viewing is created with
+                LitDocs. And the documentation here describes how you can use
+                LitDocs to make your own documentation.
+            </p>
+
+            <p>
+                LitDocs is created in LitElement, and therefore it is suitable
+                to use for LitElement related projects. It makes it easy to
                 demonstrate your library, custom components, or anything you
                 made to use together with LitElement or Web Components in
                 general.
             </p>
 
-            <p>Install with:</p>
+            <h4>Installation</h4>
 
             <p>
-                <code-block .code=${'npm install lit-docs'}></code-block>
+                <lit-docs-code-block .code=${'npm install lit-docs'}></lit-docs-lit-docs-code-block>
             </p>
             
             <p>

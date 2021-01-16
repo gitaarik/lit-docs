@@ -1,6 +1,8 @@
-import { css } from '../../web_modules/lit-element.js';
-import { litStyle } from '../../web_modules/lit-element-style.js';
-export const DemoPage = litStyle(css`
+import { css } from 'lit-element';
+import { litStyle } from 'lit-element-style';
+
+
+export const LitDocsStyle = litStyle(css`
 
     :host {
         display: block;
@@ -8,6 +10,10 @@ export const DemoPage = litStyle(css`
 
     * {
         box-sizing: border-box;
+    }
+
+    [hidden] {
+        display: none;
     }
 
     :first-child {
@@ -52,7 +58,7 @@ export const DemoPage = litStyle(css`
     }
 
     a {
-        color: #000;
+        color: #384147;
     }
 
     code {

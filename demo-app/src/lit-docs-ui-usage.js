@@ -1,20 +1,20 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { DemoPage } from '@app/helpers/index';
+import { LitDocsStyle } from '@app/helpers/index';
 import '@app/helpers/index';
 
 
-@customElement('demo-shell-usage')
-export class DemoShellUsage extends DemoPage(LitElement) {
+@customElement('lit-docs-ui-usage')
+export class LitDocsUiUsage extends LitDocsStyle(LitElement) {
 
     render() {
 
         return html`
 
-            <h1>Demo Shell</h1>
+            <h1>LitDocs UI</h1>
 
             <p>
-                The <code>&lt;demo-shell&gt;</code> component creates the basic
-                page layout and navigation that you see on this page. You
+                The <code>&lt;lit-docs-ui&gt;</code> component creates the
+                basic page layout and navigation that you see on this page. You
                 provide it a title and an array of pages, and the navigation is
                 automatically created for you.
             </p>
@@ -22,17 +22,17 @@ export class DemoShellUsage extends DemoPage(LitElement) {
             <h2>Usage</h2>
 
             <p>
-                <code-block .code=${this.demoShellCode}></code-block>
+                <lit-docs-code-block .code=${this.litDocsUiCode}></lit-docs-code-block>
             </p>
 
         `;
 
     }
 
-    get demoShellCode() {
+    get litDocsUiCode() {
 
         return `import { customElement, LitElement, html } from 'lit-element';
-import 'lit-element-demo-app-helpers';
+import 'lit-docs';
 import './demo-page-1.js';
 import './demo-page-2.js';
 
@@ -41,7 +41,12 @@ import './demo-page-2.js';
 export class MyDemoApp extends LitElement {
 
     render() {
-        return html\`<demo-shell title="My Lib" .pages=\${this.pages}></demo-shell>\`;
+        return html\`
+            <lit-docs-ui
+                .docsTitle=\${'My Lib'}
+                .pages=\${this.pages}
+            ></lit-docs-ui>
+        \`;
     }
 
     get pages() {

@@ -1,44 +1,49 @@
 import { customElement, LitElement, html, css } from 'lit-element';
 import '@app/helpers/index';
 import './intro-page.js';
-import './demo-shell-usage.js';
-import './demo-page-usage.js';
+import './lit-docs-ui-usage.js';
+import './lit-docs-style-usage.js';
+import './code-block-usage.js';
 import './demo-component/index.js';
-import './code-blocks.js';
 
 
 @customElement('lit-docs-documentation')
 export class LitDocsDocumentation extends LitElement {
 
     render() {
-        return html`<demo-shell title="LitDocs" .pages=${this.pages}></demo-shell>`;
+        return html`
+            <lit-docs-ui
+                .docsTitle=${'LitDocs'}
+                .pages=${this.pages}
+            ></lit-docs-ui>
+        `;
     }
 
     get pages() {
         return [
             {
-                hash: 'intro-page',
                 title: 'Introduction',
+                path: 'intro-page',
                 template: html`<intro-page></intro-page>`
             },
             {
-                hash: 'demo-shell',
-                title: 'Demo shell',
-                template: html`<demo-shell-usage></demo-shell-usage>`
+                title: 'LitDocs UI',
+                path: 'lit-docs-ui',
+                template: html`<lit-docs-ui-usage></lit-docs-ui-usage>`
             },
             {
-                hash: 'demo-page-usage',
-                title: 'Demo page',
-                template: html`<demo-page-usage></demo-page-usage>`
+                title: 'LitDocsStyle',
+                path: 'lit-docs-style',
+                template: html`<lit-docs-style-usage></lit-docs-style-usage>`
             },
             {
-                hash: 'code-blocks',
-                title: 'Code blocks',
-                template: html`<code-blocks></code-blocks>`
+                title: 'Code block',
+                path: 'code-block',
+                template: html`<code-block-usage></code-block-usage>`
             },
             {
-                hash: 'demo-component',
                 title: 'Demo component',
+                path: 'demo-component',
                 template: html`<demo-component></demo-component>`
             }
         ];

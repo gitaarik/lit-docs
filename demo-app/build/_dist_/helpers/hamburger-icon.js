@@ -30,16 +30,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+import { customElement, LitElement, html, css } from '../../web_modules/lit-element.js';
 
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-import { LitElement, property, html, css } from '../../web_modules/lit-element.js';
-
-let DemoShell = _decorate(null, function (_initialize, _LitElement) {
-  class DemoShell extends _LitElement {
+let HamburgerIcon = _decorate([customElement('hamburger-icon')], function (_initialize, _LitElement) {
+  class HamburgerIcon extends _LitElement {
     constructor(...args) {
       super(...args);
 
@@ -49,172 +43,18 @@ let DemoShell = _decorate(null, function (_initialize, _LitElement) {
   }
 
   return {
-    F: DemoShell,
+    F: HamburgerIcon,
     d: [{
-      kind: "field",
-      key: "_hashChangeCallback",
-
-      value() {
-        return null;
-      }
-
-    }, {
-      kind: "field",
-      decorators: [property({
-        type: Boolean
-      })],
-      key: "showMenu",
-
-      value() {
-        return false;
-      }
-
-    }, {
-      kind: "get",
-      static: true,
-      key: "properties",
-      value: function properties() {
-        return {
-          pages: {
-            type: Array
-          },
-          activePageHash: {
-            type: String
-          }
-        };
-      }
-    }, {
-      kind: "method",
-      key: "connectedCallback",
-      value: function connectedCallback() {
-        _get(_getPrototypeOf(DemoShell.prototype), "connectedCallback", this).call(this);
-
-        this._fixMenuWidthOnPageWidthChange();
-
-        this._addHashChangeCallback();
-
-        this._setInitialActiveHash();
-      }
-    }, {
-      kind: "method",
-      key: "firstUpdated",
-      value: function firstUpdated() {
-        _get(_getPrototypeOf(DemoShell.prototype), "firstUpdated", this).call(this);
-
-        this._fixMenuWidth();
-      }
-    }, {
-      kind: "method",
-      key: "_fixMenuWidth",
-      value: function _fixMenuWidth() {
-        this.shadowRoot.getElementById('menuSidebarContent').style.maxWidth = this.shadowRoot.getElementById('menuSidebar').clientWidth + 'px';
-      }
-    }, {
-      kind: "method",
-      key: "_resetMenuWidth",
-      value: function _resetMenuWidth() {
-        this.shadowRoot.getElementById('menuSidebarContent').style.maxWidth = 'none';
-      }
-    }, {
-      kind: "method",
-      key: "_fixMenuWidthOnPageWidthChange",
-      value: function _fixMenuWidthOnPageWidthChange() {
-        window.addEventListener('resize', () => this._fixMenuWidth());
-      }
-    }, {
-      kind: "method",
-      key: "_addHashChangeCallback",
-      value: function _addHashChangeCallback() {
-        this._hashChangeCallback = window.addEventListener('hashchange', () => {
-          this.activePageHash = location.hash.substr(1);
-          window.scrollTo({
-            top: 0
-          });
-        });
-      }
-    }, {
-      kind: "method",
-      key: "_setInitialActiveHash",
-      value: function _setInitialActiveHash() {
-        this.activePageHash = location.hash.substr(1);
-
-        if (!this.activePageHash) {
-          this.activePageHash = this.pages[0].hash;
-        }
-      }
-    }, {
       kind: "method",
       key: "render",
       value: function render() {
         return html`
-
-            <div id="layout" ?show-menu=${this.showMenu}>
-
-                <div id="menuSidebar">
-                    <div id="menuSidebarContent">
-                        <header><a href="#">${this.title}</a></header>
-                        <nav>${this.navTree}</nav>
-                    </div>
-                </div>
-
-                <article>
-                    <div id="articleContent">
-                        ${this.activePage.template}
-                    </div>
-                </article>
-
-            </div>
-
-            <div id="menuOpener" @click=${this.handleMenuOpenerClick} ?hidden=${this.showMenu}>
-                <div class="stripe"></div>
-                <div class="stripe"></div>
-                <div class="stripe"></div>
-            </div>
-
+            <svg viewBox="0 0 70 40" width="100%" height="100%">
+              <rect width="70" height="5" rx="5"></rect>
+              <rect width="70" height="5" rx="5" y="18"></rect>
+              <rect width="70" height="5" rx="5" y="35"></rect>
+            </svg>
         `;
-      }
-    }, {
-      kind: "get",
-      key: "navTree",
-      value: function navTree() {
-        return this.pages.map(item => {
-          return html`
-                <div class="navItem"
-                    @click=${() => this.handleMenuItemClick(item)}
-                    ?active=${this.activePage.hash == item.hash}
-                >
-                    ${item.title}
-                </div>
-            `;
-        });
-      }
-    }, {
-      kind: "get",
-      key: "activePage",
-      value: function activePage() {
-        for (const item of this.pages) {
-          if (item.hash == this.activePageHash) {
-            return item;
-          }
-        } // If `this.activePageHash` is not found, fall back to first page
-
-
-        return this.pages[0];
-      }
-    }, {
-      kind: "method",
-      key: "handleMenuItemClick",
-      value: function handleMenuItemClick(item) {
-        location.hash = item.hash;
-        this.showMenu = false;
-      }
-    }, {
-      kind: "method",
-      key: "handleMenuOpenerClick",
-      value: function handleMenuOpenerClick() {
-        this.showMenu = true;
-
-        this._resetMenuWidth();
       }
     }, {
       kind: "get",
@@ -223,126 +63,16 @@ let DemoShell = _decorate(null, function (_initialize, _LitElement) {
       value: function styles() {
         return css`
 
-            * {
-                box-sizing: border-box;
-                --left-sidebar-width: 250px;
-                --header-height: 40px;
-                --min-article-width: 300px;
+            :host {
+                display: block;
             }
 
-            #layout {
-                display: flex;
-                margin: 0 auto;
-                min-height: 100vh;
+            svg {
+                height: 100%;
             }
 
-            #menuSidebar {
-                position: relative;
-                width: 100%;
-                max-width: var(--left-sidebar-width);
-                background: #bcb9b2;
-                border-right: 1px #999 solid;
-            }
-
-            #menuSidebarContent {
-                position: fixed;
-                width: 100%;
-                max-width: var(--left-sidebar-width);
-            }
-
-            #menuSidebarContent header {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: var(--header-height);
-            }
-
-            #menuSidebarContent header a {
-                display: inline-block;
-                padding: 5px;
-                color: #000;
-                font-weight: 600;
-                text-decoration: none;
-                font-size: 20px;
-            }
-
-            nav {
-                display: flex;
-                flex-direction: column;
-                max-height: calc(100vh - var(--header-height));
-                overflow: auto;
-            }
-
-            .navItem {
-                margin: 0;
-                padding: 10px;
-                border: 1px #999 solid;
-                border-width: 1px 0 0 0;
-                background: #C7C3BB;
-                color: #000;
-                text-align: left;
-                cursor: pointer;
-            }
-
-            .navItem:last-child {
-                border-bottom-width: 1px;
-            }
-
-            .navItem:hover,
-            .navItem[active] {
-                background: #DAD7D2;
-            }
-
-            article {
-                flex-grow: 0;
-                min-width: var(--min-article-width);
-            }
-
-            #articleContent {
-                padding: 20px;
-                max-width: 720px;
-                width: 100%;
-            }
-
-            @media screen and (min-width: 501px) {
-
-                #sideBarOpener {
-                    display: none;
-                }
-
-            }
-
-            @media screen and (max-width: 500px) {
-
-                #menuSidebar {
-                    display: none;
-                }
-
-                #layout[show-menu] #menuSidebar {
-                    display: block;
-                    position: absolute;
-                }
-
-                #layout[show-menu] article {
-                    display: none;
-                }
-
-                #menuOpener {
-                    position: fixed;
-                    top: 5px;
-                    right: 5px;
-                    width: 35px;
-                    height: 35px;
-                    cursor: pointer;
-                }
-
-                #menuOpener .stripe {
-                    width: 100%;
-                    height: 4px;
-                    margin: 5px 0;
-                    background: grey;
-                }
-
+            rect {
+                fill: #7b8184;
             }
 
         `;
@@ -350,5 +80,3 @@ let DemoShell = _decorate(null, function (_initialize, _LitElement) {
     }]
   };
 }, LitElement);
-
-customElements.define('demo-shell', DemoShell);

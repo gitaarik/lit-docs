@@ -30,12 +30,11 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
-import { LitDocsStyle } from '../helpers/index.js';
-import '../helpers/index.js';
-import './example-demo-component.js';
-export let DemoComponent = _decorate([customElement('demo-component')], function (_initialize, _LitDocsStyle) {
-  class DemoComponent extends _LitDocsStyle {
+import { customElement, LitElement, html } from '../web_modules/lit-element.js';
+import { LitDocsStyle } from './helpers/index.js';
+import './helpers/index.js';
+export let LitDocsUiUsage = _decorate([customElement('lit-docs-ui-usage')], function (_initialize, _LitDocsStyle) {
+  class LitDocsUiUsage extends _LitDocsStyle {
     constructor(...args) {
       super(...args);
 
@@ -45,93 +44,68 @@ export let DemoComponent = _decorate([customElement('demo-component')], function
   }
 
   return {
-    F: DemoComponent,
+    F: LitDocsUiUsage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>DemoComponent</h1>
+            <h1>LitDocs UI</h1>
 
             <p>
-                The <code>DemoComponent</code> mixin can be used for components
-                that demonstrate some functionality of your library. It adds
-                some basic styles for the component, so that all demo
-                components have consistent styling.
-            </p>
-
-            <h2>Example</h2>
-
-            <p>
-                <example-demo-component></example-demo-component>
+                The <code>&lt;lit-docs-ui&gt;</code> component creates the
+                basic page layout and navigation that you see on this page. You
+                provide it a title and an array of pages, and the navigation is
+                automatically created for you.
             </p>
 
             <h2>Usage</h2>
 
-            <p><lit-docs-code-block .code=${this.demoShellCode}></lit-docs-code-block></p>
-
-            <h1>Multiple demo components</h1>
-
             <p>
-                If you use multiple demo components on your
-                <a href="#demo-page-mixin">demo page</a>, it is advised to wrap
-                them in <code>&lt;div class="demoComponents"&gt;&lt;div&gt;</code>,
-                so that they have some margin from each other, and stay
-                arranged well on different viewports:
+                <lit-docs-code-block .code=${this.litDocsUiCode}></lit-docs-code-block>
             </p>
-
-            <h2>Example</h2>
-
-            <div class="demoComponents">
-                <example-demo-component></example-demo-component>
-                <example-demo-component></example-demo-component>
-            </div>
-
-            <h2>Usage</h2>
-
-            <p><lit-docs-code-block .code=${this.demoComponentsWrapperCode}></lit-docs-code-block></p>
 
         `;
       }
     }, {
       kind: "get",
-      key: "demoShellCode",
-      value: function demoShellCode() {
+      key: "litDocsUiCode",
+      value: function litDocsUiCode() {
         return `import { customElement, LitElement, html } from 'lit-element';
-import { DemoComponent } from 'lit-element-demo-app-helpers';
+import 'lit-docs';
+import './demo-page-1.js';
+import './demo-page-2.js';
 
 
-@customElement('example-demo-component')
-export class ExampleDemoComponent extends DemoComponent(LitElement) {
+@customElement('my-demo-app')
+export class MyDemoApp extends LitElement {
 
     render() {
-
         return html\`
-            <h2>H2 tag</h2>
-            <h3>Normal H3 tag</h3>
-            <h3 class="status">Status H3 tag</h3>
-            <h3 class="value">Value H3 tag</h3>
-            <div class="buttons">
-                <button>Button 1</button>
-                <button>Button 2</button>
-                <button>Button 3</button>
-                <button>Button 4</button>
-            </div>
+            <lit-docs-ui
+                .docsTitle=\${'My Lib'}
+                .pages=\${this.pages}
+            ></lit-docs-ui>
         \`;
+    }
 
+    get pages() {
+        return [
+            {
+                hash: 'page1',
+                title: 'Page 1',
+                template: html\`<demo-page-1></demo-page-1>\`
+            },
+            {
+                hash: 'page2',
+                title: 'Page 2',
+                template: html\`<demo-page-2></demo-page-2>\`
+            }
+        ];
     }
 
 }`;
-      }
-    }, {
-      kind: "get",
-      key: "demoComponentsWrapperCode",
-      value: function demoComponentsWrapperCode() {
-        return `<div class="demoComponents">
-    <example-demo-component></example-demo-component>
-    <example-demo-component></example-demo-component>
-</div>`;
       }
     }]
   };
