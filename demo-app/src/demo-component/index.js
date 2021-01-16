@@ -1,6 +1,6 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { LitDocsStyle } from '@app/helpers/index';
-import '@app/helpers/index';
+import { LitDocsStyle } from '@app/lit-docs/index';
+import '@app/lit-docs/index';
 import './example-demo-component';
 
 
@@ -58,7 +58,7 @@ export class DemoComponent extends LitDocsStyle(LitElement) {
     get demoShellCode() {
 
         return `import { customElement, LitElement, html } from 'lit-element';
-import { DemoComponent } from 'lit-element-demo-app-helpers';
+import { DemoComponent } from 'lit-docs';
 
 
 @customElement('example-demo-component')

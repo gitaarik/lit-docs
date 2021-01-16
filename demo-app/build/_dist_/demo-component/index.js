@@ -31,8 +31,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
-import { LitDocsStyle } from '../helpers/index.js';
-import '../helpers/index.js';
+import { LitDocsStyle } from '../lit-docs/index.js';
+import '../lit-docs/index.js';
 import './example-demo-component.js';
 export let DemoComponent = _decorate([customElement('demo-component')], function (_initialize, _LitDocsStyle) {
   class DemoComponent extends _LitDocsStyle {
@@ -99,7 +99,7 @@ export let DemoComponent = _decorate([customElement('demo-component')], function
       key: "demoShellCode",
       value: function demoShellCode() {
         return `import { customElement, LitElement, html } from 'lit-element';
-import { DemoComponent } from 'lit-element-demo-app-helpers';
+import { DemoComponent } from 'lit-docs';
 
 
 @customElement('example-demo-component')

@@ -1,5 +1,5 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { DemoComponent } from '@app/helpers/index';
+import { DemoComponent } from '@app/lit-docs/index';
 
 
 @customElement('example-demo-component')

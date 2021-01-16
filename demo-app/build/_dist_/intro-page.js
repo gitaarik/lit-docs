@@ -31,8 +31,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
-import { LitDocsStyle } from './helpers/index.js';
-import './helpers/index.js';
+import { LitDocsStyle } from './lit-docs/index.js';
+import './lit-docs/index.js';
 export let IntroPage = _decorate([customElement('intro-page')], function (_initialize, _LitDocsStyle) {
   class IntroPage extends _LitDocsStyle {
     constructor(...args) {
@@ -54,15 +54,20 @@ export let IntroPage = _decorate([customElement('intro-page')], function (_initi
             <h1>LitDocs</h1>
 
             <p>
-                These are utilities to create documentation for LitElement
-                related projects, like the one you're currently viewing. It is
-                created in LitElement itself, and therefore it is easy to
+                This documentation you're currently viewing is created with
+                LitDocs. And the documentation here describes how you can use
+                LitDocs to make your own documentation.
+            </p>
+
+            <p>
+                LitDocs is created in LitElement, and therefore it is suitable
+                to use for LitElement related projects. It makes it easy to
                 demonstrate your library, custom components, or anything you
                 made to use together with LitElement or Web Components in
                 general.
             </p>
 
-            <p>Install with:</p>
+            <h4>Installation</h4>
 
             <p>
                 <lit-docs-code-block .code=${'npm install lit-docs'}></lit-docs-lit-docs-code-block>

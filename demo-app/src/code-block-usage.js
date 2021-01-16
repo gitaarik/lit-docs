@@ -1,6 +1,6 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { LitDocsStyle } from '@app/helpers/index';
-import '@app/helpers/index';
+import { LitDocsStyle } from '@app/lit-docs/index';
+import '@app/lit-docs/index';
 
 
 @customElement('code-block-usage')
@@ -58,7 +58,7 @@ export class CodeBlockUsage extends LitDocsStyle(LitElement) {
 
     get bigCodeDemoSource() {
         return `import { html } from 'lit-element';
-import 'lit-element-demo-app-helpers';
+import 'lit-docs';
 
 const code = \`function() {
     console.log('hello!');
@@ -70,7 +70,7 @@ html\`<lit-docs-code-block .code=\${code}></lit-docs-code-block>\`;`;
     get bigCodeWithFilenameDemoSource() {
 
         return `import { html } from 'lit-element';
-import 'lit-element-demo-app-helpers';
+import 'lit-docs';
 
 const code = \`function() {
     console.log('hello!');

@@ -31,9 +31,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html, css } from '../web_modules/lit-element.js';
-import './helpers/index.js';
+import './lit-docs/index.js';
 import './intro-page.js';
-import './lit-docs-ui-usage.js';
+import './lit-docs-ui-usage/index.js';
+import './lit-docs-ui-usage/sub-menus.js';
 import './lit-docs-style-usage.js';
 import './code-block-usage.js';
 import './demo-component/index.js';
@@ -71,7 +72,12 @@ export let LitDocsDocumentation = _decorate([customElement('lit-docs-documentati
         }, {
           title: 'LitDocs UI',
           path: 'lit-docs-ui',
-          template: html`<lit-docs-ui-usage></lit-docs-ui-usage>`
+          template: html`<lit-docs-ui-usage></lit-docs-ui-usage>`,
+          submenu: [{
+            title: 'Submenus',
+            path: 'sub-menus',
+            template: html`<sub-menus></sub-menus>`
+          }]
         }, {
           title: 'LitDocsStyle',
           path: 'lit-docs-style',

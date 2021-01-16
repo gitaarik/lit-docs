@@ -31,9 +31,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
-import { DemoComponent } from '../lit-docs/index.js';
-export let ExampleDemoComponent = _decorate([customElement('example-demo-component')], function (_initialize, _DemoComponent) {
-  class ExampleDemoComponent extends _DemoComponent {
+import { LitDocsStyle } from '../lit-docs/index.js';
+import '../lit-docs/index.js';
+export let SubMenus = _decorate([customElement('sub-menus')], function (_initialize, _LitDocsStyle) {
+  class SubMenus extends _LitDocsStyle {
     constructor(...args) {
       super(...args);
 
@@ -43,24 +44,93 @@ export let ExampleDemoComponent = _decorate([customElement('example-demo-compone
   }
 
   return {
-    F: ExampleDemoComponent,
+    F: SubMenus,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
-            <h2>H2 tag</h2>
-            <h3>Normal H3 tag</h3>
-            <h3 class="status">Status H3 tag</h3>
-            <h3 class="value">Value H3 tag</h3>
-            <div class="buttons">
-                <button>Button 1</button>
-                <button>Button 2</button>
-                <button>Button 3</button>
-                <button>Button 4</button>
-            </div>
+
+            <h1>LitDocs UI submenus</h1>
+
+            <p>
+                You can add submenu items to your main menu items by using the
+                <code>submenu</code> key in the page object:
+            </p>
+
+            <p>
+                <lit-docs-code-block .code=${this.subMenuCode}></lit-docs-code-block>
+            </p>
+
         `;
+      }
+    }, {
+      kind: "get",
+      key: "subMenuCode",
+      value: function subMenuCode() {
+        return `import { customElement, LitElement, html } from 'lit-element';
+import 'lit-docs';
+import './demo-page1.js';
+import './demo-page1-subpage1.js';
+import './demo-page1-subpage2.js';
+import './demo-page2.js';
+import './demo-page2-subpage1.js';
+import './demo-page2-subpage2.js';
+
+
+@customElement('my-demo-app')
+export class MyDemoApp extends LitElement {
+
+    render() {
+        return html\`
+            <lit-docs-ui
+                .docsTitle=\${'My Lib'}
+                .pages=\${this.pages}
+            ></lit-docs-ui>
+        \`;
+    }
+
+    get pages() {
+        return [
+            {
+                title: 'Page 1',
+                path: 'page1',
+                template: html\`<demo-page1></demo-page1>\`,
+                submenu: [
+                    {
+                        title: 'Sub Page 1',
+                        path: 'page1',
+                        template: html\`<demo-page1-subpage1></demo-page1-subpage1>\`
+                    },
+                    {
+                        title: 'Sub Page 2',
+                        path: 'page2',
+                        template: html\`<demo-page1-subpage2></demo-page1-subpage2>\`
+                    }
+                ]
+            },
+            {
+                title: 'Page 2',
+                path: 'page2',
+                template: html\`<demo-page2></demo-page2>\`,
+                submenu: [
+                    {
+                        title: 'Sub Page 1',
+                        path: 'page1',
+                        template: html\`<demo-page2-subpage1></demo-page2-subpage1>\`
+                    },
+                    {
+                        title: 'Sub Page 2',
+                        path: 'page2',
+                        template: html\`<demo-page2-subpage2></demo-page2-subpage2>\`
+                    }
+                ]
+            }
+        ];
+    }
+
+}`;
       }
     }]
   };
-}, DemoComponent(LitElement));
+}, LitDocsStyle(LitElement));

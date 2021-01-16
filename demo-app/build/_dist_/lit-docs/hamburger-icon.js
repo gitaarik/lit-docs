@@ -30,10 +30,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
-import { DemoComponent } from '../lit-docs/index.js';
-export let ExampleDemoComponent = _decorate([customElement('example-demo-component')], function (_initialize, _DemoComponent) {
-  class ExampleDemoComponent extends _DemoComponent {
+import { customElement, LitElement, html, css } from '../../web_modules/lit-element.js';
+
+let HamburgerIcon = _decorate([customElement('hamburger-icon')], function (_initialize, _LitElement) {
+  class HamburgerIcon extends _LitElement {
     constructor(...args) {
       super(...args);
 
@@ -43,24 +43,40 @@ export let ExampleDemoComponent = _decorate([customElement('example-demo-compone
   }
 
   return {
-    F: ExampleDemoComponent,
+    F: HamburgerIcon,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
-            <h2>H2 tag</h2>
-            <h3>Normal H3 tag</h3>
-            <h3 class="status">Status H3 tag</h3>
-            <h3 class="value">Value H3 tag</h3>
-            <div class="buttons">
-                <button>Button 1</button>
-                <button>Button 2</button>
-                <button>Button 3</button>
-                <button>Button 4</button>
-            </div>
+            <svg viewBox="0 0 70 40" width="100%" height="100%">
+              <rect width="70" height="5" rx="5"></rect>
+              <rect width="70" height="5" rx="5" y="18"></rect>
+              <rect width="70" height="5" rx="5" y="35"></rect>
+            </svg>
+        `;
+      }
+    }, {
+      kind: "get",
+      static: true,
+      key: "styles",
+      value: function styles() {
+        return css`
+
+            :host {
+                display: block;
+            }
+
+            svg {
+                height: 100%;
+            }
+
+            rect {
+                fill: #7b8184;
+            }
+
         `;
       }
     }]
   };
-}, DemoComponent(LitElement));
+}, LitElement);

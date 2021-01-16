@@ -1,6 +1,6 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { LitDocsStyle } from '@app/helpers/index';
-import '@app/helpers/index';
+import { LitDocsStyle } from '@app/lit-docs/index';
+import '@app/lit-docs/index';
 
 
 @customElement('lit-docs-ui-usage')

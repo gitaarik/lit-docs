@@ -31,9 +31,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
-import { DemoComponent } from '../lit-docs/index.js';
-export let ExampleDemoComponent = _decorate([customElement('example-demo-component')], function (_initialize, _DemoComponent) {
-  class ExampleDemoComponent extends _DemoComponent {
+import { LitDocsStyle } from '../lit-docs/index.js';
+import '../lit-docs/index.js';
+export let LitDocsUiUsage = _decorate([customElement('lit-docs-ui-usage')], function (_initialize, _LitDocsStyle) {
+  class LitDocsUiUsage extends _LitDocsStyle {
     constructor(...args) {
       super(...args);
 
@@ -43,24 +44,69 @@ export let ExampleDemoComponent = _decorate([customElement('example-demo-compone
   }
 
   return {
-    F: ExampleDemoComponent,
+    F: LitDocsUiUsage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
-            <h2>H2 tag</h2>
-            <h3>Normal H3 tag</h3>
-            <h3 class="status">Status H3 tag</h3>
-            <h3 class="value">Value H3 tag</h3>
-            <div class="buttons">
-                <button>Button 1</button>
-                <button>Button 2</button>
-                <button>Button 3</button>
-                <button>Button 4</button>
-            </div>
+
+            <h1>LitDocs UI</h1>
+
+            <p>
+                The <code>&lt;lit-docs-ui&gt;</code> component creates the
+                basic page layout and navigation that you see on this page. You
+                provide it a title and an array of pages, and the navigation is
+                automatically created for you.
+            </p>
+
+            <h2>Usage</h2>
+
+            <p>
+                <lit-docs-code-block .code=${this.litDocsUiCode}></lit-docs-code-block>
+            </p>
+
         `;
+      }
+    }, {
+      kind: "get",
+      key: "litDocsUiCode",
+      value: function litDocsUiCode() {
+        return `import { customElement, LitElement, html } from 'lit-element';
+import 'lit-docs';
+import './demo-page-1.js';
+import './demo-page-2.js';
+
+
+@customElement('my-demo-app')
+export class MyDemoApp extends LitElement {
+
+    render() {
+        return html\`
+            <lit-docs-ui
+                .docsTitle=\${'My Lib'}
+                .pages=\${this.pages}
+            ></lit-docs-ui>
+        \`;
+    }
+
+    get pages() {
+        return [
+            {
+                hash: 'page1',
+                title: 'Page 1',
+                template: html\`<demo-page-1></demo-page-1>\`
+            },
+            {
+                hash: 'page2',
+                title: 'Page 2',
+                template: html\`<demo-page-2></demo-page-2>\`
+            }
+        ];
+    }
+
+}`;
       }
     }]
   };
-}, DemoComponent(LitElement));
+}, LitDocsStyle(LitElement));

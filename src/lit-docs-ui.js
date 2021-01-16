@@ -35,16 +35,40 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
         const path = window.location.pathname.substr(1);
 
         if (path) {
-            for (const page of this.pages) {
-                if (page.path === window.location.pathname.substr(1)) {
-                    this._activePage = page;
-                    return;
-                }
-            }
+            this._setActivePage(path, this.pages);
         }
 
-        // If no page was not found, fall back to first page
-        this._activePage = this.pages[0];
+        if (!this._activePage) {
+            // If no page was not found, fall back to first page
+            this._activePage = this.pages[0];
+        }
+
+    }
+
+    _setActivePage(path, pages) {
+
+        const firstPathPart = path.split('/')[0];
+
+        if (!firstPathPart) {
+            return;
+        }
+
+        for (const page of pages) {
+
+            if (page.path === firstPathPart) {
+
+                this._activePage = page;
+
+                if (page.submenu) {
+                    const pathRemainder = path.split('/').slice(1).join('/');
+                    this._setActivePage(pathRemainder, page.submenu);
+                }
+
+                return;
+
+            }
+
+        }
 
     }
 
@@ -68,6 +92,8 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
 
     render() {
 
+        console.log(this._activePage.title);
+
         return html`
 
             <div id="layout" ?show-menu=${this._showMenu}>
@@ -83,7 +109,7 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
                                 ${this.docsTitle}
                             </a>
                         </header>
-                        <nav>${this.navTree}</nav>
+                        <nav>${this.navTree(this.pages)}</nav>
                     </div>
 
                     <div id="hamburgerMenu" @click=${this.handleHamburgerMenuClick}>
@@ -105,31 +131,45 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
 
     }
 
-    get navTree() {
+    navTree(pages, level = 0, pageNoPrefix = '', pathPrefix = '') {
 
-        let pageNo = 1;
+        if (!pages) {
+            return;
+        }
 
-        return this.pages.map(page => {
+        let pageNo = 0;
+
+        return pages.map(page => {
+
+            let path = page.path;
+            if (path[-1] !== '/') path += '/';
+            path = pathPrefix + path;
+
+            pageNo++;
+
             return html`
                 <a
                     class="navItem"
-                    href=${page.path}
-                    @click=${event => this.handleMenuItemClick(event, page)}
+                    nav-level=${level}
+                    href=${path}
+                    @click=${event => this.handleMenuItemClick(event, page, path)}
                     ?active=${false}
                 >
-                    <span class="navItemNo">${pageNo++}</span>
+                    <span class="navItemNo">${pageNoPrefix + pageNo}</span>
                     <span>${page.title}</span>
                 </a>
+                ${this.navTree(page.submenu, level + 1, pageNo + '.', path)}
             `;
+
         });
 
     }
 
     handleTitleClick(event) {
-        this.handleMenuItemClick(event, this.pages[0]);
+        this.handleMenuItemClick(event, this.pages[0], '/');
     }
 
-    handleMenuItemClick(event, page) {
+    handleMenuItemClick(event, page, path) {
 
         if (event.ctrlKey || event.shiftKey) {
             // Ctrl/shift click opens a `<a>` link in new tab/window, so when
@@ -138,7 +178,7 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
         }
 
         event.preventDefault();
-        history.pushState({}, page.title, page.path);
+        history.pushState({}, page.title, path);
         this._activePage = page;
         window.scrollTo(0, 0);
         this._showMenu = false;
@@ -219,6 +259,18 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
             .navItem:hover,
             .navItem[active] {
                 background: #DAD7D2;
+            }
+
+            .navItem[nav-level="1"] {
+                margin-left: 15px;
+            }
+
+            .navItem[nav-level="2"] {
+                margin-left: 30px;
+            }
+
+            .navItem[nav-level="3"] {
+                margin-left: 45px;
             }
 
             .navItemNo {
