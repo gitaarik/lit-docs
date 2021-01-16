@@ -1,8 +1,6 @@
-import './code-big';
-import './code-small';
-import './demo-shell';
-import { DemoComponent } from './demo-component';
-import { DemoPage } from './demo-page';
-import { currentTime } from './utils';
+import './code-block.js';
+import './demo-shell.js';
+import { DemoComponent } from './demo-component.js';
+import { DemoPage } from './demo-page.js';
 
-export { DemoComponent, DemoPage, currentTime };
+export { DemoComponent, DemoPage };

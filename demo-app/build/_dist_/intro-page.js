@@ -33,8 +33,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
 import { DemoPage } from './helpers/index.js';
 import './helpers/index.js';
-export let DemoPageMixin = _decorate([customElement('demo-page-mixin')], function (_initialize, _DemoPage) {
-  class DemoPageMixin extends _DemoPage {
+export let IntroPage = _decorate([customElement('intro-page')], function (_initialize, _DemoPage) {
+  class IntroPage extends _DemoPage {
     constructor(...args) {
       super(...args);
 
@@ -44,50 +44,37 @@ export let DemoPageMixin = _decorate([customElement('demo-page-mixin')], functio
   }
 
   return {
-    F: DemoPageMixin,
+    F: IntroPage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>DemoPage Mixin</h1>
+            <h1>LitDocs</h1>
 
             <p>
-                The <code-small>DemoPage</code-small> mixin should be used for
-                the demo pages that are provided to the
-                <code-small>&lt;demo-shell&gt;</code-small> component, like the
-                current page you're reading. It adds some basic styles for the
-                page, so that all demo pages have consistent styling.
+                These are utilities to create documentation for LitElement
+                related projects, like the one you're currently viewing. It is
+                created in LitElement itself, and therefore it is easy to
+                demonstrate your library, custom components, or anything you
+                made to use together with LitElement or Web Components in
+                general.
             </p>
 
-            <h2>Usage</h2>
+            <p>Install with:</p>
 
             <p>
-                <code-big .code=${this.demoShellCode}></code-big>
+                <code-block .code=${'npm install lit-docs'}></code-block>
+            </p>
+            
+            <p>
+                The package contains some web components, some mixins and some
+                functions. They are documented here. Use the navigation to
+                explore the utilities.
             </p>
 
         `;
-      }
-    }, {
-      kind: "get",
-      key: "demoShellCode",
-      value: function demoShellCode() {
-        return `import { customElement, LitElement, html } from 'lit-element';
-import { DemoPage } from 'lit-element-demo-app-helpers';
-
-
-@customElement('demo-page-mixin')
-export class DemoPageMixin extends DemoPage(LitElement) {
-
-    render() {
-        return html\`
-            <h1>This h1 tag is styled by the DemoPage mixin</h1>
-            <p>And this p tag also</p>
-        \`;
-    }
-
-}`;
       }
     }]
   };

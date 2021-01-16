@@ -3,19 +3,19 @@ import { DemoPage } from '@app/helpers/index';
 import '@app/helpers/index';
 
 
-@customElement('demo-page-mixin')
-export class DemoPageMixin extends DemoPage(LitElement) {
+@customElement('demo-page-usage')
+export class DemoPageUsage extends DemoPage(LitElement) {
 
     render() {
 
         return html`
 
-            <h1>DemoPage Mixin</h1>
+            <h1>DemoPage</h1>
 
             <p>
-                The <code-small>DemoPage</code-small> mixin should be used for
+                The <code>DemoPage</code> mixin should be used for
                 the demo pages that are provided to the
-                <code-small>&lt;demo-shell&gt;</code-small> component, like the
+                <code>&lt;demo-shell&gt;</code> component, like the
                 current page you're reading. It adds some basic styles for the
                 page, so that all demo pages have consistent styling.
             </p>
@@ -23,7 +23,7 @@ export class DemoPageMixin extends DemoPage(LitElement) {
             <h2>Usage</h2>
 
             <p>
-                <code-big .code=${this.demoShellCode}></code-big>
+                <code-block .code=${this.demoShellCode}></code-block>
             </p>
 
         `;
@@ -36,13 +36,13 @@ export class DemoPageMixin extends DemoPage(LitElement) {
 import { DemoPage } from 'lit-element-demo-app-helpers';
 
 
-@customElement('demo-page-mixin')
-export class DemoPageMixin extends DemoPage(LitElement) {
+@customElement('demo-page')
+export class DemoPage extends DemoPage(LitElement) {
 
     render() {
         return html\`
-            <h1>This h1 tag is styled by the DemoPage mixin</h1>
-            <p>And this p tag also</p>
+            <h1>This h1 tag is styled by the DemoPage</h1>
+            <p>And this p tag also. <code>this is some code</code>.</p>
         \`;
     }
 

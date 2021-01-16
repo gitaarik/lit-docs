@@ -1,9 +1,10 @@
-# Lit Element Demo App Helpers
+# LitDocs
 
-These are helper utilities to create a demo app for LitElement related
-features. It is meant for creators of LitElement related libraries. You can use
-these helpers to make a demo app to demonstrate your library. It's also useful
-as a testing app for the features of your library, for while you're developing.
+These are utilities to create documentation for LitElement related projects. It
+is created in LitElement itself, and therefore it is easy to demonstrate your
+library, custom components, or anything you made to use together with
+LitElement or Web Components in general.
 
-The helper utilities are documented in the
-[demo app](https://gitaarik.github.io/lit-element-demo-app-helpers/demo-app/build/).
+The utilities are documented in the
+[docs](https://gitaarik.github.io/lit-docs/demo-app/build/), which itself is
+created with LitDocs.

@@ -8,7 +8,7 @@ hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
 
 
-export class CodeBig extends LitElement {
+export class CodeBlock extends LitElement {
 
     static get properties() {
         return {
@@ -150,4 +150,4 @@ export class CodeBig extends LitElement {
 
 }
 
-customElements.define('code-big', CodeBig);
+customElements.define('code-block', CodeBlock);

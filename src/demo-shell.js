@@ -5,6 +5,9 @@ class DemoShell extends LitElement {
 
     _hashChangeCallback = null;
 
+    @property({type: Boolean})
+    showMenu = false;
+
     static get properties() {
         return {
             pages: {type: Array},
@@ -14,8 +17,28 @@ class DemoShell extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
+        this._fixMenuWidthOnPageWidthChange();
         this._addHashChangeCallback();
         this._setInitialActiveHash();
+    }
+
+    firstUpdated() {
+        super.firstUpdated();
+        this._fixMenuWidth();
+    }
+
+    _fixMenuWidth() {
+        this.shadowRoot.getElementById('menuSidebarContent').style.maxWidth = (
+            this.shadowRoot.getElementById('menuSidebar').clientWidth + 'px'
+        );
+    }
+
+    _resetMenuWidth() {
+        this.shadowRoot.getElementById('menuSidebarContent').style.maxWidth = 'none';
+    }
+
+    _fixMenuWidthOnPageWidthChange() {
+        window.addEventListener('resize', () => this._fixMenuWidth());
     }
 
     _addHashChangeCallback() {
@@ -39,29 +62,44 @@ class DemoShell extends LitElement {
 
         return html`
 
-            <header>
-                <nav>${this.navButtons}</nav>
-            </header>
+            <div id="layout" ?show-menu=${this.showMenu}>
 
-            <article>
-                ${this.activePage.template}
-            </article>
+                <div id="menuSidebar">
+                    <div id="menuSidebarContent">
+                        <header><a href="#">${this.title}</a></header>
+                        <nav>${this.navTree}</nav>
+                    </div>
+                </div>
+
+                <article>
+                    <div id="articleContent">
+                        ${this.activePage.template}
+                    </div>
+                </article>
+
+            </div>
+
+            <div id="menuOpener" @click=${this.handleMenuOpenerClick} ?hidden=${this.showMenu}>
+                <div class="stripe"></div>
+                <div class="stripe"></div>
+                <div class="stripe"></div>
+            </div>
 
         `;
 
     }
 
-    get navButtons() {
+    get navTree() {
 
         return this.pages.map(item => {
 
             return html`
-                <button
-                    @click=${() => location.hash = item.hash}
+                <div class="navItem"
+                    @click=${() => this.handleMenuItemClick(item)}
                     ?active=${this.activePage.hash == item.hash}
                 >
                     ${item.title}
-                </button>
+                </div>
             `;
 
         });
@@ -81,42 +119,140 @@ class DemoShell extends LitElement {
 
     }
 
+    handleMenuItemClick(item) {
+        location.hash = item.hash;
+        this.showMenu = false;
+    }
+
+    handleMenuOpenerClick() {
+        this.showMenu = true;
+        this._resetMenuWidth();
+    }
+
     static get styles() {
 
         return css`
 
-            :host {
-                display: block;
-                margin: 0 auto;
-                padding: 15px;
-                max-width: 720px;
+            * {
+                box-sizing: border-box;
+                --left-sidebar-width: 250px;
+                --header-height: 40px;
+                --min-article-width: 300px;
             }
 
-            header {
-                margin-bottom: 25px;
+            #layout {
+                display: flex;
+                margin: 0 auto;
+                min-height: 100vh;
+            }
+
+            #menuSidebar {
+                position: relative;
+                width: 100%;
+                max-width: var(--left-sidebar-width);
+                background: #bcb9b2;
+                border-right: 1px #999 solid;
+            }
+
+            #menuSidebarContent {
+                position: fixed;
+                width: 100%;
+                max-width: var(--left-sidebar-width);
+            }
+
+            #menuSidebarContent header {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: var(--header-height);
+            }
+
+            #menuSidebarContent header a {
+                display: inline-block;
+                padding: 5px;
+                color: #000;
+                font-weight: 600;
+                text-decoration: none;
+                font-size: 20px;
             }
 
             nav {
                 display: flex;
+                flex-direction: column;
+                max-height: calc(100vh - var(--header-height));
+                overflow: auto;
             }
 
-            nav button {
+            .navItem {
                 margin: 0;
                 padding: 10px;
                 border: 1px #999 solid;
-                border-left-width: 0;
+                border-width: 1px 0 0 0;
                 background: #C7C3BB;
                 color: #000;
+                text-align: left;
                 cursor: pointer;
             }
 
-            nav button:first-child {
-                border-left-width: 1px;
+            .navItem:last-child {
+                border-bottom-width: 1px;
             }
 
-            nav button:hover,
-            nav button[active] {
+            .navItem:hover,
+            .navItem[active] {
                 background: #DAD7D2;
+            }
+
+            article {
+                flex-grow: 0;
+                min-width: var(--min-article-width);
+            }
+
+            #articleContent {
+                padding: 20px;
+                max-width: 720px;
+                width: 100%;
+            }
+
+            @media screen and (min-width: 501px) {
+
+                #sideBarOpener {
+                    display: none;
+                }
+
+            }
+
+            @media screen and (max-width: 500px) {
+
+                #menuSidebar {
+                    display: none;
+                }
+
+                #layout[show-menu] #menuSidebar {
+                    display: block;
+                    position: absolute;
+                }
+
+                #layout[show-menu] article {
+                    display: none;
+                }
+
+                #menuOpener {
+                    position: fixed;
+                    top: 5px;
+                    right: 5px;
+                    width: 35px;
+                    height: 35px;
+                    cursor: pointer;
+                }
+
+                #menuOpener .stripe {
+                    width: 100%;
+                    height: 4px;
+                    margin: 5px 0;
+                    background: grey;
+                }
+
             }
 
         `;

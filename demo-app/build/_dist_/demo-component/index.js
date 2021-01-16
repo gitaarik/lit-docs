@@ -34,8 +34,8 @@ import { customElement, LitElement, html } from '../../web_modules/lit-element.j
 import { DemoPage } from '../helpers/index.js';
 import '../helpers/index.js';
 import './example-demo-component.js';
-export let DemoComponentMixin = _decorate([customElement('demo-component-mixin')], function (_initialize, _DemoPage) {
-  class DemoComponentMixin extends _DemoPage {
+export let DemoComponent = _decorate([customElement('demo-component')], function (_initialize, _DemoPage) {
+  class DemoComponent extends _DemoPage {
     constructor(...args) {
       super(...args);
 
@@ -45,17 +45,17 @@ export let DemoComponentMixin = _decorate([customElement('demo-component-mixin')
   }
 
   return {
-    F: DemoComponentMixin,
+    F: DemoComponent,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>DemoComponent Mixin</h1>
+            <h1>DemoComponent</h1>
 
             <p>
-                The <code-small>DemoComponent</code-small> mixin can be used
+                T Mixinhe <code>DemoComponent</code> mixin can be used
                 for demo components that demonstrate some functionality of your
                 library. It adds some basic styles for the component, so that
                 all demo components have consistent styling.
@@ -69,14 +69,14 @@ export let DemoComponentMixin = _decorate([customElement('demo-component-mixin')
 
             <h2>Usage</h2>
 
-            <p><code-big .code=${this.demoShellCode}></code-big></p>
+            <p><code-block .code=${this.demoShellCode}></code-block></p>
 
             <h1>Multiple demo components</h1>
 
             <p>
                 If you use multiple demo components on your
                 <a href="#demo-page-mixin">demo page</a>, it is advised to wrap
-                them in <code-small>&lt;div class="demoComponents"&gt;&lt;div&gt;</code-small>,
+                them in <code>&lt;div class="demoComponents"&gt;&lt;div&gt;</code>,
                 so that they have some margin from each other, and stay
                 arranged well on different viewports:
             </p>
@@ -90,7 +90,7 @@ export let DemoComponentMixin = _decorate([customElement('demo-component-mixin')
 
             <h2>Usage</h2>
 
-            <p><code-big .code=${this.demoComponentsWrapperCode}></code-big></p>
+            <p><code-block .code=${this.demoComponentsWrapperCode}></code-block></p>
 
         `;
       }

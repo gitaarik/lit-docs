@@ -4,17 +4,17 @@ import '@app/helpers/index';
 import './example-demo-component';
 
 
-@customElement('demo-component-mixin')
-export class DemoComponentMixin extends DemoPage(LitElement) {
+@customElement('demo-component')
+export class DemoComponent extends DemoPage(LitElement) {
 
     render() {
 
         return html`
 
-            <h1>DemoComponent Mixin</h1>
+            <h1>DemoComponent</h1>
 
             <p>
-                The <code-small>DemoComponent</code-small> mixin can be used
+                T Mixinhe <code>DemoComponent</code> mixin can be used
                 for demo components that demonstrate some functionality of your
                 library. It adds some basic styles for the component, so that
                 all demo components have consistent styling.
@@ -28,14 +28,14 @@ export class DemoComponentMixin extends DemoPage(LitElement) {
 
             <h2>Usage</h2>
 
-            <p><code-big .code=${this.demoShellCode}></code-big></p>
+            <p><code-block .code=${this.demoShellCode}></code-block></p>
 
             <h1>Multiple demo components</h1>
 
             <p>
                 If you use multiple demo components on your
                 <a href="#demo-page-mixin">demo page</a>, it is advised to wrap
-                them in <code-small>&lt;div class="demoComponents"&gt;&lt;div&gt;</code-small>,
+                them in <code>&lt;div class="demoComponents"&gt;&lt;div&gt;</code>,
                 so that they have some margin from each other, and stay
                 arranged well on different viewports:
             </p>
@@ -49,7 +49,7 @@ export class DemoComponentMixin extends DemoPage(LitElement) {
 
             <h2>Usage</h2>
 
-            <p><code-big .code=${this.demoComponentsWrapperCode}></code-big></p>
+            <p><code-block .code=${this.demoComponentsWrapperCode}></code-block></p>
 
         `;
 

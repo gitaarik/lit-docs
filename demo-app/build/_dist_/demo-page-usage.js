@@ -33,8 +33,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
 import { DemoPage } from './helpers/index.js';
 import './helpers/index.js';
-export let DemoAppHelpersUsage = _decorate([customElement('demo-app-helpers-usage')], function (_initialize, _DemoPage) {
-  class DemoAppHelpersUsage extends _DemoPage {
+export let DemoPageUsage = _decorate([customElement('demo-page-usage')], function (_initialize, _DemoPage) {
+  class DemoPageUsage extends _DemoPage {
     constructor(...args) {
       super(...args);
 
@@ -44,37 +44,50 @@ export let DemoAppHelpersUsage = _decorate([customElement('demo-app-helpers-usag
   }
 
   return {
-    F: DemoAppHelpersUsage,
+    F: DemoPageUsage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>LitElement Demo App Helpers</h1>
+            <h1>DemoPage</h1>
 
             <p>
-                These are helper utilities to create a demo app like the one
-                you're currently viewing. It is meant for creators of
-                LitElement related libraries. You can use these helpers to make
-                a demo app to demonstrate your library. It's also useful as a
-                testing app for the features of your library, for while you're
-                developing.
+                The <code>DemoPage</code> mixin should be used for
+                the demo pages that are provided to the
+                <code>&lt;demo-shell&gt;</code> component, like the
+                current page you're reading. It adds some basic styles for the
+                page, so that all demo pages have consistent styling.
             </p>
 
-            <p>Install with:</p>
+            <h2>Usage</h2>
 
             <p>
-                <code-big .code=${'npm install lit-element-demo-app-helpers'}></code-big>
-            </p>
-            
-            <p>
-                The package contains some web components, some mixins and some
-                functions. They are documented in this demo app. Use the tabs
-                at the top of the page to see the different helpers.
+                <code-block .code=${this.demoShellCode}></code-block>
             </p>
 
         `;
+      }
+    }, {
+      kind: "get",
+      key: "demoShellCode",
+      value: function demoShellCode() {
+        return `import { customElement, LitElement, html } from 'lit-element';
+import { DemoPage } from 'lit-element-demo-app-helpers';
+
+
+@customElement('demo-page')
+export class DemoPage extends DemoPage(LitElement) {
+
+    render() {
+        return html\`
+            <h1>This h1 tag is styled by the DemoPage</h1>
+            <p>And this p tag also. <code>this is some code</code>.</p>
+        \`;
+    }
+
+}`;
       }
     }]
   };

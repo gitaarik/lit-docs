@@ -13,16 +13,16 @@ export class DemoShellUsage extends DemoPage(LitElement) {
             <h1>Demo Shell</h1>
 
             <p>
-                The <code-small>&lt;demo-shell&gt;</code-small> component
-                creates the basic page layout and navigation that you see on
-                this page. You provide it an array of pages, and the navigation
-                is automatically created for you.
+                The <code>&lt;demo-shell&gt;</code> component creates the basic
+                page layout and navigation that you see on this page. You
+                provide it a title and an array of pages, and the navigation is
+                automatically created for you.
             </p>
 
             <h2>Usage</h2>
 
             <p>
-                <code-big .code=${this.demoShellCode}></code-big>
+                <code-block .code=${this.demoShellCode}></code-block>
             </p>
 
         `;
@@ -41,7 +41,7 @@ import './demo-page-2.js';
 export class MyDemoApp extends LitElement {
 
     render() {
-        return html\`<demo-shell .pages=\${this.pages}></demo-shell>\`;
+        return html\`<demo-shell title="My Lib" .pages=\${this.pages}></demo-shell>\`;
     }
 
     get pages() {

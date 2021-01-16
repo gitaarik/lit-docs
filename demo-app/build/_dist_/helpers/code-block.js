@@ -4,7 +4,7 @@ import javascript from '../../web_modules/highlightjs/lib/languages/javascript.j
 import xml from '../../web_modules/highlightjs/lib/languages/xml.js';
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
-export class CodeBig extends LitElement {
+export class CodeBlock extends LitElement {
   static get properties() {
     return {
       fileName: {
@@ -145,4 +145,4 @@ export class CodeBig extends LitElement {
   }
 
 }
-customElements.define('code-big', CodeBig);
+customElements.define('code-block', CodeBlock);

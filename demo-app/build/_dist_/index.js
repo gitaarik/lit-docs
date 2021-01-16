@@ -30,16 +30,15 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, html } from '../web_modules/lit-element.js';
+import { customElement, LitElement, html, css } from '../web_modules/lit-element.js';
 import './helpers/index.js';
-import './demo-app-helpers-usage.js';
+import './intro-page.js';
 import './demo-shell-usage.js';
-import './demo-page-mixin.js';
-import './demo-component-mixin/index.js';
+import './demo-page-usage.js';
+import './demo-component/index.js';
 import './code-blocks.js';
-import './utils-functions.js';
-export let LitElementDemoAppHelpersDemo = _decorate([customElement('lit-element-demo-app-helpers-demo')], function (_initialize, _LitElement) {
-  class LitElementDemoAppHelpersDemo extends _LitElement {
+export let LitDocsDocumentation = _decorate([customElement('lit-docs-documentation')], function (_initialize, _LitElement) {
+  class LitDocsDocumentation extends _LitElement {
     constructor(...args) {
       super(...args);
 
@@ -49,42 +48,50 @@ export let LitElementDemoAppHelpersDemo = _decorate([customElement('lit-element-
   }
 
   return {
-    F: LitElementDemoAppHelpersDemo,
+    F: LitDocsDocumentation,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
-        return html`<demo-shell .pages=${this.pages}></demo-shell>`;
+        return html`<demo-shell title="LitDocs" .pages=${this.pages}></demo-shell>`;
       }
     }, {
       kind: "get",
       key: "pages",
       value: function pages() {
         return [{
-          hash: 'demo-app-helpers',
-          title: 'Demo app helpers',
-          template: html`<demo-app-helpers-usage></demo-app-helpers-usage>`
+          hash: 'intro-page',
+          title: 'Introduction',
+          template: html`<intro-page></intro-page>`
         }, {
           hash: 'demo-shell',
           title: 'Demo shell',
           template: html`<demo-shell-usage></demo-shell-usage>`
         }, {
-          hash: 'demo-page-mixin',
-          title: 'Demo page mixin',
-          template: html`<demo-page-mixin></demo-page-mixin>`
+          hash: 'demo-page-usage',
+          title: 'Demo page',
+          template: html`<demo-page-usage></demo-page-usage>`
         }, {
           hash: 'code-blocks',
           title: 'Code blocks',
           template: html`<code-blocks></code-blocks>`
         }, {
-          hash: 'demo-component-mixin',
-          title: 'Demo component mixin',
-          template: html`<demo-component-mixin></demo-component-mixin>`
-        }, {
-          hash: 'util-functions',
-          title: 'Utils',
-          template: html`<util-functions></util-functions>`
+          hash: 'demo-component',
+          title: 'Demo component',
+          template: html`<demo-component></demo-component>`
         }];
+      }
+    }, {
+      kind: "get",
+      static: true,
+      key: "styles",
+      value: function styles() {
+        return css`
+            :host {
+                display: block;
+                min-height: 100vh;
+            }
+        `;
       }
     }]
   };

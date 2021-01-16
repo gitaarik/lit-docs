@@ -57,6 +57,16 @@ export const DemoPage = litStyle(css`
         color: #000;
     }
 
+    code {
+        display: inline-block;
+        padding: 2px 6px;
+        margin: 1px;
+        background: #444;
+        border-radius: 5px;
+        color: white;
+        white-space: pre;
+    }
+
     .demoComponents {
         display: flex;
         flex-wrap: wrap;

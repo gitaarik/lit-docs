@@ -1,26 +1,25 @@
-import { customElement, LitElement, html } from 'lit-element';
+import { customElement, LitElement, html, css } from 'lit-element';
 import '@app/helpers/index';
-import './demo-app-helpers-usage';
-import './demo-shell-usage';
-import './demo-page-mixin';
-import './demo-component-mixin/index';
-import './code-blocks';
-import './utils-functions';
+import './intro-page.js';
+import './demo-shell-usage.js';
+import './demo-page-usage.js';
+import './demo-component/index.js';
+import './code-blocks.js';
 
 
-@customElement('lit-element-demo-app-helpers-demo')
-export class LitElementDemoAppHelpersDemo extends LitElement {
+@customElement('lit-docs-documentation')
+export class LitDocsDocumentation extends LitElement {
 
     render() {
-        return html`<demo-shell .pages=${this.pages}></demo-shell>`;
+        return html`<demo-shell title="LitDocs" .pages=${this.pages}></demo-shell>`;
     }
 
     get pages() {
         return [
             {
-                hash: 'demo-app-helpers',
-                title: 'Demo app helpers',
-                template: html`<demo-app-helpers-usage></demo-app-helpers-usage>`
+                hash: 'intro-page',
+                title: 'Introduction',
+                template: html`<intro-page></intro-page>`
             },
             {
                 hash: 'demo-shell',
@@ -28,9 +27,9 @@ export class LitElementDemoAppHelpersDemo extends LitElement {
                 template: html`<demo-shell-usage></demo-shell-usage>`
             },
             {
-                hash: 'demo-page-mixin',
-                title: 'Demo page mixin',
-                template: html`<demo-page-mixin></demo-page-mixin>`
+                hash: 'demo-page-usage',
+                title: 'Demo page',
+                template: html`<demo-page-usage></demo-page-usage>`
             },
             {
                 hash: 'code-blocks',
@@ -38,16 +37,22 @@ export class LitElementDemoAppHelpersDemo extends LitElement {
                 template: html`<code-blocks></code-blocks>`
             },
             {
-                hash: 'demo-component-mixin',
-                title: 'Demo component mixin',
-                template: html`<demo-component-mixin></demo-component-mixin>`
-            },
-            {
-                hash: 'util-functions',
-                title: 'Utils',
-                template: html`<util-functions></util-functions>`
-            },
+                hash: 'demo-component',
+                title: 'Demo component',
+                template: html`<demo-component></demo-component>`
+            }
         ];
+    }
+
+    static get styles() {
+
+        return css`
+            :host {
+                display: block;
+                min-height: 100vh;
+            }
+        `;
+
     }
 
 }

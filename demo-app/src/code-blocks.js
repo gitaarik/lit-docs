@@ -14,57 +14,34 @@ export class CodeBlocks extends DemoPage(LitElement) {
 
             <p>Use the code blocks to demonstrate how your library should be used.</p>
 
-            <h2>Small code block</h2>
-
             <h3>Example:</h3>
 
             <p>
-                Normal text, <code-small>code styled text</code-small>.
+                <code-block .code=${this.bigCodeDemo}></code-block>
             </p>
 
             <h3>Usage:</h3>
 
             <p>
-                <code-big .code=${this.smallCodeDemo}></code-big>
+                <code-block .code=${this.bigCodeDemoSource}></code-block>
             </p>
 
-            <h2>Big code block</h2>
+            <h2>Code block with filename</h2>
 
             <h3>Example:</h3>
 
             <p>
-                <code-big .code=${this.bigCodeDemo}></code-big>
+                <code-block filename='my-function.js' .code=${this.bigCodeDemo}></code-block>
             </p>
 
             <h3>Usage:</h3>
 
             <p>
-                <code-big .code=${this.bigCodeDemoSource}></code-big>
-            </p>
-
-            <h2>Big code block with filename</h2>
-
-            <h3>Example:</h3>
-
-            <p>
-                <code-big filename='my-function.js' .code=${this.bigCodeDemo}></code-big>
-            </p>
-
-            <h3>Usage:</h3>
-
-            <p>
-                <code-big .code=${this.bigCodeWithFilenameDemoSource}></code-big>
+                <code-block .code=${this.bigCodeWithFilenameDemoSource}></code-block>
             </p>
 
         `;
 
-    }
-
-    get smallCodeDemo() {
-        return `import { html } from 'lit-element';
-import 'lit-element-demo-app-helpers';
-
-html\`Normal text, <code-small>code styled text</code-small>.\`;`;
     }
 
     get bigCodeDemo() {
@@ -81,7 +58,7 @@ const code = \`function() {
     console.log('hello!');
 }\`;
 
-html\`<code-big .code=\${code}></code-big>\`;`;
+html\`<code-block .code=\${code}></code-block>\`;`;
     }
 
     get bigCodeWithFilenameDemoSource() {
@@ -93,7 +70,7 @@ const code = \`function() {
     console.log('hello!');
 }\`;
 
-html\`<code-big filename='my-function.js' .code=\${code}></code-big>\`;`;
+html\`<code-block filename='my-function.js' .code=\${code}></code-block>\`;`;
 
     }
 
