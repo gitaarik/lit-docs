@@ -70,7 +70,7 @@ export class LitDocsCodeBlock extends LitElement {
                 margin: 0;
                 padding: 10px;
                 width: 100%;
-                white-space: pre;
+                white-space: pre-wrap;
                 border-radius: 5px;
                 overflow-x: auto;
                 color: #ffffff;

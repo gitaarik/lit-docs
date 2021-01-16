@@ -13,9 +13,9 @@ export class IntroPage extends LitDocsStyle(LitElement) {
             <h1>LitDocs</h1>
 
             <p>
-                This documentation you're currently viewing is created with
-                LitDocs. And the documentation here describes how you can use
-                LitDocs to make your own documentation.
+                The documentation you're currently viewing is created with
+                LitDocs. This documentation describes how you can use LitDocs
+                to make pretty documentation for your own projects.
             </p>
 
             <p>

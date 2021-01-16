@@ -74,7 +74,7 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
 
     _fixMenuWidth() {
         this.shadowRoot.getElementById('menuSidebarContent').style.maxWidth = (() => {
-            if (window.innerWidth > 500) {
+            if (window.innerWidth > 600) {
                 return this.shadowRoot.getElementById('menu').clientWidth + 'px';
             } else {
                 return 'none';
@@ -294,7 +294,7 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
                 display: none;
             }
 
-            @media screen and (min-width: 501px) {
+            @media screen and (min-width: 601px) {
 
                 #menu {
                     position: relative;
@@ -310,7 +310,7 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
 
             }
 
-            @media screen and (max-width: 500px) {
+            @media screen and (max-width: 600px) {
 
                 #layout[show-menu] #menu {
                     display: block;
