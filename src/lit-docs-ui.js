@@ -1,51 +1,97 @@
+import { LitState, stateVar, observeState } from 'lit-element-state';
 import { customElement, LitElement, property, html, css } from 'lit-element';
 import { LitDocsStyle } from './lit-docs-style.js';
 import './hamburger-icon.js';
 import './cross-icon.js';
 
 
-@customElement('lit-docs-ui')
-class LitDocsUI extends LitDocsStyle(LitElement) {
+class LitDocsUiState extends LitState {
 
-    @property({type: String})
-    docsTitle = '';
+    @stateVar() pages;
+    @stateVar() path;
+    @stateVar() page;
+    @stateVar() showMenu;
 
-    @property({type: Array})
-    pages = [];
-
-    @property({type: Boolean})
-    _showMenu = false;
-
-    @property({type: String})
-    _activePage = '';
-
-    connectedCallback() {
-        super.connectedCallback();
-        this._initActivePage();
-        this._fixMenuWidthOnPageWidthChange();
+    setPath(path) {
+        if (path[0] === '/') path = path.substr(1);
+        this.path = path || '/';
+        this._initPageByPath();
     }
 
-    firstUpdated() {
-        super.firstUpdated();
-        this._fixMenuWidth();
-    }
+    navToPath(path, addToHistory = true) {
 
-    _initActivePage() {
-
-        const path = window.location.pathname.substr(1);
-
-        if (path) {
-            this._setActivePage(path, this.pages);
+        if (!path) {
+            path = '/';
         }
 
-        if (!this._activePage) {
-            // If no page was not found, fall back to first page
-            this._activePage = this.pages[0];
+        if (
+            path.substr(0, 7) === 'http://'
+            || path.substr(0, 8) === 'https://'
+        ) {
+            path = path.split('/').slice(3).join('/');
+        }
+
+        if (path === this.path) {
+            return;
+        }
+
+        this.setPath(path);
+
+        if (addToHistory) {
+            history.pushState({}, this.page.title, this.path);
+        }
+
+        this.showMenu = false;
+        window.scrollTo(0, 0);
+
+    }
+
+    handlePageLinkClick(event) {
+
+        if (event.ctrlKey || event.shiftKey) {
+            // Ctrl/shift click opens a `<a>` link in new tab/window, so when
+            // one of these keys are pressed, don't override normal behavior.
+            return
+        }
+
+        event.preventDefault();
+
+        let target = event.target;
+        let href = event.target.href;
+
+        while (!href) {
+            target = target.parentNode;
+            href = target.href;
+        }
+
+        if (href) {
+            this.navToPath(href);
         }
 
     }
 
-    _setActivePage(path, pages) {
+    _initPageByPath() {
+
+        let path = this.path;
+
+        if (path === '/' || path === '') {
+            this.page = this.pages[0];
+            return;
+        }
+
+        if (path[0] === '/') {
+            path = path.substr(1);
+        }
+
+        this._setPageByPath(path, this.pages);
+
+        if (!this.page) {
+            this.page = this.pages[0];
+        }
+
+    }
+
+    _setPageByPath(path, pages) {
 
         const firstPathPart = path.split('/')[0];
 
@@ -57,11 +103,11 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
 
             if (page.path === firstPathPart) {
 
-                this._activePage = page;
+                this.page = page;
 
                 if (page.submenu) {
                     const pathRemainder = path.split('/').slice(1).join('/');
-                    this._setActivePage(pathRemainder, page.submenu);
+                    this._setPageByPath(pathRemainder, page.submenu);
                 }
 
                 return;
@@ -70,6 +116,37 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
 
         }
 
+    }
+
+}
+
+export const litDocsUiState = new LitDocsUiState();
+
+
+@customElement('lit-docs-ui')
+class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
+
+    @property({type: String})
+    docsTitle = '';
+
+    @property({type: Array})
+    pages = [];
+
+    connectedCallback() {
+        super.connectedCallback();
+        this._initState();
+        this._fixMenuWidthOnPageWidthChange();
+        this._initPopStateListener();
+    }
+
+    firstUpdated() {
+        super.firstUpdated();
+        this._fixMenuWidth();
+    }
+
+    _initState() {
+        litDocsUiState.pages = this.pages;
+        litDocsUiState.setPath(window.location.pathname);
     }
 
     _fixMenuWidth() {
@@ -90,38 +167,37 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
         window.addEventListener('resize', () => this._fixMenuWidth());
     }
 
-    render() {
+    _initPopStateListener() {
+        window.addEventListener('popstate', event => {
+            litDocsUiState.navToPath(window.location.pathname, false);
+        });
+    }
 
-        console.log(this._activePage.title);
+    render() {
 
         return html`
 
-            <div id="layout" ?show-menu=${this._showMenu}>
+            <div id="layout" ?show-menu=${litDocsUiState.showMenu}>
 
                 <div id="menu">
 
                     <div id="menuSidebarContent">
                         <header>
-                            <a
-                                href="/"
-                                @click=${event => this.handleTitleClick(event)}
-                            >
-                                ${this.docsTitle}
-                            </a>
+                            <a href="/" @click=${event => litDocsUiState.handlePageLinkClick(event)}>${this.docsTitle}</a>
                         </header>
                         <nav>${this.navTree(this.pages)}</nav>
                     </div>
 
                     <div id="hamburgerMenu" @click=${this.handleHamburgerMenuClick}>
-                        <hamburger-icon ?hidden=${this._showMenu}></hamburger-icon>
-                        <cross-icon ?hidden=${!this._showMenu}></cross-icon>
+                        <hamburger-icon ?hidden=${litDocsUiState.showMenu}></hamburger-icon>
+                        <cross-icon ?hidden=${!litDocsUiState.showMenu}></cross-icon>
                     </div>
 
                 </div>
 
                 <article>
                     <div id="articleContent">
-                        ${this._activePage.template}
+                        ${litDocsUiState.page.template}
                     </div>
                 </article>
 
@@ -141,9 +217,8 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
 
         return pages.map(page => {
 
-            let path = page.path;
+            let path = pathPrefix + page.path;
             if (path[-1] !== '/') path += '/';
-            path = pathPrefix + path;
 
             pageNo++;
 
@@ -152,8 +227,8 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
                     class="navItem"
                     nav-level=${level}
                     href=${path}
-                    @click=${event => this.handleMenuItemClick(event, page, path)}
-                    ?active=${false}
+                    @click=${event => litDocsUiState.handlePageLinkClick(event)}
+                    ?active=${page === litDocsUiState.page}
                 >
                     <span class="navItemNo">${pageNoPrefix + pageNo}</span>
                     <span>${page.title}</span>
@@ -178,19 +253,16 @@ class LitDocsUI extends LitDocsStyle(LitElement) {
         }
 
         event.preventDefault();
-        history.pushState({}, page.title, path);
-        this._activePage = page;
-        window.scrollTo(0, 0);
-        this._showMenu = false;
+        litDocsUiState.navToPath(path);
 
     }
 
     handleHamburgerMenuClick() {
 
-        if (this._showMenu) {
-            this._showMenu = false;
+        if (litDocsUiState.showMenu) {
+            litDocsUiState.showMenu = false;
         } else {
-            this._showMenu = true;
+            litDocsUiState.showMenu = true;
         }
 
         this._resetMenuWidth();
