@@ -33,9 +33,8 @@ export class DemoComponent extends LitDocsStyle(LitElement) {
             <h1>Multiple demo components</h1>
 
             <p>
-                If you use multiple demo components on your
-                <a href="#demo-page-mixin">demo page</a>, it is advised to wrap
-                them in <code>&lt;div class="demoComponents"&gt;&lt;div&gt;</code>,
+                If you want to show multiple demo components, it is advised to
+                wrap them in <code>&lt;div class="demoComponents"&gt;&lt;div&gt;</code>,
                 so that they have some margin from each other, and stay
                 arranged well on different viewports:
             </p>

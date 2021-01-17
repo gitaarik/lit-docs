@@ -1,10 +1,12 @@
 import { customElement, LitElement, html } from 'lit-element';
 import { LitDocsStyle } from '@app/lit-docs/index';
+import { litDocsUiState } from '@app/lit-docs/index';
+import { LitAnchor } from './lit-anchor.js';
 import '@app/lit-docs/index';
 
 
 @customElement('code-block-usage')
-export class CodeBlockUsage extends LitDocsStyle(LitElement) {
+export class CodeBlockUsage extends LitAnchor(LitDocsStyle(LitElement)) {
 
     render() {
 
@@ -14,9 +16,9 @@ export class CodeBlockUsage extends LitDocsStyle(LitElement) {
 
             <p>
                 Use code blocks to demonstrate code. When using
-                <a href="lit-state-style">LitStateStyle</a>, the default
-                <code>&lt;code&gt;</code> blocks are styled and are good for
-                tiny code snippets. For bigger code blocks, use
+                <a href="lit-docs-style/" @click=${event => litDocsUiState.handlePageLinkClick(event)}>LitDocsStyle</a>,
+                the default <code>&lt;code&gt;</code> blocks are styled and are
+                good for tiny code snippets. For bigger code blocks, use
                 <code>&lt;lit-docs-code-block&gt;</code>.
             </p>
 
