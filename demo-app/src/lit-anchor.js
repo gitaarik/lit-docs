@@ -6,18 +6,25 @@ import { litStyle } from 'lit-element-style';
 // `goToAnchor()` function can be used from any component.
 let ANCHORS = [];
 
-function scrollToAnchor(anchorName) {
+function getAnchorData(anchorName, returnList = false) {
 
-    const anchorData = ANCHORS.find(anchor => {
+    const conditionFunc = anchor => {
         return anchor.anchorName == anchorName;
-    });
+    };
 
+    if (returnList) {
+        return ANCHORS.filter(conditionFunc);
+    } else {
+        return ANCHORS.find(conditionFunc);
+    }
+
+}
+
+function scrollToAnchor(anchorName) {
+    const anchorData = getAnchorData(anchorName);
     if (!anchorData) return;
-
     const newScrollY = window.scrollY + anchorData.element.getBoundingClientRect().top;
-
     window.scrollTo(0, newScrollY);
-
 }
 
 export function goToAnchor(anchorName) {
@@ -97,7 +104,7 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
     _initAnchor(element) {
 
         const elementText = element.textContent;
-        const anchorName = elementText.replace(/ /g, '-').replace(/[^a-z-]/gi, '').toLowerCase();
+        const anchorName = this._getAnchorName(elementText);
 
         ANCHORS.push({
             anchorName,
@@ -113,6 +120,23 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
         `;
 
         element.id = anchorName;
+
+    }
+
+    _getAnchorName(elementText) {
+
+        const baseAnchorName = elementText.replace(/ /g, '-').replace(/[^\w-]/gi, '').toLowerCase();
+        let anchorName = baseAnchorName;
+        let alreadyExistingAnchor = getAnchorData(anchorName);
+        let counter = 1;
+
+        while (alreadyExistingAnchor) {
+            counter++;
+            anchorName = baseAnchorName + '-' + counter;
+            alreadyExistingAnchor = getAnchorData(anchorName);
+        }
+
+        return anchorName;
 
     }
 
