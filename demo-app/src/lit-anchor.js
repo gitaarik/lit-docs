@@ -2,27 +2,33 @@ import { css } from 'lit-element';
 import { litStyle } from 'lit-element-style';
 
 
-const anchors = [];
+// Global container of all the anchors on the page. This is global so that the
+// `goToAnchor()` function can be used from any component.
+let ANCHORS = [];
 
-function scrollToAnchor(anchor) {
-    const newScrollY = window.scrollY + anchor.element.getBoundingClientRect().top;
+function scrollToAnchor(anchorName) {
+
+    const anchorData = ANCHORS.find(anchor => {
+        return anchor.anchorName == anchorName;
+    });
+
+    if (!anchorData) return;
+
+    const newScrollY = window.scrollY + anchorData.element.getBoundingClientRect().top;
+
     window.scrollTo(0, newScrollY);
+
 }
 
 export function goToAnchor(anchorName) {
 
     if (!anchorName) return;
 
-    const anchor = anchors.find(anchor => {
-        return anchor.anchorName == anchorName;
-    });
+    scrollToAnchor(anchorName);
 
-    if (!anchor) return;
-
-    scrollToAnchor(anchor);
-
+    // Do it another time when the full document has loaded
     window.addEventListener('load', event => {
-        scrollToAnchor(anchor);
+        scrollToAnchor(anchorName);
     });
 
 }
@@ -40,9 +46,14 @@ const litAnchorStyles = litStyle(css`
 
 export const LitAnchor = superclass => class extends litAnchorStyles(superclass) {
 
-    constructor() {
-        super();
-        this._initHashChangeListener();
+    connectedCallback() {
+        super.connectedCallback();
+        this._addHashChangeListener();
+    }
+
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        this._removeHashChangeListener();
     }
 
     firstUpdated() {
@@ -51,10 +62,15 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
         this._loadInitialAnchor();
     }
 
-    _initHashChangeListener() {
-        window.addEventListener('hashchange', event => {
+    _addHashChangeListener() {
+        this.hashChangeCallback = event => {
             goToAnchor(event.newURL.split('#')[1]);
-        });
+        };
+        window.addEventListener('hashchange', this.hashChangeCallback);
+    }
+
+    _removeHashChangeListener() {
+        window.removeEventListener('hashchange', this.hashChangeCallback);
     }
 
     _loadInitialAnchor() {
@@ -63,6 +79,7 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
 
     _initAnchors() {
 
+        ANCHORS = [];
         const tagNames = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
         for (const tagName of tagNames) {
@@ -82,7 +99,7 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
         const elementText = element.textContent;
         const anchorName = elementText.replace(/ /g, '-').replace(/[^a-z-]/gi, '').toLowerCase();
 
-        anchors.push({
+        ANCHORS.push({
             anchorName,
             element,
             elementText
