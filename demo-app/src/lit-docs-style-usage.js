@@ -25,6 +25,21 @@ export class LitDocsStyleUsage extends LitDocsStyle(LitElement) {
                 <lit-docs-code-block .code=${this.litDocsStyleCode}></lit-docs-code-block>
             </p>
 
+            <h2>Output</h2>
+
+            <p>
+
+                <h1>This s a &lt;h1&gt; tag</h1>
+                <h2>This s a &lt;h2&gt; tag</h2>
+                <h3>This s a &lt;h3&gt; tag</h3>
+                <h4>This s a &lt;h4&gt; tag</h4>
+                <h5>This s a &lt;h5&gt; tag</h5>
+                <h6>This s a &lt;h6&gt; tag</h6>
+
+                <p>This is a &lt;p&gt; tag. <code>this is some code</code>.</p>
+
+            </p>
+
         `;
 
     }
