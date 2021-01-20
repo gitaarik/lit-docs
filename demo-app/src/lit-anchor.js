@@ -13,7 +13,7 @@ export let ANCHOR_SCROLL_CORRECTION = 0;
 
 function scrollCorrection() {
     if (window.innerWidth > 600) {
-        return 0;
+        return 10;
     } else {
         return 50;
     }
@@ -103,11 +103,12 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
     disconnectedCallback() {
         super.disconnectedCallback();
         this._removeHashChangeListener();
+        this._removeAnchors();
     }
 
     firstUpdated() {
         super.firstUpdated();
-        this._initAnchors();
+        this._addAnchors();
         this._renderAnchors();
         this._loadInitialAnchor();
     }
@@ -128,9 +129,9 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
         goToAnchor(window.location.hash.substr(1));
     }
 
-    _initAnchors() {
+    _addAnchors() {
 
-        ANCHORS = [];
+        this._addedAnchors = [];
         const tagNames = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
         for (const tagName of tagNames) {
@@ -145,16 +146,29 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
 
     }
 
+    _removeAnchors() {
+        for (let addedAnchor of this._addedAnchors) {
+            const anchorIndex = ANCHORS.findIndex(anchor => {
+                return anchor.anchorName === addedAnchor.anchorName;
+            });
+            ANCHORS.splice(anchorIndex, 1);
+        }
+    }
+
     _addAnchor(element) {
 
         const elementText = element.textContent;
         const anchorName = this._getAnchorName(elementText);
 
-        ANCHORS.push({
+        const anchorData = {
             anchorName,
             element,
             elementText
-        });
+        };
+
+        ANCHORS.push(anchorData);
+
+        this._addedAnchors.push(anchorData);
 
     }
 
