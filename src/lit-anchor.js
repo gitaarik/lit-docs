@@ -7,10 +7,6 @@ import { litStyle } from 'lit-element-style';
 // `goToAnchor()` function can be used from any component.
 let ANCHORS = [];
 
-// The correction for the scroll distance. Useful for when you have a fixed
-// element overlaying the top of the page.
-export let ANCHOR_SCROLL_CORRECTION = 0;
-
 function scrollCorrection() {
     if (window.innerWidth > 600) {
         return 10;
@@ -80,7 +76,6 @@ const litAnchorStyles = litStyle(css`
 
     .headingAnchor {
         display: inline-block;
-        fill: rgb(69, 75, 78);
         fill: rgb(115, 121, 126);
         text-decoration: none;
         height: 15px;

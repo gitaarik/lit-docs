@@ -1,7 +1,5 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { LitDocsStyle } from '@app/lit-docs/index';
-import { litDocsUiState } from '@app/lit-docs/index';
-import { LitAnchor } from './lit-anchor.js';
+import { LitDocsStyle, litDocsUiState, LitAnchor } from '@app/lit-docs/index';
 import '@app/lit-docs/index';
 
 
