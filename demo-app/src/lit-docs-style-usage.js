@@ -1,29 +1,18 @@
 import { customElement, LitElement, html } from 'lit-element';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import { LitDocsStyle, LitDocsAnchors } from '@app/lit-docs/index';
 import '@app/lit-docs/index';
 
 
-@customElement('lit-docs-style-show-case')
-class LitDocsStyleShowCase extends LitDocsAnchors(LitElement) {
-
-    render() {
-
-        return html`
-
-            <h1>This s a &lt;h1&gt; tag</h1>
-            <h2>This s a &lt;h2&gt; tag</h2>
-            <h3>This s a &lt;h3&gt; tag</h3>
-            <h4>This s a &lt;h4&gt; tag</h4>
-            <h5>This s a &lt;h5&gt; tag</h5>
-            <h6>This s a &lt;h6&gt; tag</h6>
-
-            <p>This is a &lt;p&gt; tag. <code>this is some code</code>.</p>
-
-        `;
-
-    }
-
-}
+const litDocsStyleShowCaseCode = `
+    <h1>This s a &lt;h1&gt; tag</h1>
+    <h2>This s a &lt;h2&gt; tag</h2>
+    <h3>This s a &lt;h3&gt; tag</h3>
+    <h4>This s a &lt;h4&gt; tag</h4>
+    <h5>This s a &lt;h5&gt; tag</h5>
+    <h6>This s a &lt;h6&gt; tag</h6>
+    <p>This is a &lt;p&gt; tag. <code>this is some code</code>.</p>
+`;
 
 
 @customElement('lit-docs-style-usage')
@@ -33,7 +22,7 @@ export class LitDocsStyleUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) 
 
         return html`
 
-            <h1>LitDocsStyle</h1>
+            <h1>Basic styling</h1>
 
             <p>
                 The <code>LitDocsStyle</code> mixin should be used to apply
@@ -51,7 +40,7 @@ export class LitDocsStyleUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) 
             <h2>Output</h2>
 
             <p>
-                <lit-docs-style-show-case></lit-docs-style-show-case>
+                ${unsafeHTML(litDocsStyleShowCaseCode)}
             </p>
 
         `;
@@ -68,10 +57,7 @@ import { LitDocsStyle } from 'lit-docs';
 export class MyComponent extends LitDocsStyle(LitElement) {
 
     render() {
-        return html\`
-            <h1>This h1 tag is styled by LitDocsStyle</h1>
-            <p>And this p tag also. <code>this is some code</code>.</p>
-        \`;
+        return html\`${litDocsStyleShowCaseCode}\`;
     }
 
 }`;

@@ -29,7 +29,7 @@ export class LitDocsDocumentation extends LitElement {
                 template: html`<intro-page></intro-page>`
             },
             {
-                title: 'LitDocs UI',
+                title: 'Menu and pages',
                 path: 'lit-docs-ui',
                 template: html`<lit-docs-ui-usage></lit-docs-ui-usage>`,
                 submenu: [
@@ -41,22 +41,22 @@ export class LitDocsDocumentation extends LitElement {
                 ]
             },
             {
-                title: 'LitDocsStyle',
+                title: 'Basic styling',
                 path: 'lit-docs-style',
                 template: html`<lit-docs-style-usage></lit-docs-style-usage>`
             },
             {
-                title: 'LitDocsAnchors',
+                title: 'Anchors',
                 path: 'lit-docs-anchors-usage',
                 template: html`<lit-docs-anchors-usage></lit-docs-anchors-usage>`
             },
             {
-                title: 'Code block',
+                title: 'Code blocks',
                 path: 'code-block',
                 template: html`<code-block-usage></code-block-usage>`
             },
             {
-                title: 'Demo component',
+                title: 'Demo components',
                 path: 'demo-component',
                 template: html`<demo-component></demo-component>`
             }

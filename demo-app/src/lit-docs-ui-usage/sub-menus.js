@@ -10,7 +10,7 @@ export class SubMenus extends LitDocsStyle(LitElement) {
 
         return html`
 
-            <h1>LitDocs UI submenus</h1>
+            <h1>Submenus</h1>
 
             <p>
                 You can add submenu items to your main menu items by using the

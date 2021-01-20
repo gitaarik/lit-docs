@@ -11,7 +11,7 @@ export class DemoComponent extends LitDocsAnchors(LitDocsStyle(LitElement)) {
 
         return html`
 
-            <h1>DemoComponent</h1>
+            <h1>Demo Components</h1>
 
             <p>
                 The <code>DemoComponent</code> mixin can be used for components

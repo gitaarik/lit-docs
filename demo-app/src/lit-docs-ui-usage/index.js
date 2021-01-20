@@ -10,7 +10,7 @@ export class LitDocsUiUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
 
         return html`
 
-            <h1>LitDocs UI</h1>
+            <h1>Menu and pages</h1>
 
             <p>
                 The <code>&lt;lit-docs-ui&gt;</code> component creates the
@@ -52,13 +52,13 @@ export class MyDemoApp extends LitElement {
     get pages() {
         return [
             {
-                hash: 'page1',
                 title: 'Page 1',
+                path: 'page1',
                 template: html\`<demo-page-1></demo-page-1>\`
             },
             {
-                hash: 'page2',
                 title: 'Page 2',
+                path: 'page2',
                 template: html\`<demo-page-2></demo-page-2>\`
             }
         ];
