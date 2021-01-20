@@ -44,12 +44,12 @@ export function goToAnchor(anchorName) {
 
 const litAnchorStyles = litStyle(css`
 
-    h1 .headingAnchor,
-    h2 .headingAnchor,
-    h3 .headingAnchor,
-    h4 .headingAnchor,
-    h5 .headingAnchor,
-    h6 .headingAnchor {
+    h1 .headingAnchor:not([active]),
+    h2 .headingAnchor:not([active]),
+    h3 .headingAnchor:not([active]),
+    h4 .headingAnchor:not([active]),
+    h5 .headingAnchor:not([active]),
+    h6 .headingAnchor:not([active]) {
         display: none;
     }
 
@@ -91,12 +91,14 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
     firstUpdated() {
         super.firstUpdated();
         this._initAnchors();
+        this._renderAnchors();
         this._loadInitialAnchor();
     }
 
     _addHashChangeListener() {
         this.hashChangeCallback = event => {
             goToAnchor(event.newURL.split('#')[1]);
+            this._renderAnchors();
         };
         window.addEventListener('hashchange', this.hashChangeCallback);
     }
@@ -119,14 +121,14 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
             const elements = this.shadowRoot.querySelectorAll(tagName);
 
             for (const element of elements) {
-                this._initAnchor(element);
+                this._addAnchor(element);
             }
 
         }
 
     }
 
-    _initAnchor(element) {
+    _addAnchor(element) {
 
         const elementText = element.textContent;
         const anchorName = this._getAnchorName(elementText);
@@ -137,13 +139,32 @@ export const LitAnchor = superclass => class extends litAnchorStyles(superclass)
             elementText
         });
 
+    }
+
+    _renderAnchors() {
+        for (let anchor of ANCHORS) {
+            this._renderAnchor(anchor);
+        }
+    }
+
+    _renderAnchor(anchor) {
+
+        const active = window.location.hash.substr(1) === anchor.anchorName;
+
         const template = html`
-            <span>${elementText}</span>
-            <a class="headingAnchor" href=${window.location.pathname + '#' + anchorName}>${this._anchorSvg}</a>
+            <span>${anchor.elementText}</span>
+            <a
+                class="headingAnchor"
+                href=${window.location.pathname + '#' + anchor.anchorName}
+                ?active=${active}
+                @click=${() => goToAnchor(anchor.anchorName)}
+            >
+                ${this._anchorSvg}
+            </a>
         `;
 
-        render(template, element);
-        element.id = anchorName;
+        render(template, anchor.element);
+        anchor.element.id = anchor.anchorName;
 
     }
 
