@@ -1,10 +1,11 @@
 import { customElement, LitElement, html } from 'lit-element';
 import { LitDocsStyle } from '@app/lit-docs/index';
+import { LitAnchor } from './lit-anchor.js';
 import '@app/lit-docs/index';
 
 
 @customElement('lit-docs-style-usage')
-export class LitDocsStyleUsage extends LitDocsStyle(LitElement) {
+export class LitDocsStyleUsage extends LitAnchor(LitDocsStyle(LitElement)) {
 
     render() {
 
