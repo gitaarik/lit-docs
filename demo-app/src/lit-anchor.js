@@ -65,6 +65,7 @@ const litAnchorStyles = litStyle(css`
     .headingAnchor {
         display: inline-block;
         fill: rgb(69, 75, 78);
+        fill: rgb(115, 121, 126);
         text-decoration: none;
         height: 15px;
     }
