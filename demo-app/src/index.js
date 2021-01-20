@@ -4,6 +4,7 @@ import './intro-page.js';
 import './lit-docs-ui-usage/index.js';
 import './lit-docs-ui-usage/sub-menus.js';
 import './lit-docs-style-usage.js';
+import './lit-docs-anchors-usage.js';
 import './code-block-usage.js';
 import './demo-component/index.js';
 
@@ -43,6 +44,11 @@ export class LitDocsDocumentation extends LitElement {
                 title: 'LitDocsStyle',
                 path: 'lit-docs-style',
                 template: html`<lit-docs-style-usage></lit-docs-style-usage>`
+            },
+            {
+                title: 'LitDocsAnchors',
+                path: 'lit-docs-anchors-usage',
+                template: html`<lit-docs-anchors-usage></lit-docs-anchors-usage>`
             },
             {
                 title: 'Code block',

@@ -54,7 +54,7 @@ export function goToAnchor(anchorName) {
 }
 
 
-const litAnchorStyles = litStyle(css`
+const litDocsAnchorsStyles = litStyle(css`
 
     h1 .headingAnchor:not([active]),
     h2 .headingAnchor:not([active]),
@@ -88,7 +88,7 @@ const litAnchorStyles = litStyle(css`
 `);
 
 
-export const LitAnchor = superclass => class extends litAnchorStyles(superclass) {
+export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(superclass) {
 
     connectedCallback() {
         super.connectedCallback();

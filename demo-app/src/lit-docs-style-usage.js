@@ -1,10 +1,10 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { LitDocsStyle, LitAnchor } from '@app/lit-docs/index';
+import { LitDocsStyle, LitDocsAnchors } from '@app/lit-docs/index';
 import '@app/lit-docs/index';
 
 
 @customElement('lit-docs-style-show-case')
-class LitDocsStyleShowCase extends LitAnchor(LitElement) {
+class LitDocsStyleShowCase extends LitDocsAnchors(LitElement) {
 
     render() {
 
@@ -27,7 +27,7 @@ class LitDocsStyleShowCase extends LitAnchor(LitElement) {
 
 
 @customElement('lit-docs-style-usage')
-export class LitDocsStyleUsage extends LitAnchor(LitDocsStyle(LitElement)) {
+export class LitDocsStyleUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
 
     render() {
 
