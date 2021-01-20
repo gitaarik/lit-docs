@@ -7,6 +7,23 @@ import { litStyle } from 'lit-element-style';
 // `goToAnchor()` function can be used from any component.
 let ANCHORS = [];
 
+// The correction for the scroll distance. Useful for when you have a fixed
+// element overlaying the top of the page.
+export let ANCHOR_SCROLL_CORRECTION = 0;
+
+function scrollCorrection() {
+    if (window.innerWidth > 600) {
+        return 0;
+    } else {
+        return 50;
+    }
+}
+
+function scrollToAnchorExec(anchorData) {
+    const newScrollY = window.scrollY + anchorData.element.getBoundingClientRect().top - scrollCorrection();
+    window.scrollTo(0, newScrollY);
+}
+
 function getAnchorData(anchorName, returnList = false) {
 
     const conditionFunc = anchor => {
@@ -24,8 +41,7 @@ function getAnchorData(anchorName, returnList = false) {
 function scrollToAnchor(anchorName) {
     const anchorData = getAnchorData(anchorName);
     if (!anchorData) return;
-    const newScrollY = window.scrollY + anchorData.element.getBoundingClientRect().top;
-    window.scrollTo(0, newScrollY);
+    scrollToAnchorExec(anchorData);
 }
 
 export function goToAnchor(anchorName) {
