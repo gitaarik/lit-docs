@@ -20,30 +20,34 @@ export class CodeBlockUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
                 <code>&lt;lit-docs-code-block&gt;</code>.
             </p>
 
-            <h3>Example:</h3>
-
-            <p>
-                <lit-docs-code-block .code=${this.bigCodeDemo}></lit-docs-lit-docs-code-block>
-            </p>
-
-            <h3>Usage:</h3>
+            <h3>Usage</h3>
 
             <p>
                 <lit-docs-code-block .code=${this.bigCodeDemoSource}></lit-docs-code-block>
             </p>
 
-            <h2>Code block with filename</h2>
-
-            <h3>Example:</h3>
+            <h3>Output</h3>
 
             <p>
-                <lit-docs-code-block filename='my-function.js' .code=${this.bigCodeDemo}></lit-docs-code-block>
+                <showcase-box>
+                    <lit-docs-code-block .code=${this.bigCodeDemo}></lit-docs-lit-docs-code-block>
+                </showcase-box>
             </p>
 
-            <h3>Usage:</h3>
+            <h2>Code block with filename</h2>
+
+            <h3>Usage</h3>
 
             <p>
                 <lit-docs-code-block .code=${this.bigCodeWithFilenameDemoSource}></lit-docs-code-block>
+            </p>
+
+            <h3>Output</h3>
+
+            <p>
+                <showcase-box>
+                    <lit-docs-code-block filename='my-function.js' .code=${this.bigCodeDemo}></lit-docs-code-block>
+                </showcase-box>
             </p>
 
         `;

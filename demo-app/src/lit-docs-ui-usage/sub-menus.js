@@ -1,10 +1,10 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { LitDocsStyle } from '@app/lit-docs/index';
+import { LitDocsStyle, LitDocsAnchors } from '@app/lit-docs/index';
 import '@app/lit-docs/index';
 
 
 @customElement('sub-menus')
-export class SubMenus extends LitDocsStyle(LitElement) {
+export class SubMenus extends LitDocsAnchors(LitDocsStyle(LitElement)) {
 
     render() {
 

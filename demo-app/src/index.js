@@ -6,7 +6,7 @@ import './lit-docs-ui-usage/sub-menus.js';
 import './lit-docs-style-usage.js';
 import './lit-docs-anchors-usage.js';
 import './code-block-usage.js';
-import './demo-component/index.js';
+import './showcase-box-usage/index.js';
 
 
 @customElement('lit-docs-documentation')
@@ -25,12 +25,12 @@ export class LitDocsDocumentation extends LitElement {
         return [
             {
                 title: 'Introduction',
-                path: 'intro-page',
+                path: 'introduction',
                 template: html`<intro-page></intro-page>`
             },
             {
                 title: 'Menu and pages',
-                path: 'lit-docs-ui',
+                path: 'menu-and-pages',
                 template: html`<lit-docs-ui-usage></lit-docs-ui-usage>`,
                 submenu: [
                     {
@@ -42,23 +42,23 @@ export class LitDocsDocumentation extends LitElement {
             },
             {
                 title: 'Basic styling',
-                path: 'lit-docs-style',
+                path: 'basic-styling',
                 template: html`<lit-docs-style-usage></lit-docs-style-usage>`
             },
             {
                 title: 'Anchors',
-                path: 'lit-docs-anchors-usage',
+                path: 'anchors',
                 template: html`<lit-docs-anchors-usage></lit-docs-anchors-usage>`
             },
             {
                 title: 'Code blocks',
-                path: 'code-block',
+                path: 'code-blocks',
                 template: html`<code-block-usage></code-block-usage>`
             },
             {
-                title: 'Demo components',
-                path: 'demo-component',
-                template: html`<demo-component></demo-component>`
+                title: 'Showcase boxes',
+                path: 'showcase-boxes',
+                template: html`<showcase-box-usage></showcase-box-usage>`
             }
         ];
     }

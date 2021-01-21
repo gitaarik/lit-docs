@@ -72,7 +72,9 @@ class LitDocsAnchorsUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
             <h2>Output</h2>
 
             <p>
-                <my-documentation-page></my-documentation-page>
+                <showcase-box>
+                    <my-documentation-page></my-documentation-page>
+                </showcase-box>
             </p>
 
         `;
