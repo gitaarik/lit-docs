@@ -1,10 +1,10 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { LitDocsStyle } from '@app/lit-docs/index';
+import { LitDocsContent } from '@app/lit-docs/index';
 import '@app/lit-docs/index';
 
 
 @customElement('intro-page')
-export class IntroPage extends LitDocsStyle(LitElement) {
+export class IntroPage extends LitDocsContent(LitElement) {
 
     render() {
 

@@ -5,6 +5,7 @@ import './lit-docs-ui-usage/index.js';
 import './lit-docs-ui-usage/sub-menus.js';
 import './lit-docs-style-usage.js';
 import './lit-docs-anchors-usage.js';
+import './lit-docs-content-usage.js';
 import './code-block-usage.js';
 import './showcase-box-usage/index.js';
 
@@ -49,6 +50,11 @@ export class LitDocsDocumentation extends LitElement {
                 title: 'Anchors',
                 path: 'anchors',
                 template: html`<lit-docs-anchors-usage></lit-docs-anchors-usage>`
+            },
+            {
+                title: 'Content',
+                path: 'content',
+                template: html`<lit-docs-content-usage></lit-docs-content-usage>`
             },
             {
                 title: 'Code blocks',

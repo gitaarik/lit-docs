@@ -1,33 +1,7 @@
 import { customElement, LitElement, html } from 'lit-element';
 import { LitDocsStyle, LitDocsAnchors } from '@app/lit-docs/index';
 import '@app/lit-docs/index';
-
-
-@customElement('my-documentation-page')
-class MyDocumentationPage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
-
-    render() {
-
-        let someContent = [];
-
-        for (let i = 0; i < 5; i++) {
-            someContent.push(html`content<br />`);
-        }
-
-        return html`
-            <h1>My documentation page</h1>
-            <p>${someContent}</p>
-
-            <h2>A h2 heading</h2>
-            <p>${someContent}</p>
-
-            <h2>A h2 heading</h2>
-            <p>${someContent}</p>
-        `;
-
-    }
-
-}
+import './content-showcase-box.js';
 
 
 @customElement('lit-docs-anchors-usage')
@@ -72,9 +46,7 @@ class LitDocsAnchorsUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
             <h2>Output</h2>
 
             <p>
-                <showcase-box>
-                    <my-documentation-page></my-documentation-page>
-                </showcase-box>
+                <content-showcase-box></content-showcase-box>
             </p>
 
         `;
@@ -92,17 +64,23 @@ class MyDocumentationPage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
 
     render() {
 
-        const someContent = 'content\\n'.repeat(10);
+        let someContent = [];
+
+        for (let i = 0; i < 5; i++) {
+            someContent.push(html\`content<br />\`);
+        }
 
         return html\`
+
             <h1>My documentation page</h1>
             <p>\${someContent}</p>
 
             <h2>A h2 heading</h2>
             <p>\${someContent}</p>
 
-            <h2>A h2 heading</h2>
+            <h3>A h3 heading</h3>
             <p>\${someContent}</p>
+
         \`;
 
     }

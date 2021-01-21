@@ -1,10 +1,10 @@
 import { customElement, LitElement, html } from 'lit-element';
-import { LitDocsStyle, litDocsUiState, LitDocsAnchors } from '@app/lit-docs/index';
+import { litDocsUiState, LitDocsContent } from '@app/lit-docs/index';
 import '@app/lit-docs/index';
 
 
 @customElement('code-block-usage')
-export class CodeBlockUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
+export class CodeBlockUsage extends LitDocsContent(LitElement) {
 
     render() {
 
