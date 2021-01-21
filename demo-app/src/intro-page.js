@@ -29,7 +29,7 @@ export class IntroPage extends LitDocsContent(LitElement) {
             <h4>Installation</h4>
 
             <p>
-                <lit-docs-code-block .code=${'npm install lit-docs'}></lit-docs-lit-docs-code-block>
+                <code-block .code=${'npm install lit-docs'}></lit-docs-code-block>
             </p>
             
             <p>

@@ -40,7 +40,7 @@ class LitDocsAnchorsUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
             </p>
 
             <p>
-                <lit-docs-code-block .code=${this.litDocsAnchorsCode}></lit-docs-code-block>
+                <code-block .code=${this.litDocsAnchorsCode}></code-block>
             </p>
 
             <h2>Output</h2>

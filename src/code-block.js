@@ -8,8 +8,8 @@ hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
 
 
-@customElement('lit-docs-code-block')
-export class LitDocsCodeBlock extends LitElement {
+@customElement('code-block')
+export class CodeBlock extends LitElement {
 
     static get properties() {
         return {

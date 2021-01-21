@@ -17,20 +17,20 @@ export class CodeBlockUsage extends LitDocsContent(LitElement) {
                 <a href="lit-docs-style/" @click=${event => litDocsUiState.handlePageLinkClick(event)}>LitDocsStyle</a>,
                 the default <code>&lt;code&gt;</code> blocks are styled and are
                 good for tiny code snippets. For bigger code blocks, use
-                <code>&lt;lit-docs-code-block&gt;</code>.
+                <code>&lt;code-block&gt;</code>.
             </p>
 
             <h3>Usage</h3>
 
             <p>
-                <lit-docs-code-block .code=${this.bigCodeDemoSource}></lit-docs-code-block>
+                <code-block .code=${this.bigCodeDemoSource}></code-block>
             </p>
 
             <h3>Output</h3>
 
             <p>
                 <showcase-box>
-                    <lit-docs-code-block .code=${this.bigCodeDemo}></lit-docs-lit-docs-code-block>
+                    <code-block .code=${this.bigCodeDemo}></code-block>
                 </showcase-box>
             </p>
 
@@ -39,14 +39,14 @@ export class CodeBlockUsage extends LitDocsContent(LitElement) {
             <h3>Usage</h3>
 
             <p>
-                <lit-docs-code-block .code=${this.bigCodeWithFilenameDemoSource}></lit-docs-code-block>
+                <code-block .code=${this.bigCodeWithFilenameDemoSource}></code-block>
             </p>
 
             <h3>Output</h3>
 
             <p>
                 <showcase-box>
-                    <lit-docs-code-block filename='my-function.js' .code=${this.bigCodeDemo}></lit-docs-code-block>
+                    <code-block filename='my-function.js' .code=${this.bigCodeDemo}></code-block>
                 </showcase-box>
             </p>
 
@@ -68,7 +68,7 @@ const code = \`function() {
     console.log('hello!');
 }\`;
 
-html\`<lit-docs-code-block .code=\${code}></lit-docs-code-block>\`;`;
+html\`<code-block .code=\${code}></code-block>\`;`;
     }
 
     get bigCodeWithFilenameDemoSource() {
@@ -80,7 +80,7 @@ const code = \`function() {
     console.log('hello!');
 }\`;
 
-html\`<lit-docs-code-block filename='my-function.js' .code=\${code}></lit-docs-code-block>\`;`;
+html\`<code-block filename='my-function.js' .code=\${code}></code-block>\`;`;
 
     }
 

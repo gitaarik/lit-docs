@@ -18,7 +18,7 @@ export class SubMenus extends LitDocsContent(LitElement) {
             </p>
 
             <p>
-                <lit-docs-code-block .code=${this.subMenuCode}></lit-docs-code-block>
+                <code-block .code=${this.subMenuCode}></code-block>
             </p>
 
         `;

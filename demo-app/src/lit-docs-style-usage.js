@@ -34,7 +34,7 @@ export class LitDocsStyleUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) 
             <h2>Usage</h2>
 
             <p>
-                <lit-docs-code-block .code=${this.litDocsStyleCode}></lit-docs-code-block>
+                <code-block .code=${this.litDocsStyleCode}></code-block>
             </p>
 
             <h2>Output</h2>

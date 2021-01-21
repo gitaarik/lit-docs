@@ -22,7 +22,7 @@ export class LitDocsUiUsage extends LitDocsContent(LitElement) {
             <h2>Usage</h2>
 
             <p>
-                <lit-docs-code-block .code=${this.litDocsUiCode}></lit-docs-code-block>
+                <code-block .code=${this.litDocsUiCode}></code-block>
             </p>
 
         `;

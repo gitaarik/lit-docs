@@ -28,7 +28,7 @@ export class ShowcaseBoxUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
 
             <h2>Usage</h2>
 
-            <p><lit-docs-code-block .code=${this.demoShellCode}></lit-docs-code-block></p>
+            <p><code-block .code=${this.demoShellCode}></code-block></p>
 
             <h1>Multiple demo components</h1>
 
@@ -48,7 +48,7 @@ export class ShowcaseBoxUsage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
 
             <h2>Usage</h2>
 
-            <p><lit-docs-code-block .code=${this.demoComponentsWrapperCode}></lit-docs-code-block></p>
+            <p><code-block .code=${this.demoComponentsWrapperCode}></code-block></p>
 
         `;
 

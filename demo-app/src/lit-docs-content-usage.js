@@ -23,7 +23,7 @@ class LitDocsContentUsage extends LitDocsContent(LitElement) {
             <h2>Usage</h2>
 
             <p>
-                <lit-docs-code-block .code=${this.litDocsContentCode}></lit-docs-code-block>
+                <code-block .code=${this.litDocsContentCode}></code-block>
             </p>
 
             <h2>Output</h2>
