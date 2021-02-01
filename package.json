@@ -1,6 +1,6 @@
 {
   "name": "lit-docs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Utilities to create documentation for LitElement related projects.",
   "main": "src/index.js",
   "files": "src/*",
@@ -22,10 +22,10 @@
   },
   "homepage": "https://github.com/gitaarik/lit-docs#readme",
   "dependencies": {
-    "highlight.js": "^10.4.1",
-    "lit-element-style": "0.0.4"
+    "highlight.js": "^10.4.1"
   },
   "peerDependencies": {
-    "lit-element": "^2.0.0"
+    "lit-element": "^2.0.0",
+    "lit-element-style": "0.0.4"
   }
 }
