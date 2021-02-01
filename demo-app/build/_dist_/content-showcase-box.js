@@ -32,9 +32,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
 import { LitDocsContent } from './lit-docs/index.js';
-import './lit-docs/index.js';
-export let IntroPage = _decorate([customElement('intro-page')], function (_initialize, _LitDocsContent) {
-  class IntroPage extends _LitDocsContent {
+
+let ContentShowcaseBox = _decorate([customElement('content-showcase-box')], function (_initialize, _LitDocsContent) {
+  class ContentShowcaseBox extends _LitDocsContent {
     constructor(...args) {
       super(...args);
 
@@ -44,40 +44,31 @@ export let IntroPage = _decorate([customElement('intro-page')], function (_initi
   }
 
   return {
-    F: IntroPage,
+    F: ContentShowcaseBox,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
+        let someContent = [];
+
+        for (let i = 0; i < 5; i++) {
+          someContent.push(html`content<br />`);
+        }
+
         return html`
 
-            <h1>LitDocs</h1>
+            <showcase-box>
 
-            <p>
-                The documentation you're currently viewing is created with
-                LitDocs. This documentation describes how you can use LitDocs
-                to make pretty documentation for your own projects.
-            </p>
+                <h1>My documentation page</h1>
+                <p>${someContent}</p>
 
-            <p>
-                LitDocs is created in LitElement, and therefore it is suitable
-                to use for LitElement related projects. It makes it easy to
-                demonstrate your library, custom components, or anything you
-                made to use together with LitElement or Web Components in
-                general.
-            </p>
+                <h2>A h2 heading</h2>
+                <p>${someContent}</p>
 
-            <h4>Installation</h4>
+                <h3>A h3 heading</h3>
+                <p>${someContent}</p>
 
-            <p>
-                <code-block .code=${'npm install lit-docs'}></lit-docs-code-block>
-            </p>
-            
-            <p>
-                The package contains some web components, some mixins and some
-                functions. They are documented here. Use the navigation to
-                explore the utilities.
-            </p>
+            </showcase-box>
 
         `;
       }

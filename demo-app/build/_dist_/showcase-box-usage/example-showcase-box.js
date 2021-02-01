@@ -30,11 +30,11 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, html } from '../web_modules/lit-element.js';
-import { LitDocsContent } from './lit-docs/index.js';
-import './lit-docs/index.js';
-export let IntroPage = _decorate([customElement('intro-page')], function (_initialize, _LitDocsContent) {
-  class IntroPage extends _LitDocsContent {
+import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
+import { LitDocsStyle } from '../lit-docs/index.js';
+import '../lit-docs/index.js';
+export let ExampleShowcaseBox = _decorate([customElement('example-showcase-box')], function (_initialize, _LitDocsStyle) {
+  class ExampleShowcaseBox extends _LitDocsStyle {
     constructor(...args) {
       super(...args);
 
@@ -44,43 +44,21 @@ export let IntroPage = _decorate([customElement('intro-page')], function (_initi
   }
 
   return {
-    F: IntroPage,
+    F: ExampleShowcaseBox,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
-
-            <h1>LitDocs</h1>
-
-            <p>
-                The documentation you're currently viewing is created with
-                LitDocs. This documentation describes how you can use LitDocs
-                to make pretty documentation for your own projects.
-            </p>
-
-            <p>
-                LitDocs is created in LitElement, and therefore it is suitable
-                to use for LitElement related projects. It makes it easy to
-                demonstrate your library, custom components, or anything you
-                made to use together with LitElement or Web Components in
-                general.
-            </p>
-
-            <h4>Installation</h4>
-
-            <p>
-                <code-block .code=${'npm install lit-docs'}></lit-docs-code-block>
-            </p>
-            
-            <p>
-                The package contains some web components, some mixins and some
-                functions. They are documented here. Use the navigation to
-                explore the utilities.
-            </p>
-
+            <showcase-box>
+                <h2>Example showcase box</h2>
+                <p>
+                    This is an example of a showcase box. A showcase box can be
+                    used to demonstrate some functionality.
+                </p>
+            </showcase-box>
         `;
       }
     }]
   };
-}, LitDocsContent(LitElement));
+}, LitDocsStyle(LitElement));

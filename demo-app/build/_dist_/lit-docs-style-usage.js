@@ -31,10 +31,20 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
-import { LitDocsStyle } from './lit-docs/index.js';
+import { unsafeHTML } from '../web_modules/lit-html/directives/unsafe-html.js';
+import { LitDocsStyle, LitDocsAnchors } from './lit-docs/index.js';
 import './lit-docs/index.js';
-export let LitDocsStyleUsage = _decorate([customElement('lit-docs-style-usage')], function (_initialize, _LitDocsStyle) {
-  class LitDocsStyleUsage extends _LitDocsStyle {
+const litDocsStyleShowCaseCode = `
+            <h1>This s a &lt;h1&gt; tag</h1>
+            <h2>This s a &lt;h2&gt; tag</h2>
+            <h3>This s a &lt;h3&gt; tag</h3>
+            <h4>This s a &lt;h4&gt; tag</h4>
+            <h5>This s a &lt;h5&gt; tag</h5>
+            <h6>This s a &lt;h6&gt; tag</h6>
+            <p>This is a &lt;p&gt; tag. <code>this is some code</code>.</p>
+        `;
+export let LitDocsStyleUsage = _decorate([customElement('lit-docs-style-usage')], function (_initialize, _LitDocsAnchors) {
+  class LitDocsStyleUsage extends _LitDocsAnchors {
     constructor(...args) {
       super(...args);
 
@@ -51,7 +61,7 @@ export let LitDocsStyleUsage = _decorate([customElement('lit-docs-style-usage')]
       value: function render() {
         return html`
 
-            <h1>LitDocsStyle</h1>
+            <h1>Basic styling</h1>
 
             <p>
                 The <code>LitDocsStyle</code> mixin should be used to apply
@@ -63,7 +73,15 @@ export let LitDocsStyleUsage = _decorate([customElement('lit-docs-style-usage')]
             <h2>Usage</h2>
 
             <p>
-                <lit-docs-code-block .code=${this.litDocsStyleCode}></lit-docs-code-block>
+                <code-block .code=${this.litDocsStyleCode}></code-block>
+            </p>
+
+            <h2>Output</h2>
+
+            <p>
+                <showcase-box>
+                    ${unsafeHTML(litDocsStyleShowCaseCode)}
+                </showcase-box>
             </p>
 
         `;
@@ -80,14 +98,11 @@ import { LitDocsStyle } from 'lit-docs';
 export class MyComponent extends LitDocsStyle(LitElement) {
 
     render() {
-        return html\`
-            <h1>This h1 tag is styled by LitDocsStyle</h1>
-            <p>And this p tag also. <code>this is some code</code>.</p>
-        \`;
+        return html\`${litDocsStyleShowCaseCode}\`;
     }
 
 }`;
       }
     }]
   };
-}, LitDocsStyle(LitElement));
+}, LitDocsAnchors(LitDocsStyle(LitElement)));

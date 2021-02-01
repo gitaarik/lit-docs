@@ -1,4 +1,4 @@
-import { customElement, LitElement, html, css } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import xml from 'highlight.js/lib/languages/xml';
@@ -8,7 +8,6 @@ hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
 
 
-@customElement('code-block')
 export class CodeBlock extends LitElement {
 
     static get properties() {
@@ -150,3 +149,6 @@ export class CodeBlock extends LitElement {
     }
 
 }
+
+
+customElements.define('code-block', CodeBlock);

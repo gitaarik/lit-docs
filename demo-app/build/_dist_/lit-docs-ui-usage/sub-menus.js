@@ -31,10 +31,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
-import { LitDocsStyle } from '../lit-docs/index.js';
+import { LitDocsContent } from '../lit-docs/index.js';
 import '../lit-docs/index.js';
-export let SubMenus = _decorate([customElement('sub-menus')], function (_initialize, _LitDocsStyle) {
-  class SubMenus extends _LitDocsStyle {
+export let SubMenus = _decorate([customElement('sub-menus')], function (_initialize, _LitDocsContent) {
+  class SubMenus extends _LitDocsContent {
     constructor(...args) {
       super(...args);
 
@@ -51,7 +51,7 @@ export let SubMenus = _decorate([customElement('sub-menus')], function (_initial
       value: function render() {
         return html`
 
-            <h1>LitDocs UI submenus</h1>
+            <h1>Submenus</h1>
 
             <p>
                 You can add submenu items to your main menu items by using the
@@ -59,7 +59,7 @@ export let SubMenus = _decorate([customElement('sub-menus')], function (_initial
             </p>
 
             <p>
-                <lit-docs-code-block .code=${this.subMenuCode}></lit-docs-code-block>
+                <code-block .code=${this.subMenuCode}></code-block>
             </p>
 
         `;
@@ -133,4 +133,4 @@ export class MyDemoApp extends LitElement {
       }
     }]
   };
-}, LitDocsStyle(LitElement));
+}, LitDocsContent(LitElement));

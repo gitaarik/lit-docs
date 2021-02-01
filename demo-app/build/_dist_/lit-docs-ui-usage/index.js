@@ -31,10 +31,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
-import { LitDocsStyle } from '../lit-docs/index.js';
+import { LitDocsContent } from '../lit-docs/index.js';
 import '../lit-docs/index.js';
-export let LitDocsUiUsage = _decorate([customElement('lit-docs-ui-usage')], function (_initialize, _LitDocsStyle) {
-  class LitDocsUiUsage extends _LitDocsStyle {
+export let LitDocsUiUsage = _decorate([customElement('lit-docs-ui-usage')], function (_initialize, _LitDocsContent) {
+  class LitDocsUiUsage extends _LitDocsContent {
     constructor(...args) {
       super(...args);
 
@@ -51,7 +51,7 @@ export let LitDocsUiUsage = _decorate([customElement('lit-docs-ui-usage')], func
       value: function render() {
         return html`
 
-            <h1>LitDocs UI</h1>
+            <h1>Menu and pages</h1>
 
             <p>
                 The <code>&lt;lit-docs-ui&gt;</code> component creates the
@@ -63,7 +63,7 @@ export let LitDocsUiUsage = _decorate([customElement('lit-docs-ui-usage')], func
             <h2>Usage</h2>
 
             <p>
-                <lit-docs-code-block .code=${this.litDocsUiCode}></lit-docs-code-block>
+                <code-block .code=${this.litDocsUiCode}></code-block>
             </p>
 
         `;
@@ -93,13 +93,13 @@ export class MyDemoApp extends LitElement {
     get pages() {
         return [
             {
-                hash: 'page1',
                 title: 'Page 1',
+                path: 'page1',
                 template: html\`<demo-page-1></demo-page-1>\`
             },
             {
-                hash: 'page2',
                 title: 'Page 2',
+                path: 'page2',
                 template: html\`<demo-page-2></demo-page-2>\`
             }
         ];
@@ -109,4 +109,4 @@ export class MyDemoApp extends LitElement {
       }
     }]
   };
-}, LitDocsStyle(LitElement));
+}, LitDocsContent(LitElement));

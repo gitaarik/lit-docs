@@ -36,8 +36,10 @@ import './intro-page.js';
 import './lit-docs-ui-usage/index.js';
 import './lit-docs-ui-usage/sub-menus.js';
 import './lit-docs-style-usage.js';
+import './lit-docs-anchors-usage.js';
+import './lit-docs-content-usage.js';
 import './code-block-usage.js';
-import './demo-component/index.js';
+import './showcase-box-usage/index.js';
 export let LitDocsDocumentation = _decorate([customElement('lit-docs-documentation')], function (_initialize, _LitElement) {
   class LitDocsDocumentation extends _LitElement {
     constructor(...args) {
@@ -67,11 +69,11 @@ export let LitDocsDocumentation = _decorate([customElement('lit-docs-documentati
       value: function pages() {
         return [{
           title: 'Introduction',
-          path: 'intro-page',
+          path: 'introduction',
           template: html`<intro-page></intro-page>`
         }, {
-          title: 'LitDocs UI',
-          path: 'lit-docs-ui',
+          title: 'Menu and pages',
+          path: 'menu-and-pages',
           template: html`<lit-docs-ui-usage></lit-docs-ui-usage>`,
           submenu: [{
             title: 'Submenus',
@@ -79,17 +81,25 @@ export let LitDocsDocumentation = _decorate([customElement('lit-docs-documentati
             template: html`<sub-menus></sub-menus>`
           }]
         }, {
-          title: 'LitDocsStyle',
-          path: 'lit-docs-style',
+          title: 'Basic styling',
+          path: 'basic-styling',
           template: html`<lit-docs-style-usage></lit-docs-style-usage>`
         }, {
-          title: 'Code block',
-          path: 'code-block',
+          title: 'Anchors',
+          path: 'anchors',
+          template: html`<lit-docs-anchors-usage></lit-docs-anchors-usage>`
+        }, {
+          title: 'Content',
+          path: 'content',
+          template: html`<lit-docs-content-usage></lit-docs-content-usage>`
+        }, {
+          title: 'Code blocks',
+          path: 'code-blocks',
           template: html`<code-block-usage></code-block-usage>`
         }, {
-          title: 'Demo component',
-          path: 'demo-component',
-          template: html`<demo-component></demo-component>`
+          title: 'Showcase boxes',
+          path: 'showcase-boxes',
+          template: html`<showcase-box-usage></showcase-box-usage>`
         }];
       }
     }, {

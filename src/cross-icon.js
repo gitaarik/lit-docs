@@ -1,7 +1,6 @@
-import { customElement, LitElement, html, css } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 
-@customElement('cross-icon')
 class CrossIcon extends LitElement {
 
     render() {
@@ -35,3 +34,6 @@ class CrossIcon extends LitElement {
     }
 
 }
+
+
+customElements.define('cross-icon', CrossIcon)

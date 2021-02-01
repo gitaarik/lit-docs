@@ -1,15 +1,12 @@
-import { LitElement, html, css } from 'lit-element';
-
+import { LitElement, html, css } from '../../web_modules/lit-element.js';
 
 class ShowcaseBox extends LitElement {
+  render() {
+    return html`<slot></slot>`;
+  }
 
-    render() {
-        return html`<slot></slot>`;
-    }
-
-    static get styles() {
-
-        return css`
+  static get styles() {
+    return css`
             :host {
                 display: block;
                 padding: 15px;
@@ -17,10 +14,8 @@ class ShowcaseBox extends LitElement {
                 border: 1px #666 solid;
             }
         `;
-
-    }
+  }
 
 }
-
 
 customElements.define('showcase-box', ShowcaseBox);

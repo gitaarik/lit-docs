@@ -1,7 +1,6 @@
-import { customElement, LitElement, html, css } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 
-@customElement('hamburger-icon')
 class HamburgerIcon extends LitElement {
 
     render() {
@@ -35,3 +34,6 @@ class HamburgerIcon extends LitElement {
     }
 
 }
+
+
+customElements.define('hamburger-icon', HamburgerIcon)

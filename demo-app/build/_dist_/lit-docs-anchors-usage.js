@@ -31,10 +31,12 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
-import { LitDocsContent } from './lit-docs/index.js';
+import { LitDocsStyle, LitDocsAnchors } from './lit-docs/index.js';
 import './lit-docs/index.js';
-export let IntroPage = _decorate([customElement('intro-page')], function (_initialize, _LitDocsContent) {
-  class IntroPage extends _LitDocsContent {
+import './content-showcase-box.js';
+
+let LitDocsAnchorsUsage = _decorate([customElement('lit-docs-anchors-usage')], function (_initialize, _LitDocsAnchors) {
+  class LitDocsAnchorsUsage extends _LitDocsAnchors {
     constructor(...args) {
       super(...args);
 
@@ -44,43 +46,89 @@ export let IntroPage = _decorate([customElement('intro-page')], function (_initi
   }
 
   return {
-    F: IntroPage,
+    F: LitDocsAnchorsUsage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>LitDocs</h1>
+            <h1>Anchors</h1>
 
             <p>
-                The documentation you're currently viewing is created with
-                LitDocs. This documentation describes how you can use LitDocs
-                to make pretty documentation for your own projects.
+                With <code>LitDocsAnchors</code> you can automatically add
+                anchors to your heading elements (<code>&lt;h1&gt;</code>,
+                <code>&lt;h2&gt;</code> etc). When you click on an anchor, the
+                page scrolls to the anchor. Also the address in the locationbar
+                will get a hashtag with the anchor name added. This address can
+                be used to share a particular part of a documentation page.
+            </p>
+
+            <h2>Example</h2>
+
+            <p>
+                The heading text above get's an anchor icon when you hover over
+                it. When you click on the link icon, the page will scroll to
+                that part of the page. In the addressbar you'll see a hashtag:
+                <code>#example</code>. When you share this URL to someone else,
+                the page will open up at the scroll offset of that anchor.
+            </p>
+
+            <h2>Usage</h2>
+
+            <p>
+                Add the <code>LitDocsAnchors</code> mixin on your component.
+                This will automatically add the anchors to your heading tags:
             </p>
 
             <p>
-                LitDocs is created in LitElement, and therefore it is suitable
-                to use for LitElement related projects. It makes it easy to
-                demonstrate your library, custom components, or anything you
-                made to use together with LitElement or Web Components in
-                general.
+                <code-block .code=${this.litDocsAnchorsCode}></code-block>
             </p>
 
-            <h4>Installation</h4>
+            <h2>Output</h2>
 
             <p>
-                <code-block .code=${'npm install lit-docs'}></lit-docs-code-block>
-            </p>
-            
-            <p>
-                The package contains some web components, some mixins and some
-                functions. They are documented here. Use the navigation to
-                explore the utilities.
+                <content-showcase-box></content-showcase-box>
             </p>
 
         `;
       }
+    }, {
+      kind: "get",
+      key: "litDocsAnchorsCode",
+      value: function litDocsAnchorsCode() {
+        return `import { customElement, LitElement, html } from 'lit-element';
+import { LitDocsStyle, LitDocsAnchors } from 'lit-docs';
+
+
+@customElement('my-documentation-page')
+class MyDocumentationPage extends LitDocsAnchors(LitDocsStyle(LitElement)) {
+
+    render() {
+
+        let someContent = [];
+
+        for (let i = 0; i < 5; i++) {
+            someContent.push(html\`content<br />\`);
+        }
+
+        return html\`
+
+            <h1>My documentation page</h1>
+            <p>\${someContent}</p>
+
+            <h2>A h2 heading</h2>
+            <p>\${someContent}</p>
+
+            <h3>A h3 heading</h3>
+            <p>\${someContent}</p>
+
+        \`;
+
+    }
+
+}`;
+      }
     }]
   };
-}, LitDocsContent(LitElement));
+}, LitDocsAnchors(LitDocsStyle(LitElement)));

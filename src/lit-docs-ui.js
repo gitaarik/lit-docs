@@ -1,5 +1,5 @@
-import { LitState, stateVar, observeState } from 'lit-element-state';
-import { customElement, LitElement, property, html, css } from 'lit-element';
+import { LitState, observeState } from 'lit-element-state';
+import { LitElement, html, css } from 'lit-element';
 import { LitDocsStyle } from './lit-docs-style.js';
 import './hamburger-icon.js';
 import './cross-icon.js';
@@ -7,10 +7,14 @@ import './cross-icon.js';
 
 class LitDocsUiState extends LitState {
 
-    @stateVar() pages;
-    @stateVar() path;
-    @stateVar() page;
-    @stateVar() showMenu;
+    static get stateVars() {
+        return {
+            pages: {},
+            path: {},
+            page: {},
+            showMenu: {}
+        }
+    }
 
     setPath(path) {
         if (path[0] === '/') path = path.substr(1);
@@ -123,14 +127,20 @@ class LitDocsUiState extends LitState {
 export const litDocsUiState = new LitDocsUiState();
 
 
-@customElement('lit-docs-ui')
 class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
-    @property({type: String})
-    docsTitle = '';
+    static get properties() {
+        return {
+            docsTitle: {type: String},
+            pages: {type: Array}
+        }
+    }
 
-    @property({type: Array})
-    pages = [];
+    constructor() {
+        super();
+        this.docsTitle = '';
+        this.pages = [];
+    }
 
     connectedCallback() {
         super.connectedCallback();
@@ -432,3 +442,6 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
     }
 
 }
+
+
+customElements.define('lit-docs-ui', LitDocsUI)

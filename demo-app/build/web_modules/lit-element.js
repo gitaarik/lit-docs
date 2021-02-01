@@ -1,4 +1,6 @@
-export { L as LitElement, c as css, h as html } from './common/lit-element-7d33ee9a.js';
+export { h as html } from './common/lit-html-7f1eac0d.js';
+export { L as LitElement, c as css } from './common/lit-element-61c2e4f9.js';
+import './common/render-fe2ef6e3.js';
 
 /**
  * @license
@@ -51,72 +53,5 @@ const standardCustomElement = (tagName, descriptor) => {
 const customElement = (tagName) => (classOrDescriptor) => (typeof classOrDescriptor === 'function') ?
     legacyCustomElement(tagName, classOrDescriptor) :
     standardCustomElement(tagName, classOrDescriptor);
-const standardProperty = (options, element) => {
-    // When decorating an accessor, pass it through and add property metadata.
-    // Note, the `hasOwnProperty` check in `createProperty` ensures we don't
-    // stomp over the user's accessor.
-    if (element.kind === 'method' && element.descriptor &&
-        !('value' in element.descriptor)) {
-        return Object.assign(Object.assign({}, element), { finisher(clazz) {
-                clazz.createProperty(element.key, options);
-            } });
-    }
-    else {
-        // createProperty() takes care of defining the property, but we still
-        // must return some kind of descriptor, so return a descriptor for an
-        // unused prototype field. The finisher calls createProperty().
-        return {
-            kind: 'field',
-            key: Symbol(),
-            placement: 'own',
-            descriptor: {},
-            // When @babel/plugin-proposal-decorators implements initializers,
-            // do this instead of the initializer below. See:
-            // https://github.com/babel/babel/issues/9260 extras: [
-            //   {
-            //     kind: 'initializer',
-            //     placement: 'own',
-            //     initializer: descriptor.initializer,
-            //   }
-            // ],
-            initializer() {
-                if (typeof element.initializer === 'function') {
-                    this[element.key] = element.initializer.call(this);
-                }
-            },
-            finisher(clazz) {
-                clazz.createProperty(element.key, options);
-            }
-        };
-    }
-};
-const legacyProperty = (options, proto, name) => {
-    proto.constructor
-        .createProperty(name, options);
-};
-/**
- * A property decorator which creates a LitElement property which reflects a
- * corresponding attribute value. A [[`PropertyDeclaration`]] may optionally be
- * supplied to configure property features.
- *
- * This decorator should only be used for public fields. Private or protected
- * fields should use the [[`internalProperty`]] decorator.
- *
- * @example
- * ```ts
- * class MyElement {
- *   @property({ type: Boolean })
- *   clicked = false;
- * }
- * ```
- * @category Decorator
- * @ExportDecoratedItems
- */
-function property(options) {
-    // tslint:disable-next-line:no-any decorator
-    return (protoOrDescriptor, name) => (name !== undefined) ?
-        legacyProperty(options, protoOrDescriptor, name) :
-        standardProperty(options, protoOrDescriptor);
-}
 
-export { customElement, property };
+export { customElement };

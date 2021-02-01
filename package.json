@@ -23,6 +23,9 @@
   "homepage": "https://github.com/gitaarik/lit-docs#readme",
   "dependencies": {
     "highlight.js": "^10.4.1",
-    "lit-element-style": "0.0.1"
+    "lit-element-style": "0.0.4"
+  },
+  "peerDependencies": {
+    "lit-element": "^2.0.0"
   }
 }
