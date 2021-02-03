@@ -1,4 +1,4 @@
-import { LitState, observeState } from 'lit-element-state';
+import { LitState, stateVar, observeState } from 'lit-element-state';
 import { LitElement, html, css } from 'lit-element';
 import { LitDocsStyle } from './lit-docs-style.js';
 import './hamburger-icon.js';
@@ -7,14 +7,22 @@ import './cross-icon.js';
 
 class LitDocsUiState extends LitState {
 
-    static get stateVars() {
+    constructor() {
+        super();
+        this.pages = stateVar();
+        this.path = stateVar();
+        this.page = stateVar();
+        this.showMenu = stateVar();
+    }
+
+    /*static get stateVars() {
         return {
             pages: {},
             path: {},
             page: {},
             showMenu: {}
         }
-    }
+    }*/
 
     setPath(path) {
         if (path[0] === '/') path = path.substr(1);
@@ -287,7 +295,6 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                 box-sizing: border-box;
                 --left-sidebar-width: 250px;
                 --header-height: 45px;
-                --min-article-width: 300px;
             }
 
             #layout {
@@ -362,8 +369,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
             }
 
             article {
-                flex-grow: 0;
-                min-width: var(--min-article-width);
+                flex-grow: 1;
             }
 
             #articleContent {
