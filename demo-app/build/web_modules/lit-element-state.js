@@ -1,3 +1,7 @@
+import './common/lit-html-7f1eac0d.js';
+import './common/lit-element-61c2e4f9.js';
+import './common/render-fe2ef6e3.js';
+
 const observeState = superclass => class extends superclass {
 
     constructor() {
@@ -42,11 +46,45 @@ const observeState = superclass => class extends superclass {
 
 class LitState {
 
-    static stateVars = {};
-
     constructor() {
+
+        this._stateVars = [];
         this._observers = [];
-        this._initStateVars();
+
+        return new Proxy(this, {
+
+            set: (obj, key, value) => {
+
+                if (this._isStateVar(key)) {
+                    const return_value = obj[key]._handleSet(value);
+                    if (return_value !== undefined) {
+                        return return_value;
+                    }
+                } else if (value instanceof BaseStateVar) {
+                    this._stateVars.push(key);
+                    value._recordRead = () => this._recordRead(key);
+                    value._notifyChange = () => this._notifyChange(key);
+                    obj[key] = value;
+                } else {
+                    obj[key] = value;
+                }
+
+                return true;
+
+            },
+
+            get: (obj, key) => {
+
+                if (obj._isStateVar(key)) {
+                    return obj[key]._handleGet();
+                }
+
+                return obj[key];
+
+            }
+
+        });
+
     }
 
     addObserver(observer, keys) {
@@ -57,41 +95,8 @@ class LitState {
         this._observers = this._observers.filter(observerObj => observerObj.observer !== observer);
     }
 
-    _initStateVars() {
-        for (let [key, options] of Object.entries(this.constructor.stateVars)) {
-            this._initStateVar(key, options);
-        }
-    }
-
-    _initStateVar(key, options) {
-
-        if (!options.handler) {
-            options.handler = StateVar;
-        }
-
-        const stateVar = new options.handler({
-            options: options,
-            recordRead: () => this._recordRead(key),
-            notifyChange: () => this._notifyChange(key)
-        });
-
-        Object.defineProperty(
-            this,
-            key,
-            {
-                get() {
-                    return stateVar.get();
-                },
-                set(value) {
-                    if (stateVar.shouldSetValue(value)) {
-                        stateVar.set(value);
-                    }
-                },
-                configurable: true,
-                enumerable: true
-            }
-        );
-
+    _isStateVar(key) {
+        return this._stateVars.includes(key);
     }
 
     _recordRead(key) {
@@ -108,33 +113,36 @@ class LitState {
 }
 
 
-class StateVar {
+class BaseStateVar {
+    _handleGet() {}
+    _handleSet(value) {}
+}
 
-    constructor(args) {
-        this.options = args.options; // The options given in the `stateVar` declaration
-        this.recordRead = args.recordRead; // Callback to indicate the `stateVar` is read
-        this.notifyChange = args.notifyChange; // Callback to indicate the `stateVar` value has changed
-        this.value = undefined; // The initial value
+
+class StateVar extends BaseStateVar {
+
+    constructor(initialValue) {
+        super();
+        this._value = initialValue;
     }
 
-    // Called when the `stateVar` on the `State` class is read.
-    get() {
-        this.recordRead();
-        return this.value;
+    _handleGet() {
+        this._recordRead();
+        return this._value;
     }
 
-    // Returns whether the given `value` should be passed on to the `set()`
-    // method. Can be used for validation and/or optimization.
-    shouldSetValue(value) {
-        return this.value !== value;
+    _handleSet(value) {
+        if (this._value !== value) {
+            this._value = value;
+            this._notifyChange();
+        }
     }
 
-    // Called when the `stateVar` on the `State` class is set.
-    set(value) {
-        this.value = value;
-        this.notifyChange();
-    }
+}
 
+
+function stateVar(defaultValue) {
+    return new StateVar(defaultValue);
 }
 
 
@@ -165,4 +173,4 @@ class StateRecorder {
 
 const stateRecorder = new StateRecorder();
 
-export { LitState, observeState };
+export { LitState, observeState, stateVar };

@@ -31,10 +31,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../../web_modules/lit-element.js';
-import { LitDocsContent } from '../lit-docs/index.js';
+import { litDocsUiState, LitDocsContent } from '../lit-docs/index.js';
 import '../lit-docs/index.js';
-export let SubMenus = _decorate([customElement('sub-menus')], function (_initialize, _LitDocsContent) {
-  class SubMenus extends _LitDocsContent {
+export let CategoryUsage = _decorate([customElement('category-usage')], function (_initialize, _LitDocsContent) {
+  class CategoryUsage extends _LitDocsContent {
     constructor(...args) {
       super(...args);
 
@@ -44,38 +44,37 @@ export let SubMenus = _decorate([customElement('sub-menus')], function (_initial
   }
 
   return {
-    F: SubMenus,
+    F: CategoryUsage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>Submenus</h1>
+            <h1>Categories</h1>
 
             <p>
-                You can add submenu items to your main menu items by using the
-                <code>submenu</code> key in the page object:
+                You can create a category in the menu that is not clickable.
+                Just omit the <code>template</code> key. And put the items of
+                the category in a <code>submenu</code>.
             </p>
 
+            <h3>Usage</h3>
+
             <p>
-                <code-block .code=${this.subMenuCode}></code-block>
+                <code-block .code=${this.categoryCode}></code-block>
             </p>
 
         `;
       }
     }, {
       kind: "get",
-      key: "subMenuCode",
-      value: function subMenuCode() {
+      key: "categoryCode",
+      value: function categoryCode() {
         return `import { customElement, LitElement, html } from 'lit-element';
 import 'lit-docs';
-import './demo-page1.js';
-import './demo-page1-subpage1.js';
-import './demo-page1-subpage2.js';
-import './demo-page2.js';
-import './demo-page2-subpage1.js';
-import './demo-page2-subpage2.js';
+import './demo-page-1.js';
+import './demo-page-2.js';
 
 
 @customElement('my-demo-app')
@@ -93,39 +92,21 @@ export class MyDemoApp extends LitElement {
     get pages() {
         return [
             {
-                title: 'Page 1',
-                path: 'page1',
-                template: html\`<demo-page1></demo-page1>\`,
+                title: 'My category',
+                path: 'my-category'
                 submenu: [
                     {
-                        title: 'Sub Page 1',
+                        title: 'Page 1',
                         path: 'page1',
-                        template: html\`<demo-page1-subpage1></demo-page1-subpage1>\`
+                        template: html\`<demo-page-1></demo-page-1>\`
                     },
                     {
-                        title: 'Sub Page 2',
+                        title: 'Page 2',
                         path: 'page2',
-                        template: html\`<demo-page1-subpage2></demo-page1-subpage2>\`
+                        template: html\`<demo-page-2></demo-page-2>\`
                     }
                 ]
             },
-            {
-                title: 'Page 2',
-                path: 'page2',
-                template: html\`<demo-page2></demo-page2>\`,
-                submenu: [
-                    {
-                        title: 'Sub Page 1',
-                        path: 'page1',
-                        template: html\`<demo-page2-subpage1></demo-page2-subpage1>\`
-                    },
-                    {
-                        title: 'Sub Page 2',
-                        path: 'page2',
-                        template: html\`<demo-page2-subpage2></demo-page2-subpage2>\`
-                    }
-                ]
-            }
         ];
     }
 

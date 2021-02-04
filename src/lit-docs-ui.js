@@ -203,7 +203,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                         <header>
                             <a href="/" @click=${event => litDocsUiState.handlePageLinkClick(event)}>${this.docsTitle}</a>
                         </header>
-                        <nav>${this.navTree(this.pages)}</nav>
+                        <nav class="mainMenu menu">${this.navTree(this.pages)}</nav>
                     </div>
 
                     <div id="hamburgerMenu" @click=${this.handleHamburgerMenuClick}>
@@ -240,18 +240,49 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
             pageNo++;
 
+            const getMenuItem = () => {
+
+                if (page.template) {
+
+                    return html`
+                        <a
+                            class="menuItem menuItemLink"
+                            nav-level=${level}
+                            href=${path}
+                            @click=${event => litDocsUiState.handlePageLinkClick(event)}
+                            ?active=${page === litDocsUiState.page}
+                        >
+                            ${page.title}
+                        </a>
+                    `;
+
+                } else {
+
+                    return html`
+                        <span
+                            class="menuItem menuItemCategory"
+                            nav-level=${level}
+                        >
+                            ${page.title}
+                        </span>
+                    `;
+                }
+
+            };
+
+            const getSubMenu = () => {
+                if (page.submenu) {
+                    return html`
+                        <div class="menuItemSubmenu menu">
+                            ${this.navTree(page.submenu, level + 1, pageNo + '.', path)}
+                        </div>
+                    `;
+                }
+            }
+
             return html`
-                <a
-                    class="navItem"
-                    nav-level=${level}
-                    href=${path}
-                    @click=${event => litDocsUiState.handlePageLinkClick(event)}
-                    ?active=${page === litDocsUiState.page}
-                >
-                    <span class="navItemNo">${pageNoPrefix + pageNo}</span>
-                    <span>${page.title}</span>
-                </a>
-                ${this.navTree(page.submenu, level + 1, pageNo + '.', path)}
+                ${getMenuItem()}
+                ${getSubMenu()}
             `;
 
         });
@@ -326,46 +357,69 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                 font-size: 20px;
             }
 
-            nav {
-                display: flex;
-                flex-direction: column;
+            .mainMenu {
                 max-height: calc(100vh - var(--header-height));
                 overflow: auto;
             }
 
-            .navItem {
+            .menu {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .menuItem {
                 display: inline-flex;
                 align-items: center;
                 margin: 0;
-                padding: 10px;
-                border-bottom: 1px #999 solid;
-                background: #C7C3BB;
+                padding: 8px;
+                border: solid transparent;
+                border-width: 1px 0;
                 text-align: left;
                 text-decoration: none;
+            }
+
+            .menuItemCategory {
+                font-weight: bold;
+                color: #384147;
+                margin-top: 5px;
+                xpadding-top: 15px;
+                xpadding-bottom: 15px;
+            }
+
+            .menuItemSubmenu {
+                margin: 5px 0;
+            }
+
+            .menuItemLink {
+                xbackground: #C7C3BB;
+            }
+
+            .menuItemLink {
                 cursor: pointer;
             }
 
-            .navItem:hover,
-            .navItem[active] {
+            .menuItem[active],
+            .menuItemLink:hover {
                 background: #DAD7D2;
+                border-color: #999;
             }
 
-            .navItem[nav-level="1"] {
-                margin-left: 15px;
+            .menuItem[nav-level="1"] {
+                padding-left: 25px;
             }
 
-            .navItem[nav-level="2"] {
-                margin-left: 30px;
+            .menuItem[nav-level="2"] {
+                padding-left: 40px;
             }
 
-            .navItem[nav-level="3"] {
-                margin-left: 45px;
+            .menuItem[nav-level="3"] {
+                padding-left: 55px;
             }
 
-            .navItemNo {
-                font-size: 12px;
+            .menuItemNo {
+                font-size: 11px;
                 opacity: 0.6;
-                margin: 2px 8px 0 0;
+                margin: 2px 5px 0 0;
             }
 
             article {

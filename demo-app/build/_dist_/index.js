@@ -35,6 +35,7 @@ import './lit-docs/index.js';
 import './intro-page.js';
 import './lit-docs-ui-usage/index.js';
 import './lit-docs-ui-usage/sub-menus.js';
+import './lit-docs-ui-usage/category-usage.js';
 import './lit-docs-style-usage.js';
 import './lit-docs-anchors-usage.js';
 import './lit-docs-content-usage.js';
@@ -79,6 +80,14 @@ export let LitDocsDocumentation = _decorate([customElement('lit-docs-documentati
             title: 'Submenus',
             path: 'sub-menus',
             template: html`<sub-menus></sub-menus>`
+          }, {
+            title: 'Category',
+            path: 'category',
+            submenu: [{
+              title: 'How to',
+              path: 'category-menu-item-usage',
+              template: html`<category-usage></category-usage>`
+            }]
           }]
         }, {
           title: 'Basic styling',

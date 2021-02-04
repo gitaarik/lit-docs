@@ -84,7 +84,7 @@ export class MyDemoApp extends LitElement {
     render() {
         return html\`
             <lit-docs-ui
-                .docsTitle=\${'My Lib'}
+                docsTitle="My Lib"
                 .pages=\${this.pages}
             ></lit-docs-ui>
         \`;

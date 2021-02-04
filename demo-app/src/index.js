@@ -3,6 +3,7 @@ import '@app/lit-docs/index';
 import './intro-page.js';
 import './lit-docs-ui-usage/index.js';
 import './lit-docs-ui-usage/sub-menus.js';
+import './lit-docs-ui-usage/category-usage.js';
 import './lit-docs-style-usage.js';
 import './lit-docs-anchors-usage.js';
 import './lit-docs-content-usage.js';
@@ -38,6 +39,17 @@ export class LitDocsDocumentation extends LitElement {
                         title: 'Submenus',
                         path: 'sub-menus',
                         template: html`<sub-menus></sub-menus>`
+                    },
+                    {
+                        title: 'Category',
+                        path: 'category',
+                        submenu: [
+                            {
+                                title: 'How to',
+                                path: 'category-menu-item-usage',
+                                template: html`<category-usage></category-usage>`
+                            }
+                        ]
                     }
                 ]
             },
