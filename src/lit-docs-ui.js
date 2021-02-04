@@ -340,7 +340,6 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
             }
 
             #menuSidebarContent {
-                position: fixed;
                 width: 100%;
                 max-width: var(--left-sidebar-width);
             }
@@ -360,11 +359,6 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                 font-weight: 600;
                 text-decoration: none;
                 font-size: 20px;
-            }
-
-            .mainMenu {
-                max-height: calc(100vh - var(--header-height));
-                overflow: auto;
             }
 
             .menu {
@@ -429,6 +423,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
             article {
                 flex-grow: 1;
+                overflow-x: auto;
                 max-width: 100%;
             }
 
@@ -459,6 +454,15 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
             }
 
             @media screen and (max-width: 600px) {
+
+                #menuSidebarContent {
+                    position: fixed;
+                }
+
+                .mainMenu {
+                    overflow: auto;
+                    max-height: calc(100vh - var(--header-height));
+                }
 
                 #layout[show-menu] #menu {
                     display: block;
