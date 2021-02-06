@@ -14,7 +14,7 @@ export class CodeBlockUsage extends LitDocsContent(LitElement) {
 
             <p>
                 Use code blocks to demonstrate code. When using
-                <a href="basic-styling/" @click=${event => litDocsUiState.handlePageLinkClick(event)}>LitDocsStyle</a>,
+                <lit-docs-link href="basic-styling/">LitDocsStyle</lit-docs-link>,
                 the default <code>&lt;code&gt;</code> blocks are styled and are
                 good for tiny code snippets. For bigger code blocks, use
                 <code>&lt;code-block&gt;</code>.

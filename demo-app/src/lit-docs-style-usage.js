@@ -11,7 +11,8 @@ const litDocsStyleShowCaseCode = `
             <h4>This s a &lt;h4&gt; tag</h4>
             <h5>This s a &lt;h5&gt; tag</h5>
             <h6>This s a &lt;h6&gt; tag</h6>
-            <p>This is a &lt;p&gt; tag. <code>this is some code</code>.</p>
+            <p>This is a &lt;p&gt; tag.</p>
+            <code>this is some code</code>
         `;
 
 
