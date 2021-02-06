@@ -5,7 +5,16 @@ import { litDocsUiState } from './lit-docs-ui.js';
 
 class LitDocsLink extends LitDocsStyle(LitElement) {
 
-    @property() href = '';
+    static get properties() {
+        return {
+            href: {type: String}
+        };
+    }
+
+    constructor() {
+        super();
+        this.href = '';
+    }
 
     render() {
         // Don't leave no spaces in the template, because the host is an inline
