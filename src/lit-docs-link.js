@@ -1,9 +1,8 @@
-import { customElement, LitElement, property, html, css } from 'lit-element';
+import { LitElement, property, html, css } from 'lit-element';
 import { LitDocsStyle } from './lit-docs-style.js';
 import { litDocsUiState } from './lit-docs-ui.js';
 
 
-@customElement('lit-docs-link')
 class LitDocsLink extends LitDocsStyle(LitElement) {
 
     @property() href = '';
@@ -25,3 +24,6 @@ class LitDocsLink extends LitDocsStyle(LitElement) {
     }
 
 }
+
+
+customElements.define('lit-docs-link', LitDocsLink);
