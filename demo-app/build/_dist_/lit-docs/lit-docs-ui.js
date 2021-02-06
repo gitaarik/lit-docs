@@ -223,6 +223,10 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
       let path = pathPrefix + page.path;
       if (path[-1] !== '/') path += '/';
       pageNo++;
+      const navContent = html`
+                <span class="menuItemNo">${pageNoPrefix + pageNo}</span>
+                <span>${page.title}</span>
+            `;
 
       const getMenuItem = () => {
         if (page.template) {
@@ -234,7 +238,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                             @click=${event => litDocsUiState.handlePageLinkClick(event)}
                             ?active=${page === litDocsUiState.page}
                         >
-                            ${page.title}
+                            ${navContent}
                         </a>
                     `;
         } else {
@@ -243,7 +247,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                             class="menuItem menuItemCategory"
                             nav-level=${level}
                         >
-                            ${page.title}
+                            ${navContent}
                         </span>
                     `;
         }
@@ -253,7 +257,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
         if (page.submenu) {
           return html`
                         <div class="menuItemSubmenu menu">
-                            ${this.navTree(page.submenu, level + 1, pageNo + '.', path)}
+                            ${this.navTree(page.submenu, level + 1, pageNoPrefix + pageNo + '.', path)}
                         </div>
                     `;
         }
@@ -307,7 +311,6 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
             }
 
             #menuSidebarContent {
-                position: fixed;
                 width: 100%;
                 max-width: var(--left-sidebar-width);
             }
@@ -329,11 +332,6 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                 font-size: 20px;
             }
 
-            .mainMenu {
-                max-height: calc(100vh - var(--header-height));
-                overflow: auto;
-            }
-
             .menu {
                 display: flex;
                 flex-direction: column;
@@ -344,8 +342,8 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                 align-items: center;
                 margin: 0;
                 padding: 8px;
-                border: solid transparent;
-                border-width: 1px 0;
+                border-bottom: 1px solid #999;
+                xborder-width: 1px 0;
                 text-align: left;
                 text-decoration: none;
             }
@@ -353,13 +351,13 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
             .menuItemCategory {
                 font-weight: bold;
                 color: #384147;
-                margin-top: 5px;
+                xmargin-top: 5px;
                 xpadding-top: 15px;
                 xpadding-bottom: 15px;
             }
 
             .menuItemSubmenu {
-                margin: 5px 0;
+                xmargin: 5px 0;
             }
 
             .menuItemLink {
@@ -391,11 +389,13 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
             .menuItemNo {
                 font-size: 11px;
                 opacity: 0.6;
-                margin: 2px 5px 0 0;
+                margin: 1px 7px 0 0;
             }
 
             article {
                 flex-grow: 1;
+                overflow-x: auto;
+                max-width: 100%;
             }
 
             #articleContent {
@@ -425,6 +425,15 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
             }
 
             @media screen and (max-width: 600px) {
+
+                #menuSidebarContent {
+                    position: fixed;
+                }
+
+                .mainMenu {
+                    overflow: auto;
+                    max-height: calc(100vh - var(--header-height));
+                }
 
                 #layout[show-menu] #menu {
                     display: block;

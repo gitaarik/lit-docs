@@ -31,10 +31,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
-import { litDocsUiState, LitDocsContent } from './lit-docs/index.js';
+import { LitDocsContent } from './lit-docs/index.js';
 import './lit-docs/index.js';
-export let CodeBlockUsage = _decorate([customElement('code-block-usage')], function (_initialize, _LitDocsContent) {
-  class CodeBlockUsage extends _LitDocsContent {
+export let LitDocsLinksUsage = _decorate([customElement('lit-docs-links-usage')], function (_initialize, _LitDocsContent) {
+  class LitDocsLinksUsage extends _LitDocsContent {
     constructor(...args) {
       super(...args);
 
@@ -44,50 +44,36 @@ export let CodeBlockUsage = _decorate([customElement('code-block-usage')], funct
   }
 
   return {
-    F: CodeBlockUsage,
+    F: LitDocsLinksUsage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>Code block</h1>
+            <h1>Links</h1>
 
             <p>
-                Use code blocks to demonstrate code. When using
-                <lit-docs-link href="basic-styling/">LitDocsStyle</lit-docs-link>,
-                the default <code>&lt;code&gt;</code> blocks are styled and are
-                good for tiny code snippets. For bigger code blocks, use
-                <code>&lt;code-block&gt;</code>.
+                For internal links to other docs pages, use the
+                <code>&lt;lit-docs-link&gt;</code> component. This ensures that
+                the link click is handled by the router of LitDocsUI.
+                Clicks with Ctrl/Shift to open in new tab/window also keeps
+                working.
             </p>
 
-            <h3>Usage</h3>
+            <h2>Usage</h2>
 
             <p>
-                <code-block .code=${this.bigCodeDemoSource}></code-block>
+                <code-block .code=${this.litDocsLinkCode}></code-block>
             </p>
 
-            <h3>Output</h3>
+            <h2>Output</h2>
 
             <p>
                 <showcase-box>
-                    <code-block .code=${this.bigCodeDemo}></code-block>
-                </showcase-box>
-            </p>
-
-            <h2>Code block with filename</h2>
-
-            <h3>Usage</h3>
-
-            <p>
-                <code-block .code=${this.bigCodeWithFilenameDemoSource}></code-block>
-            </p>
-
-            <h3>Output</h3>
-
-            <p>
-                <showcase-box>
-                    <code-block filename='my-function.js' .code=${this.bigCodeDemo}></code-block>
+                    <lit-docs-link href="components/links-usage/the-other-page/">
+                        Go to the other page
+                    </lit-docs-link>
                 </showcase-box>
             </p>
 
@@ -95,37 +81,9 @@ export let CodeBlockUsage = _decorate([customElement('code-block-usage')], funct
       }
     }, {
       kind: "get",
-      key: "bigCodeDemo",
-      value: function bigCodeDemo() {
-        return `function() {
-    console.log('hello!');
-}`;
-      }
-    }, {
-      kind: "get",
-      key: "bigCodeDemoSource",
-      value: function bigCodeDemoSource() {
-        return `import { html } from 'lit-element';
-import 'lit-docs';
-
-const code = \`function() {
-    console.log('hello!');
-}\`;
-
-html\`<code-block .code=\${code}></code-block>\`;`;
-      }
-    }, {
-      kind: "get",
-      key: "bigCodeWithFilenameDemoSource",
-      value: function bigCodeWithFilenameDemoSource() {
-        return `import { html } from 'lit-element';
-import 'lit-docs';
-
-const code = \`function() {
-    console.log('hello!');
-}\`;
-
-html\`<code-block filename='my-function.js' .code=\${code}></code-block>\`;`;
+      key: "litDocsLinkCode",
+      value: function litDocsLinkCode() {
+        return `<lit-docs-link href="other-page/">Go to the other page</lit-docs-link>`;
       }
     }]
   };

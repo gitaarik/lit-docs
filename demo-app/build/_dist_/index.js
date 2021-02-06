@@ -41,6 +41,8 @@ import './lit-docs-anchors-usage.js';
 import './lit-docs-content-usage.js';
 import './code-block-usage.js';
 import './showcase-box-usage/index.js';
+import './lit-docs-links-usage.js';
+import './the-other-page.js';
 export let LitDocsDocumentation = _decorate([customElement('lit-docs-documentation')], function (_initialize, _LitElement) {
   class LitDocsDocumentation extends _LitElement {
     constructor(...args) {
@@ -90,25 +92,42 @@ export let LitDocsDocumentation = _decorate([customElement('lit-docs-documentati
             }]
           }]
         }, {
-          title: 'Basic styling',
-          path: 'basic-styling',
-          template: html`<lit-docs-style-usage></lit-docs-style-usage>`
+          title: 'Page content',
+          path: 'page-content',
+          submenu: [{
+            title: 'Basic styling',
+            path: 'basic-styling',
+            template: html`<lit-docs-style-usage></lit-docs-style-usage>`
+          }, {
+            title: 'Anchors',
+            path: 'anchors',
+            template: html`<lit-docs-anchors-usage></lit-docs-anchors-usage>`
+          }, {
+            title: 'Content',
+            path: 'content',
+            template: html`<lit-docs-content-usage></lit-docs-content-usage>`
+          }]
         }, {
-          title: 'Anchors',
-          path: 'anchors',
-          template: html`<lit-docs-anchors-usage></lit-docs-anchors-usage>`
-        }, {
-          title: 'Content',
-          path: 'content',
-          template: html`<lit-docs-content-usage></lit-docs-content-usage>`
-        }, {
-          title: 'Code blocks',
-          path: 'code-blocks',
-          template: html`<code-block-usage></code-block-usage>`
-        }, {
-          title: 'Showcase boxes',
-          path: 'showcase-boxes',
-          template: html`<showcase-box-usage></showcase-box-usage>`
+          title: 'Components',
+          path: 'components',
+          submenu: [{
+            title: 'Code blocks',
+            path: 'code-blocks',
+            template: html`<code-block-usage></code-block-usage>`
+          }, {
+            title: 'Showcase boxes',
+            path: 'showcase-boxes',
+            template: html`<showcase-box-usage></showcase-box-usage>`
+          }, {
+            title: 'Links',
+            path: 'links-usage',
+            template: html`<lit-docs-links-usage></lit-docs-links-usage>`,
+            submenu: [{
+              title: 'The other page',
+              path: 'the-other-page',
+              template: html`<the-other-page></the-other-page>`
+            }]
+          }]
         }];
       }
     }, {

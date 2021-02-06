@@ -31,10 +31,10 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { customElement, LitElement, html } from '../web_modules/lit-element.js';
-import { litDocsUiState, LitDocsContent } from './lit-docs/index.js';
+import { LitDocsContent } from './lit-docs/index.js';
 import './lit-docs/index.js';
-export let CodeBlockUsage = _decorate([customElement('code-block-usage')], function (_initialize, _LitDocsContent) {
-  class CodeBlockUsage extends _LitDocsContent {
+export let TheOtherPage = _decorate([customElement('the-other-page')], function (_initialize, _LitDocsContent) {
+  class TheOtherPage extends _LitDocsContent {
     constructor(...args) {
       super(...args);
 
@@ -44,88 +44,21 @@ export let CodeBlockUsage = _decorate([customElement('code-block-usage')], funct
   }
 
   return {
-    F: CodeBlockUsage,
+    F: TheOtherPage,
     d: [{
       kind: "method",
       key: "render",
       value: function render() {
         return html`
 
-            <h1>Code block</h1>
+            <h1>The other page</h1>
 
             <p>
-                Use code blocks to demonstrate code. When using
-                <lit-docs-link href="basic-styling/">LitDocsStyle</lit-docs-link>,
-                the default <code>&lt;code&gt;</code> blocks are styled and are
-                good for tiny code snippets. For bigger code blocks, use
-                <code>&lt;code-block&gt;</code>.
-            </p>
-
-            <h3>Usage</h3>
-
-            <p>
-                <code-block .code=${this.bigCodeDemoSource}></code-block>
-            </p>
-
-            <h3>Output</h3>
-
-            <p>
-                <showcase-box>
-                    <code-block .code=${this.bigCodeDemo}></code-block>
-                </showcase-box>
-            </p>
-
-            <h2>Code block with filename</h2>
-
-            <h3>Usage</h3>
-
-            <p>
-                <code-block .code=${this.bigCodeWithFilenameDemoSource}></code-block>
-            </p>
-
-            <h3>Output</h3>
-
-            <p>
-                <showcase-box>
-                    <code-block filename='my-function.js' .code=${this.bigCodeDemo}></code-block>
-                </showcase-box>
+                This is the other page.
+                <lit-docs-link href="components/links-usage/">Go back</lit-docs-link>.
             </p>
 
         `;
-      }
-    }, {
-      kind: "get",
-      key: "bigCodeDemo",
-      value: function bigCodeDemo() {
-        return `function() {
-    console.log('hello!');
-}`;
-      }
-    }, {
-      kind: "get",
-      key: "bigCodeDemoSource",
-      value: function bigCodeDemoSource() {
-        return `import { html } from 'lit-element';
-import 'lit-docs';
-
-const code = \`function() {
-    console.log('hello!');
-}\`;
-
-html\`<code-block .code=\${code}></code-block>\`;`;
-      }
-    }, {
-      kind: "get",
-      key: "bigCodeWithFilenameDemoSource",
-      value: function bigCodeWithFilenameDemoSource() {
-        return `import { html } from 'lit-element';
-import 'lit-docs';
-
-const code = \`function() {
-    console.log('hello!');
-}\`;
-
-html\`<code-block filename='my-function.js' .code=\${code}></code-block>\`;`;
       }
     }]
   };
