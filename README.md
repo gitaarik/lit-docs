@@ -6,5 +6,5 @@ library, custom components, or anything you made to use together with
 LitElement or Web Components in general.
 
 The utilities are documented in the
-[docs](https://gitaarik.github.io/lit-docs/docs/build/), which itself is
+[docs](https://gitaarik.github.io/lit-docs/build/), which itself is
 created with LitDocs.
