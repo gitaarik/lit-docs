@@ -23,11 +23,27 @@ class LitDocsUiState extends LitState {
   }*/
 
 
-  setPath(path) {
-    if (path[0] === '/') path = path.substr(1);
-    this.path = path || '/';
+  initPageByPath(path) {
+    path = path.slice(); // make a copy
 
-    this._initPageByPath();
+    if (path === '/' || path === '' || path === '#') {
+      this.page = this.pages[0];
+      return;
+    }
+
+    if (path[0] === '/') {
+      path = path.substr(1);
+    }
+
+    if (this.useHash && path[0] === '#') {
+      path = path.substr(1);
+    }
+
+    this._setPageByPath(path, this.pages);
+
+    if (!this.page) {
+      this.page = this.pages[0];
+    }
   }
 
   navToPath(path, addToHistory = true) {
@@ -47,10 +63,10 @@ class LitDocsUiState extends LitState {
       path = '#' + path;
     }
 
-    this.setPath(path);
+    this.initPageByPath(path);
 
     if (addToHistory) {
-      history.pushState({}, this.page.title, this.path);
+      history.pushState({}, this.page.title, path);
     }
 
     this.showMenu = false;
@@ -74,6 +90,7 @@ class LitDocsUiState extends LitState {
     }
 
     if (href) {
+      console.log('nav to path ', href);
       this.navToPath(href);
     }
   }
@@ -83,29 +100,6 @@ class LitDocsUiState extends LitState {
       this.navToPath(window.location.hash, false);
     } else {
       this.navToPath(window.location.pathname, false);
-    }
-  }
-
-  _initPageByPath() {
-    let path = this.path;
-
-    if (path === '/' || path === '' || path === '#') {
-      this.page = this.pages[0];
-      return;
-    }
-
-    if (path[0] === '/') {
-      path = path.substr(1);
-    }
-
-    if (this.useHash && path[0] === '#') {
-      path = path.substr(1);
-    }
-
-    this._setPageByPath(path, this.pages);
-
-    if (!this.page) {
-      this.page = this.pages[0];
     }
   }
 
@@ -143,6 +137,9 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
       },
       pages: {
         type: Array
+      },
+      useHash: {
+        type: Boolean
       }
     };
   }
@@ -150,6 +147,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
   constructor() {
     super();
     this.docsTitle = '';
+    this.useHash = true;
     this.pages = [];
   }
 
@@ -170,8 +168,9 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
   }
 
   _initState() {
+    litDocsUiState.useHash = this.useHash;
     litDocsUiState.pages = this.pages;
-    litDocsUiState.setPath(window.location.pathname + window.location.hash);
+    litDocsUiState.initPageByPath(window.location.pathname + window.location.hash);
   }
 
   _fixMenuWidth() {
