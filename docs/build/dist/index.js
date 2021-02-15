@@ -43,7 +43,7 @@ import './code-block-usage.js';
 import './showcase-box-usage/index.js';
 import './lit-docs-links-usage.js';
 import './the-other-page.js';
-const BASE_URL = '/lit-docs/build/';
+window.BASE_URL = '/lit-docs/build/';
 export let LitDocsDocumentation = _decorate([customElement('lit-docs-documentation')], function (_initialize, _LitElement) {
   class LitDocsDocumentation extends _LitElement {
     constructor(...args) {

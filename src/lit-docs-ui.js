@@ -43,7 +43,7 @@ class LitDocsUiState extends LitState {
             path = path.split('/').slice(3).join('/');
         }
 
-        if (BASE_URL) {
+        if (window.BASE_URL) {
             if (path.substr(0, BASE_URL.length) == BASE_URL) {
                 path = path.substr(BASE_URL.length)
             }
