@@ -13,6 +13,9 @@ import './lit-docs-links-usage.js';
 import './the-other-page.js';
 
 
+const BASE_URL = '/lit-docs/build/';
+
+
 @customElement('lit-docs-documentation')
 export class LitDocsDocumentation extends LitElement {
 
