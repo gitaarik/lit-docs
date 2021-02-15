@@ -87,6 +87,14 @@ class LitDocsUiState extends LitState {
 
     }
 
+    handlePopState() {
+        if (this.useHash) {
+            this.navToPath(window.location.hash, false);
+        } else {
+            this.navToPath(window.location.pathname, false);
+        }
+    }
+
     _initPageByPath() {
 
         let path = this.path;
@@ -196,7 +204,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
     _initPopStateListener() {
         window.addEventListener('popstate', event => {
-            litDocsUiState.navToPath(window.location.pathname, false);
+            litDocsUiState.handlePopState();
         });
     }
 
