@@ -34,8 +34,8 @@ class LitDocsUiState extends LitState {
       path = path.substr(1);
     }
 
-    if (this.useHash && path[0] === '#') {
-      path = path.substr(1);
+    if (this.useHash && path.split('#').length > 1) {
+      path = path.split('#')[1];
     }
 
     this._setPageByPath(path, this.pages);
@@ -46,6 +46,8 @@ class LitDocsUiState extends LitState {
   }
 
   navToPath(path, addToHistory = true) {
+    path = path.slice(); // make a copy
+
     if (this.useHash) {
       path = path.split('#')[1] || '';
     } else {
@@ -61,7 +63,7 @@ class LitDocsUiState extends LitState {
     this.initPageByPath(path);
 
     if (addToHistory) {
-      history.pushState({}, this.page.title, (this.useHash ? '#' : '') + path);
+      history.pushState({}, this.page.title, (this.useHash ? window.location.pathname + '#' : '') + path);
     }
 
     this.showMenu = false;
@@ -242,7 +244,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
         if (page.template) {
           const href = (() => {
             if (litDocsUiState.useHash) {
-              return '#' + path;
+              return window.location.pathname + '#' + path;
             }
 
             return path;

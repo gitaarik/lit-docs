@@ -37,8 +37,8 @@ class LitDocsUiState extends LitState {
             path = path.substr(1);
         }
 
-        if (this.useHash && path[0] === '#') {
-            path = path.substr(1);
+        if (this.useHash && path.split('#').length > 1) {
+            path = path.split('#')[1];
         }
 
         this._setPageByPath(path, this.pages);
@@ -50,6 +50,8 @@ class LitDocsUiState extends LitState {
     }
 
     navToPath(path, addToHistory = true) {
+
+        path = path.slice(); // make a copy
 
         if (this.useHash) {
             path = path.split('#')[1] || '';
@@ -74,7 +76,7 @@ class LitDocsUiState extends LitState {
             history.pushState(
                 {},
                 this.page.title,
-                (this.useHash ? '#' : '') + path
+                (this.useHash ? window.location.pathname + '#' : '') + path
             );
         }
 
@@ -267,7 +269,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                     const href = (() => {
 
                         if (litDocsUiState.useHash) {
-                            return '#' + path;
+                            return window.location.pathname + '#' + path;
                         }
 
                         return path;
