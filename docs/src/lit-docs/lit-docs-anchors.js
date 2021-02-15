@@ -1,6 +1,7 @@
 import { css, html } from 'lit-element';
 import { render } from 'lit-html';
 import { litStyle } from 'lit-element-style';
+import { litDocsUiState } from './lit-docs-ui';
 
 
 // Global container of all the anchors on the page. This is global so that the
@@ -110,7 +111,7 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
 
     _addHashChangeListener() {
         this.hashChangeCallback = event => {
-            goToAnchor(event.newURL.split('#')[1]);
+            goToAnchor(event.newURL.split('#').slice(-1)[0]);
             this._renderAnchors();
         };
         window.addEventListener('hashchange', this.hashChangeCallback);
@@ -121,7 +122,9 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
     }
 
     _loadInitialAnchor() {
-        goToAnchor(window.location.hash.substr(1));
+        const hashes = window.location.hash.split('#');
+        const lastHash = hashes.pop();
+        goToAnchor(lastHash);
     }
 
     _addAnchors() {
@@ -181,7 +184,7 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
             <span>${anchor.elementText}</span>
             <a
                 class="headingAnchor"
-                href=${window.location.pathname + '#' + anchor.anchorName}
+                href=${window.location.pathname + this._baseHash + '#' + anchor.anchorName}
                 ?active=${active}
                 @click=${() => goToAnchor(anchor.anchorName)}
             >
@@ -191,6 +194,23 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
 
         render(template, anchor.element);
         anchor.element.id = anchor.anchorName;
+
+    }
+
+    get _baseHash() {
+
+        if (!litDocsUiState.useHash || window.location.hash[0] !== '#') {
+            return '';
+        }
+
+        const hashValue = window.location.hash.substr(1);
+        const hashes = hashValue.split('#');
+
+        if (hashes.length > 1) {
+            return '#' + hashes.slice(0, -1).join('#');
+        } else {
+            return '#' + hashes[0];
+        }
 
     }
 

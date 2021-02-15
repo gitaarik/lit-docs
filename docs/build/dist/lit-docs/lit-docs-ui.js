@@ -11,6 +11,7 @@ class LitDocsUiState extends LitState {
     this.path = stateVar();
     this.page = stateVar();
     this.showMenu = stateVar();
+    this.useHash = stateVar(true);
   }
   /*static get stateVars() {
       return {
@@ -38,14 +39,12 @@ class LitDocsUiState extends LitState {
       path = path.split('/').slice(3).join('/');
     }
 
-    if (BASE_URL) {
-      if (path.substr(0, BASE_URL.length) == BASE_URL) {
-        path = path.substr(BASE_URL.length);
-      }
-    }
-
     if (path === this.path) {
       return;
+    }
+
+    if (this.useHash && path[0] !== '#') {
+      path = '#' + path;
     }
 
     this.setPath(path);
@@ -88,6 +87,10 @@ class LitDocsUiState extends LitState {
     }
 
     if (path[0] === '/') {
+      path = path.substr(1);
+    }
+
+    if (this.useHash && path[0] === '#') {
       path = path.substr(1);
     }
 
@@ -160,7 +163,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
   _initState() {
     litDocsUiState.pages = this.pages;
-    litDocsUiState.setPath(window.location.pathname);
+    litDocsUiState.setPath(window.location.pathname + window.location.hash);
   }
 
   _fixMenuWidth() {

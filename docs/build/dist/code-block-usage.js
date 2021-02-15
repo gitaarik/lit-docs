@@ -55,7 +55,7 @@ export let CodeBlockUsage = _decorate([customElement('code-block-usage')], funct
 
             <p>
                 Use code blocks to demonstrate code. When using
-                <lit-docs-link href="basic-styling/">LitDocsStyle</lit-docs-link>,
+                <lit-docs-link href="page-content/basic-styling/">LitDocsStyle</lit-docs-link>,
                 the default <code>&lt;code&gt;</code> blocks are styled and are
                 good for tiny code snippets. For bigger code blocks, use
                 <code>&lt;code-block&gt;</code>.

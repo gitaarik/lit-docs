@@ -19,9 +19,19 @@ class LitDocsLink extends LitDocsStyle(LitElement) {
     render() {
         // Don't leave no spaces in the template, because the host is an inline
         // element.
-        return html`<a href=${this.href}
+        return html`<a href=${this._href}
             @click=${event => litDocsUiState.handlePageLinkClick(event)}
         ><slot></slot></a>`;
+    }
+
+    get _href() {
+
+        if (litDocsUiState.useHash) {
+            return '#' + this.href;
+        }
+
+        return this.href;
+
     }
 
     static get styles() {

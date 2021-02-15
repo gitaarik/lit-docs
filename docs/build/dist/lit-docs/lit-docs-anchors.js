@@ -1,6 +1,7 @@
 import { css, html } from '../../web_modules/lit-element.js';
 import { render } from '../../web_modules/lit-html.js';
-import { litStyle } from '../../web_modules/lit-element-style.js'; // Global container of all the anchors on the page. This is global so that the
+import { litStyle } from '../../web_modules/lit-element-style.js';
+import { litDocsUiState } from './lit-docs-ui.js'; // Global container of all the anchors on the page. This is global so that the
 // `goToAnchor()` function can be used from any component.
 
 let ANCHORS = [];
@@ -103,7 +104,7 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
 
   _addHashChangeListener() {
     this.hashChangeCallback = event => {
-      goToAnchor(event.newURL.split('#')[1]);
+      goToAnchor(event.newURL.split('#').slice(-1)[0]);
 
       this._renderAnchors();
     };
@@ -116,7 +117,9 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
   }
 
   _loadInitialAnchor() {
-    goToAnchor(window.location.hash.substr(1));
+    const hashes = window.location.hash.split('#');
+    const lastHash = hashes.pop();
+    goToAnchor(lastHash);
   }
 
   _addAnchors() {
@@ -168,7 +171,7 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
             <span>${anchor.elementText}</span>
             <a
                 class="headingAnchor"
-                href=${window.location.pathname + '#' + anchor.anchorName}
+                href=${window.location.pathname + this._baseHash + '#' + anchor.anchorName}
                 ?active=${active}
                 @click=${() => goToAnchor(anchor.anchorName)}
             >
@@ -177,6 +180,21 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
         `;
     render(template, anchor.element);
     anchor.element.id = anchor.anchorName;
+  }
+
+  get _baseHash() {
+    if (!litDocsUiState.useHash || window.location.hash[0] !== '#') {
+      return '';
+    }
+
+    const hashValue = window.location.hash.substr(1);
+    const hashes = hashValue.split('#');
+
+    if (hashes.length > 1) {
+      return '#' + hashes.slice(0, -1).join('#');
+    } else {
+      return '#' + hashes[0];
+    }
   }
 
   _getAnchorName(elementText) {
