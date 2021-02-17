@@ -5,7 +5,7 @@ import { litDocsUiState } from './lit-docs-ui.js';
 class LitDocsLink extends LitDocsStyle(LitElement) {
   static get properties() {
     return {
-      href: {
+      path: {
         type: String
       }
     };
@@ -13,7 +13,7 @@ class LitDocsLink extends LitDocsStyle(LitElement) {
 
   constructor() {
     super();
-    this.href = '';
+    this.path = '';
   }
 
   render() {
@@ -26,10 +26,10 @@ class LitDocsLink extends LitDocsStyle(LitElement) {
 
   get _href() {
     if (litDocsUiState.useHash) {
-      return '#' + this.href;
+      return '#' + this.path;
     }
 
-    return this.href;
+    return this.path;
   }
 
   static get styles() {

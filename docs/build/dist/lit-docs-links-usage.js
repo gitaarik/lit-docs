@@ -56,9 +56,11 @@ export let LitDocsLinksUsage = _decorate([customElement('lit-docs-links-usage')]
             <p>
                 For internal links to other docs pages, use the
                 <code>&lt;lit-docs-link&gt;</code> component. This ensures that
-                the link click is handled by the router of LitDocsUI.
-                Clicks with Ctrl/Shift to open in new tab/window also keeps
-                working.
+                the link click is handled by the router of LitDocsUI. So it
+                won't trigger a full page reload. Also possible anchors (from
+                <lit-docs-link path="page-content/anchors/">LitDocsAnchors</lit-docs-link>)
+                in the link will be handled. Clicks with Ctrl/Shift to open in
+                new tab/window also keeps working.
             </p>
 
             <h2>Usage</h2>
@@ -71,7 +73,7 @@ export let LitDocsLinksUsage = _decorate([customElement('lit-docs-links-usage')]
 
             <p>
                 <showcase-box>
-                    <lit-docs-link href="components/links-usage/the-other-page/">
+                    <lit-docs-link path="components/links-usage/the-other-page/">
                         Go to the other page
                     </lit-docs-link>
                 </showcase-box>
@@ -83,7 +85,7 @@ export let LitDocsLinksUsage = _decorate([customElement('lit-docs-links-usage')]
       kind: "get",
       key: "litDocsLinkCode",
       value: function litDocsLinkCode() {
-        return `<lit-docs-link href="other-page/">Go to the other page</lit-docs-link>`;
+        return `<lit-docs-link path="components/links-usage/the-other-page/">Go to the other page</lit-docs-link>`;
       }
     }]
   };
