@@ -1,4 +1,5 @@
 import { css, html } from '../../web_modules/lit-element.js';
+import { unsafeHTML } from '../../web_modules/lit-html/directives/unsafe-html.js';
 import { render } from '../../web_modules/lit-html.js';
 import { litStyle } from '../../web_modules/lit-element-style.js';
 import { litDocsUiState } from './lit-docs-ui.js'; // Global container of all the anchors on the page. This is global so that the
@@ -38,8 +39,11 @@ function scrollToAnchor(anchorName) {
 }
 
 export function goToAnchor(anchorName) {
-  if (!anchorName) return;
-  scrollToAnchor(anchorName); // Do it another time when the full document has loaded
+  if (!anchorName) return; // `setTimeout` is used to queue the task at the end of the execution
+  // stack, so that any page change rendering has finished.
+
+  window.setTimeout(() => scrollToAnchor(anchorName)); // Execute `scrollToAnchor()` again when the page has fully loaded. Because
+  // when other components load, it could change the scroll offset.
 
   window.addEventListener('load', event => {
     scrollToAnchor(anchorName);
@@ -104,9 +108,7 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
 
   _addHashChangeListener() {
     this.hashChangeCallback = event => {
-      goToAnchor(event.newURL.split('#').slice(-1)[0]);
-
-      this._renderAnchors();
+      this.loadAnchorFromUrl(event.newURL);
     };
 
     window.addEventListener('hashchange', this.hashChangeCallback);
@@ -117,9 +119,15 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
   }
 
   _loadInitialAnchor() {
-    const hashes = window.location.hash.split('#');
-    const lastHash = hashes.pop();
-    goToAnchor(lastHash);
+    this.loadAnchorFromUrl(window.location.href);
+  }
+
+  loadAnchorFromUrl(url) {
+    if (litDocsUiState.useHash && url.split('#').length < 3) {
+      return;
+    }
+
+    goToAnchor(url.split('#').slice(-1)[0]);
   }
 
   _addAnchors() {
@@ -145,14 +153,9 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
   }
 
   _addAnchor(element) {
-    const elementText = element.textContent;
-
-    const anchorName = this._getAnchorName(elementText);
-
     const anchorData = {
-      anchorName,
-      element,
-      elementText
+      anchorName: this._getAnchorName(element),
+      element
     };
     ANCHORS.push(anchorData);
 
@@ -168,7 +171,7 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
   _renderAnchor(anchor) {
     const active = window.location.hash.substr(1) === anchor.anchorName;
     const template = html`
-            <span>${anchor.elementText}</span>
+            <span>${unsafeHTML(anchor.element.innerHTML)}</span>
             <a
                 class="headingAnchor"
                 href=${window.location.pathname + this._baseHash + '#' + anchor.anchorName}
@@ -197,8 +200,8 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
     }
   }
 
-  _getAnchorName(elementText) {
-    const baseAnchorName = elementText.replace(/ /g, '-').replace(/[^\w-_\.]/gi, '').toLowerCase();
+  _getAnchorName(element) {
+    const baseAnchorName = element.textContent.replace(/ /g, '-').replace(/[^\w-_\.]/gi, '').toLowerCase();
     let anchorName = baseAnchorName;
     let alreadyExistingAnchor = getAnchorData(anchorName);
     let counter = 1;

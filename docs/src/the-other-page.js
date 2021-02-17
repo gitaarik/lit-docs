@@ -14,7 +14,7 @@ export class TheOtherPage extends LitDocsContent(LitElement) {
 
             <p>
                 This is the other page.
-                <lit-docs-link href="components/links-usage/">Go back</lit-docs-link>.
+                <lit-docs-link href="components/links-usage/#output">Go back</lit-docs-link>.
             </p>
 
         `;
