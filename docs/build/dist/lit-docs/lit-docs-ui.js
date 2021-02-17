@@ -5,22 +5,14 @@ import './hamburger-icon.js';
 import './cross-icon.js';
 
 class LitDocsUiState extends LitState {
-  constructor() {
-    super();
-    this.pages = stateVar();
-    this.page = stateVar();
-    this.showMenu = stateVar();
-    this.useHash = stateVar(true);
+  static get stateVars() {
+    return {
+      pages: {},
+      path: {},
+      page: {},
+      showMenu: {}
+    };
   }
-  /*static get stateVars() {
-      return {
-          pages: {},
-          path: {},
-          page: {},
-          showMenu: {}
-      }
-  }*/
-
 
   initPageByPath(path) {
     if (!path || path === '/' || path === '' || path === '#') {
@@ -152,6 +144,8 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
     this._initState();
 
+    this._initBaseStyle();
+
     this._fixMenuWidthOnPageWidthChange();
 
     this._initPopStateListener();
@@ -167,6 +161,41 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
     litDocsUiState.useHash = this.useHash;
     litDocsUiState.pages = this.pages;
     litDocsUiState.initPageByPath(window.location.pathname + window.location.hash);
+  }
+
+  _initBaseStyle() {
+    const baseStyleTag = document.createElement('style');
+    baseStyleTag.textContent = css`
+
+            * {
+                --background-color: rgb(237, 236, 234);
+            }
+
+            @media (prefers-color-scheme: dark) {
+
+                * {
+                    --text-color: rgb(201, 209, 217);
+                    --background-color: #171309;
+                }
+
+            }
+
+            html, body {
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                background: var(--background-color);
+                color: var(--text-color);
+                font-family: Arial;
+            }
+
+            a {
+                color: var(--text-color);
+            }
+
+        `;
+    const headTag = document.getElementsByTagName('head')[0];
+    headTag.appendChild(baseStyleTag);
   }
 
   _fixMenuWidth() {
@@ -307,6 +336,15 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                 box-sizing: border-box;
                 --left-sidebar-width: 250px;
                 --header-height: 45px;
+                --menu-bg-color: #e4e2dd;
+                --border-color: #ccc;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                * {
+                    --menu-bg-color: #1f1a0f;
+                    --border-color: #333;
+                }
             }
 
             #layout {
@@ -325,13 +363,14 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                 justify-content: center;
                 align-items: center;
                 height: var(--header-height);
-                background: #bcb9b2;
-                border-bottom: 1px #999 solid;
+                background: var(--menu-bg-color);
+                border-bottom: 1px var(--border-color) solid;
             }
 
             #menuSidebarContent header a {
                 display: inline-block;
                 padding: 5px;
+                color: var(--text-color);
                 font-weight: 600;
                 text-decoration: none;
                 font-size: 20px;
@@ -347,26 +386,15 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                 align-items: center;
                 margin: 0;
                 padding: 8px;
-                border-bottom: 1px solid #999;
-                xborder-width: 1px 0;
+                border-bottom: 1px solid var(--border-color);
+                color: var(--text-color);
                 text-align: left;
                 text-decoration: none;
             }
 
             .menuItemCategory {
                 font-weight: bold;
-                color: #384147;
-                xmargin-top: 5px;
-                xpadding-top: 15px;
-                xpadding-bottom: 15px;
-            }
-
-            .menuItemSubmenu {
-                xmargin: 5px 0;
-            }
-
-            .menuItemLink {
-                xbackground: #C7C3BB;
+                color: var(--text-color);
             }
 
             .menuItemLink {
@@ -376,7 +404,16 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
             .menuItem[active],
             .menuItemLink:hover {
                 background: #DAD7D2;
-                border-color: #999;
+                border-color: var(--border-color);
+            }
+
+            @media (prefers-color-scheme: dark) {
+
+                .menuItem[active],
+                .menuItemLink:hover {
+                    background: #352F24;
+                }
+
             }
 
             .menuItem[nav-level="1"] {
@@ -419,8 +456,8 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                     position: relative;
                     width: 100%;
                     max-width: var(--left-sidebar-width);
-                    background: #bcb9b2;
-                    border-right: 1px #999 solid;
+                    background: var(--menu-bg-color);
+                    border-right: 1px var(--border-color) solid;
                 }
 
                 #sideBarOpener {

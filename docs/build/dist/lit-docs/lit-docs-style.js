@@ -60,7 +60,7 @@ export const LitDocsStyle = litStyle(css`
     }
 
     a {
-        color: #384147;
+        color: var(--text-color);
     }
 
     code {

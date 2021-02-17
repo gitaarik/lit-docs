@@ -1,7 +1,3 @@
-import './common/lit-html-7f1eac0d.js';
-import './common/lit-element-61c2e4f9.js';
-import './common/render-fe2ef6e3.js';
-
 const observeState = superclass => class extends superclass {
 
     constructor() {
@@ -47,44 +43,8 @@ const observeState = superclass => class extends superclass {
 class LitState {
 
     constructor() {
-
-        this._stateVars = [];
         this._observers = [];
-
-        return new Proxy(this, {
-
-            set: (obj, key, value) => {
-
-                if (this._isStateVar(key)) {
-                    const return_value = obj[key]._handleSet(value);
-                    if (return_value !== undefined) {
-                        return return_value;
-                    }
-                } else if (value instanceof BaseStateVar) {
-                    this._stateVars.push(key);
-                    value._recordRead = () => this._recordRead(key);
-                    value._notifyChange = () => this._notifyChange(key);
-                    obj[key] = value;
-                } else {
-                    obj[key] = value;
-                }
-
-                return true;
-
-            },
-
-            get: (obj, key) => {
-
-                if (obj._isStateVar(key)) {
-                    return obj[key]._handleGet();
-                }
-
-                return obj[key];
-
-            }
-
-        });
-
+        this._initStateVars();
     }
 
     addObserver(observer, keys) {
@@ -95,8 +55,68 @@ class LitState {
         this._observers = this._observers.filter(observerObj => observerObj.observer !== observer);
     }
 
-    _isStateVar(key) {
-        return this._stateVars.includes(key);
+    _initStateVars() {
+        if (!this.constructor.stateVars) return;
+        for (let [key, options] of Object.entries(this.constructor.stateVars)) {
+            this._initStateVar(key, options);
+        }
+    }
+
+    _initStateVar(key, options) {
+
+        options = this._parseOptions(options);
+
+        const stateVar = new options.handler({
+            options: options,
+            recordRead: () => this._recordRead(key),
+            notifyChange: () => this._notifyChange(key)
+        });
+
+        Object.defineProperty(
+            this,
+            key,
+            {
+                get() {
+                    return stateVar.get();
+                },
+                set(value) {
+                    if (stateVar.shouldSetValue(value)) {
+                        stateVar.set(value);
+                    }
+                },
+                configurable: true,
+                enumerable: true
+            }
+        );
+
+    }
+
+    _parseOptions(options) {
+
+        if (!options.handler) {
+            options.handler = StateVar;
+        } else {
+
+            // In case of a custom `StateVar` handler is provided, we offer a
+            // second way of providing options to your custom handler class.
+            //
+            // You can decorate a *method* with `@stateVar()` instead of a
+            // variable. The method must return an object, and that object will
+            // be assigned to the `options` object.
+            //
+            // Within the method you have access to the `this` context. So you
+            // can access other properties and methods from your state class.
+            // And you can add arrow function callbacks where you can access
+            // `this`. This provides a lot of possibilities for a custom
+            // handler class.
+            if (options.propertyMethod && options.propertyMethod.kind === 'method') {
+                Object.assign(options, options.propertyMethod.descriptor.value.call(this));
+            }
+
+        }
+
+        return options;
+
     }
 
     _recordRead(key) {
@@ -113,36 +133,67 @@ class LitState {
 }
 
 
-class BaseStateVar {
-    _handleGet() {}
-    _handleSet(value) {}
+class StateVar {
+
+    constructor(args) {
+        this.options = args.options; // The options given in the `stateVar` declaration
+        this.recordRead = args.recordRead; // Callback to indicate the `stateVar` is read
+        this.notifyChange = args.notifyChange; // Callback to indicate the `stateVar` value has changed
+        this.value = undefined; // The initial value
+    }
+
+    // Called when the `stateVar` on the `State` class is read.
+    get() {
+        this.recordRead();
+        return this.value;
+    }
+
+    // Returns whether the given `value` should be passed on to the `set()`
+    // method. Can be used for validation and/or optimization.
+    shouldSetValue(value) {
+        return this.value !== value;
+    }
+
+    // Called when the `stateVar` on the `State` class is set.
+    set(value) {
+        this.value = value;
+        this.notifyChange();
+    }
+
 }
 
 
-class StateVar extends BaseStateVar {
+function stateVar(options = {}) {
 
-    constructor(initialValue) {
-        super();
-        this._value = initialValue;
-    }
+    return element => {
 
-    _handleGet() {
-        this._recordRead();
-        return this._value;
-    }
+        return {
+            kind: 'field',
+            key: Symbol(),
+            placement: 'own',
+            descriptor: {},
+            initializer() {
+                if (typeof element.initializer === 'function') {
+                    this[element.key] = element.initializer.call(this);
+                }
+            },
+            finisher(litStateClass) {
 
-    _handleSet(value) {
-        if (this._value !== value) {
-            this._value = value;
-            this._notifyChange();
-        }
-    }
+                if (element.kind === 'method') {
+                    options.propertyMethod = element;
+                }
 
-}
+                if (litStateClass.stateVars === undefined) {
+                    litStateClass.stateVars = {};
+                }
 
+                litStateClass.stateVars[element.key] = options;
 
-function stateVar(defaultValue) {
-    return new StateVar(defaultValue);
+            }
+        };
+
+    };
+
 }
 
 

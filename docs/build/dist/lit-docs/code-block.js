@@ -77,6 +77,14 @@ export class CodeBlock extends LitElement {
                 border-radius: 0 0 5px 5px;
             }
 
+            @media (prefers-color-scheme: dark) {
+
+                .hljs {
+                    background: rgb(51, 55, 58);
+                }
+
+            }
+
             .hljs-comment {
                 color: #999999;
             }
