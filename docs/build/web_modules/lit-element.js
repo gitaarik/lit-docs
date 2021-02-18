@@ -1490,4 +1490,4 @@ LitElement['finalized'] = true;
  */
 LitElement.render = render;
 
-export { LitElement, css, customElement, property };
+export { LitElement, css, customElement, property, unsafeCSS };

@@ -1,4 +1,4 @@
-import { customElement, LitElement, html } from 'lit-element';
+import { customElement, LitElement, html, css } from 'lit-element';
 import { litDocsUiState, LitDocsContent } from '@app/lit-docs/index';
 import '@app/lit-docs/index';
 
@@ -81,6 +81,18 @@ const code = \`function() {
 }\`;
 
 html\`<code-block filename='my-function.js' .code=\${code}></code-block>\`;`;
+
+    }
+
+    static get styles() {
+
+        return css`
+
+            showcase-box {
+                background: transparent;
+            }
+
+        `;
 
     }
 

@@ -30,7 +30,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, html } from '../web_modules/lit-element.js';
+import { customElement, LitElement, html, css } from '../web_modules/lit-element.js';
 import { litDocsUiState, LitDocsContent } from './lit-docs/index.js';
 import './lit-docs/index.js';
 export let CodeBlockUsage = _decorate([customElement('code-block-usage')], function (_initialize, _LitDocsContent) {
@@ -126,6 +126,19 @@ const code = \`function() {
 }\`;
 
 html\`<code-block filename='my-function.js' .code=\${code}></code-block>\`;`;
+      }
+    }, {
+      kind: "get",
+      static: true,
+      key: "styles",
+      value: function styles() {
+        return css`
+
+            showcase-box {
+                background: transparent;
+            }
+
+        `;
       }
     }]
   };

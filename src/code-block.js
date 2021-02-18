@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css, unsafeCSS } from 'lit-element';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import xml from 'highlight.js/lib/languages/xml';
@@ -58,8 +58,6 @@ export class CodeBlock extends LitElement {
                 margin: 0;
                 padding: 7px 10px;
                 border-radius: 5px 5px 0 0;
-                background: #555;
-                color: #FFF;
                 font-weight: bold;
             }
 
@@ -72,20 +70,119 @@ export class CodeBlock extends LitElement {
                 white-space: pre-wrap;
                 border-radius: 5px;
                 overflow-x: auto;
-                color: #ffffff;
-                background: #1c1b1b;
             }
 
             .hljs[has-filename] {
                 border-radius: 0 0 5px 5px;
             }
 
+            @media (prefers-color-scheme: light) {
+                ${unsafeCSS(this.lightThemeCSS)}
+            }
+
             @media (prefers-color-scheme: dark) {
+                ${unsafeCSS(this.darkThemeCSS)}
+            }
 
-                .hljs {
-                    background: rgb(51, 55, 58);
-                }
+        `;
 
+    }
+
+    static get lightThemeCSS() {
+
+        return css`
+
+            .fileName {
+                background: #c2beb9;
+            }
+
+			.hljs {
+			  display: block;
+			  overflow-x: auto;
+			  padding: 0.5em;
+			  color: #2f3337;
+			  background: #dad7d2;
+			}
+
+			.hljs-comment {
+			  color: #656e77;
+			}
+
+			.hljs-keyword,
+			.hljs-selector-tag,
+			.hljs-meta-keyword,
+			.hljs-doctag,
+			.hljs-section,
+			.hljs-selector-class,
+			.hljs-meta,
+			.hljs-selector-pseudo,
+			.hljs-attr {
+			  color: #015692;
+			}
+
+			.hljs-attribute {
+			  color: #803378;
+			}
+
+			.hljs-name,
+			.hljs-type,
+			.hljs-number,
+			.hljs-selector-id,
+			.hljs-quote,
+			.hljs-template-tag,
+			.hljs-built_in,
+			.hljs-title,
+			.hljs-literal {
+			  color: #b75501;
+			}
+
+			.hljs-string,
+			.hljs-regexp,
+			.hljs-symbol,
+			.hljs-variable,
+			.hljs-template-variable,
+			.hljs-link,
+			.hljs-selector-attr,
+			.hljs-meta-string {
+			  color: #54790d;
+			}
+
+			.hljs-bullet,
+			.hljs-code {
+			  color: #535a60;
+			}
+
+			.hljs-deletion {
+			  color: #c02d2e;
+			}
+
+			.hljs-addition {
+			  color: #2f6f44;
+			}
+
+			.hljs-emphasis {
+			  font-style: italic;
+			}
+
+			.hljs-strong {
+			  font-weight: bold;
+			}
+
+        `;
+
+    }
+
+    static get darkThemeCSS() {
+
+        return css`
+
+            .fileName {
+                background: #2d2d2d;
+            }
+
+            .hljs {
+                color: #ffffff;
+                background: #1c1b1b;
             }
 
             .hljs-comment {
