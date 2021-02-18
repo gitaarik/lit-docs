@@ -30,19 +30,38 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { customElement, LitElement, html } from '../web_modules/lit-element.js';
+import { customElement, LitElement, html, css } from '../web_modules/lit-element.js';
 import { unsafeHTML } from '../web_modules/lit-html/directives/unsafe-html.js';
 import { LitDocsStyle, LitDocsAnchors } from './lit-docs/index.js';
 import './lit-docs/index.js';
 const litDocsStyleShowCaseCode = `
+
             <h1>This s a &lt;h1&gt; tag</h1>
             <h2>This s a &lt;h2&gt; tag</h2>
             <h3>This s a &lt;h3&gt; tag</h3>
             <h4>This s a &lt;h4&gt; tag</h4>
             <h5>This s a &lt;h5&gt; tag</h5>
             <h6>This s a &lt;h6&gt; tag</h6>
+
             <p>This is a &lt;p&gt; tag.</p>
-            <code>this is some code</code>
+
+            <p>
+                <code>this is some code</code>
+            </p>
+
+            <p>A table:</p>
+
+            <table>
+                <tr>
+                    <th>Foo</th>
+                    <td>Lorem</td>
+                </tr>
+                <tr>
+                    <th>Bar</th>
+                    <td>Ipsum</td>
+                </tr>
+            </table>
+
         `;
 export let LitDocsStyleUsage = _decorate([customElement('lit-docs-style-usage')], function (_initialize, _LitDocsAnchors) {
   class LitDocsStyleUsage extends _LitDocsAnchors {
@@ -103,6 +122,17 @@ export class MyComponent extends LitDocsStyle(LitElement) {
     }
 
 }`;
+      }
+    }, {
+      kind: "get",
+      static: true,
+      key: "styles",
+      value: function styles() {
+        return css`
+            showcase-box {
+                background: transparent;
+            }
+        `;
       }
     }]
   };

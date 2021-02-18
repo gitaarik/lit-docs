@@ -1,18 +1,37 @@
-import { customElement, LitElement, html } from 'lit-element';
+import { customElement, LitElement, html, css } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import { LitDocsStyle, LitDocsAnchors } from '@app/lit-docs/index';
 import '@app/lit-docs/index';
 
 
 const litDocsStyleShowCaseCode = `
+
             <h1>This s a &lt;h1&gt; tag</h1>
             <h2>This s a &lt;h2&gt; tag</h2>
             <h3>This s a &lt;h3&gt; tag</h3>
             <h4>This s a &lt;h4&gt; tag</h4>
             <h5>This s a &lt;h5&gt; tag</h5>
             <h6>This s a &lt;h6&gt; tag</h6>
+
             <p>This is a &lt;p&gt; tag.</p>
-            <code>this is some code</code>
+
+            <p>
+                <code>this is some code</code>
+            </p>
+
+            <p>A table:</p>
+
+            <table>
+                <tr>
+                    <th>Foo</th>
+                    <td>Lorem</td>
+                </tr>
+                <tr>
+                    <th>Bar</th>
+                    <td>Ipsum</td>
+                </tr>
+            </table>
+
         `;
 
 
@@ -64,6 +83,16 @@ export class MyComponent extends LitDocsStyle(LitElement) {
     }
 
 }`;
+
+    }
+
+    static get styles() {
+
+        return css`
+            showcase-box {
+                background: transparent;
+            }
+        `;
 
     }
 

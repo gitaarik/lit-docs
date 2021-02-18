@@ -63,6 +63,20 @@ export const LitDocsStyle = litStyle(css`
         color: var(--text-color);
     }
 
+    table {
+        border-collapse: collapse;
+    }
+
+    table tr th,
+    table tr td {
+        border: 1px var(--border-color) solid;
+        padding: 10px;
+    }
+
+    table tr th {
+        text-align: left;
+    }
+
     code {
         display: inline-block;
         padding: 2px 6px;
