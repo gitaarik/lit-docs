@@ -1,5 +1,5 @@
 import { customElement, LitElement, html, css } from 'lit-element';
-import { litDocsUiState, LitDocsContent } from '@app/lit-docs/index';
+import { LitDocsContent } from '@app/lit-docs/index';
 import '@app/lit-docs/index';
 
 

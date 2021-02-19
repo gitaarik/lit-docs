@@ -178,7 +178,7 @@ export const LitDocsAnchors = superclass => class extends litDocsAnchorsStyles(s
     }
 
     _renderAnchors() {
-        for (let anchor of ANCHORS) {
+        for (let anchor of this._addedAnchors) {
             this._renderAnchor(anchor);
         }
     }
