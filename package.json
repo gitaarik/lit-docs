@@ -1,6 +1,6 @@
 {
   "name": "lit-docs",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "Utilities to create documentation for LitElement related projects.",
   "main": "src/index.js",
   "files": "src/*",

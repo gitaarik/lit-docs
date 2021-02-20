@@ -7,6 +7,8 @@ import './cross-icon.js';
 
 class LitDocsUiState extends LitState {
 
+    useHash = true;
+
     static get stateVars() {
         return {
             pages: {},
@@ -41,21 +43,15 @@ class LitDocsUiState extends LitState {
 
         path = path.slice(); // make a copy
 
-        if (this.useHash) {
-            path = path.split('#').slice(1).join('#');
-        } else {
+        if (
+            path.substr(0, 7) === 'http://'
+            || path.substr(0, 8) === 'https://'
+        ) {
+            path = path.split('/').slice(3).join('/');
+        }
 
-            if (!path) {
-                path = '/';
-            }
-
-            if (
-                path.substr(0, 7) === 'http://'
-                || path.substr(0, 8) === 'https://'
-            ) {
-                path = path.split('/').slice(3).join('/');
-            }
-
+        if (!path) {
+            path = '/';
         }
 
         this.initPageByPath(path);
@@ -73,33 +69,9 @@ class LitDocsUiState extends LitState {
 
     }
 
-    handlePageLinkClick(event) {
-
-        if (event.ctrlKey || event.shiftKey) {
-            // Ctrl/shift click opens a `<a>` link in new tab/window, so when
-            // one of these keys are pressed, don't override normal behavior.
-            return
-        }
-
-        event.preventDefault();
-
-        let target = event.target;
-        let href = event.target.href;
-
-        while (!href) {
-            target = target.parentNode;
-            href = target.href;
-        }
-
-        if (href) {
-            this.navToPath(href);
-        }
-
-    }
-
     handlePopState() {
         if (this.useHash) {
-            this.navToPath(window.location.hash, false);
+            this.navToPath(window.location.hash.substr(1), false);
         } else {
             this.navToPath(window.location.pathname + window.location.hash, false);
         }
@@ -253,7 +225,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
                     <div id="menuSidebarContent">
                         <header>
-                            <a href="/" @click=${event => litDocsUiState.handlePageLinkClick(event)}>${this.docsTitle}</a>
+                            <a href="/" @click=${event => this.handleMenuItemClick(event, '/')}>${this.docsTitle}</a>
                         </header>
                         <nav class="mainMenu menu">${this.navTree(this.pages)}</nav>
                     </div>
@@ -314,9 +286,9 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
                     return html`
                         <a
                             class="menuItem menuItemLink"
-                            nav-level=${level}
                             href=${href}
-                            @click=${event => litDocsUiState.handlePageLinkClick(event)}
+                            @click=${event => this.handleMenuItemClick(event, path)}
+                            nav-level=${level}
                             ?active=${page === litDocsUiState.page}
                         >
                             ${navContent}
@@ -354,6 +326,11 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
         });
 
+    }
+
+    handleMenuItemClick(event, path) {
+        event.preventDefault();
+        litDocsUiState.navToPath(path);
     }
 
     handleHamburgerMenuClick() {
