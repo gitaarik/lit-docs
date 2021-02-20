@@ -81,10 +81,18 @@ export const LitDocsStyle = litStyle(css`
         display: inline-block;
         padding: 2px 6px;
         margin: 1px;
-        background: #444;
         border-radius: 5px;
-        color: white;
+        background: #dad7d2;
         white-space: pre;
+    }
+
+    @media (prefers-color-scheme: dark) {
+
+        code {
+            background: #444;
+            color: white;
+        }
+
     }
 
     .demoComponents {

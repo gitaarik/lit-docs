@@ -166,7 +166,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
                 * {
                     --text-color: rgb(201, 209, 217);
-                    --background-color: #171309;
+                    --background-color: #313131;
                 }
 
             }
@@ -359,8 +359,8 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
             @media (prefers-color-scheme: dark) {
                 * {
-                    --menu-bg-color: #1f1a0f;
-                    --border-color: #333;
+                    --menu-bg-color: #2b2b2b;
+                    --border-color: #444;
                 }
             }
 
@@ -428,7 +428,7 @@ class LitDocsUI extends observeState(LitDocsStyle(LitElement)) {
 
                 .menuItem[active],
                 .menuItemLink:hover {
-                    background: #352F24;
+                    background: #393939;
                 }
 
             }

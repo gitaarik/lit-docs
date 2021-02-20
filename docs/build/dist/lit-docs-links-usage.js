@@ -56,8 +56,10 @@ export let LitDocsLinksUsage = _decorate([customElement('lit-docs-links-usage')]
             <p>
                 For internal links to other docs pages, use the
                 <code>&lt;lit-docs-link&gt;</code> component. This ensures that
-                the link click is handled by the router of LitDocsUI. So it
-                won't trigger a full page reload. Also possible anchors (from
+                the link click is handled by the router of
+                <lit-docs-link path="menu-and-pages/"><code>LitDocsUI</code></lit-docs-link>.
+                So it won't trigger a full page reload. Also possible anchors
+                (from
                 <lit-docs-link path="page-content/anchors/">LitDocsAnchors</lit-docs-link>)
                 in the link will be handled. Clicks with Ctrl/Shift to open in
                 new tab/window also keeps working.

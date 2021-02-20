@@ -18,7 +18,7 @@ class ShowcaseBox extends LitElement {
             @media (prefers-color-scheme: dark) {
 
                 :host {
-                    background: rgb(51, 55, 58);
+                    background: rgb(65, 65, 65);
                 }
 
             }
